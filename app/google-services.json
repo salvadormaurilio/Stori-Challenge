@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "828785122269",
+    "project_id": "stori-example",
+    "storage_bucket": "stori-example.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:828785122269:android:d8f1f8c0d3d14f92f13434",
+        "android_client_info": {
+          "package_name": "mx.android.storichallenge"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyB6EpjiIvDrJNHnXZUvJLJoJNkaIcNtOzM"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
