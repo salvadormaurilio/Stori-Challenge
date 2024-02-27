@@ -1,4 +1,4 @@
-package mx.android.storichallenge.domain
+package mx.android.storichallenge.domain.model
 
 data class UserDataSubmit(
         val fistName: String,

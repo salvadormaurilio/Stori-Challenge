@@ -6,8 +6,8 @@ import kotlinx.coroutines.flow.flatMapConcat
 import kotlinx.coroutines.flow.flowOf
 import mx.android.storichallenge.data.datasource.remote.AuthRemoteDataSource
 import mx.android.storichallenge.data.datasource.remote.UserRemoteDataSource
-import mx.android.storichallenge.domain.UserDataSubmit
-import mx.android.storichallenge.domain.toUserDataMap
+import mx.android.storichallenge.domain.model.UserDataSubmit
+import mx.android.storichallenge.domain.model.toUserDataMap
 import javax.inject.Inject
 
 @OptIn(ExperimentalCoroutinesApi::class)
