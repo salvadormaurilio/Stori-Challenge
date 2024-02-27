@@ -33,6 +33,6 @@ fun UserDataResponse?.toUserData() = UserData(
 
 private fun ArrayList<Map<String, String>>?.toMovementList() = this?.map { it.toMovement() }.orEmpty()
 
-private const val FIRST_NAME = "first_name"
-private const val LAST_NAME = "last_name"
-private const val EMAIL_NAME = "email"
+const val FIRST_NAME = "first_name"
+const val LAST_NAME = "last_name"
+const val EMAIL_NAME = "email"

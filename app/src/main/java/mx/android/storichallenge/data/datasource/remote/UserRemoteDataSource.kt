@@ -64,7 +64,7 @@ class UserRemoteDataSource @Inject constructor(
     }
 
     companion object {
-        private const val USERS_COLLECTION = "users"
-        private const val MOVEMENTS_COLLECTION = "movements"
+        const val USERS_COLLECTION = "users"
+        const val MOVEMENTS_COLLECTION = "movements"
     }
 }

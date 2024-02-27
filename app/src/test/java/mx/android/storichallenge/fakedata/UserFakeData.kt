@@ -1,4 +1,8 @@
-package mx.android.storichallenge
+package mx.android.storichallenge.fakedata
+
+import mx.android.storichallenge.domain.model.EMAIL_NAME
+import mx.android.storichallenge.domain.model.FIRST_NAME
+import mx.android.storichallenge.domain.model.LAST_NAME
 
 const val ANY_USER_ID = "MaKNkzR0ySOFAd9PS4IFxnW5rpX2"
 private const val ANY_FIRST_NAME = "Salvador"
@@ -10,6 +14,12 @@ const val ANY_INVALID_USER_EMAIL = "salvadorbuapap.mx"
 const val ANY_PASSWORD = "Admin1234_1"
 const val ANY_INVALID_PASSWORD = "Admi"
 private const val ANY_OTHER_PASSWORD = "Admin1234_12"
+
+fun givenUserDataMap() = mapOf(
+    FIRST_NAME to ANY_FIRST_NAME,
+    LAST_NAME to ANY_LAST_LAST_NAME,
+    EMAIL_NAME to ANY_USER_EMAIL
+)
 
 //fun givenUserEntity() = UserEntity(
 //    id = ANY_ID,
