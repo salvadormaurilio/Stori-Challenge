@@ -1,9 +1,10 @@
-package mx.android.storichallenge.data.datasource.local
+package mx.android.storichallenge.data.datasource.remote
 
 import com.google.firebase.auth.FirebaseAuth
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.callbackFlow
-import mx.android.storichallenge.data.datasource.exception.AuthException
+import mx.android.storichallenge.data.datasource.exception.AuthException.SignInException
+import mx.android.storichallenge.data.datasource.exception.AuthException.SignUpException
 import javax.inject.Inject
 
 class AuthRemoteDataSource @Inject constructor(private val firebaseAuth: FirebaseAuth) {
@@ -15,18 +16,18 @@ class AuthRemoteDataSource @Inject constructor(private val firebaseAuth: Firebas
                 }
                 .addOnFailureListener {
                     it.printStackTrace()
-                    trySend(Result.failure(AuthException.SignInException()))
+                    trySend(Result.failure(SignInException()))
                 }
     }
 
-    suspend fun signUp(email: String, password: String): Flow<Result<String>> = callbackFlow {
+    fun signUp(email: String, password: String): Flow<Result<String>> = callbackFlow {
         firebaseAuth.createUserWithEmailAndPassword(email, password)
                 .addOnSuccessListener {
                     trySend(Result.success(it.user?.uid.orEmpty()))
                 }
                 .addOnFailureListener {
                     it.printStackTrace()
-                    trySend(Result.failure(AuthException.SignUpException()))
+                    trySend(Result.failure(SignUpException()))
                 }
     }
 }

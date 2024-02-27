@@ -1,10 +1,11 @@
-package mx.android.storichallenge.data.datasource.local
+package mx.android.storichallenge.data.datasource.remote
 
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.firestore.FirebaseFirestore
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.callbackFlow
-import mx.android.storichallenge.data.datasource.exception.AuthException
+import mx.android.storichallenge.data.datasource.exception.UserException.GetUserDataException
+import mx.android.storichallenge.data.datasource.exception.UserException.StoreUserDataException
 import javax.inject.Inject
 
 class UserRemoteDataSource @Inject constructor(private val firebaseAuth: FirebaseAuth,
@@ -20,21 +21,21 @@ class UserRemoteDataSource @Inject constructor(private val firebaseAuth: Firebas
                 }
                 .addOnFailureListener {
                     it.printStackTrace()
-                    trySend(Result.failure(AuthException.SignInException()))
+                    trySend(Result.failure(StoreUserDataException()))
                 }
     }
 
-    suspend fun getUserData(): Flow<Result<Map<String, Any>>> = callbackFlow {
+    fun getUserData(): Flow<Result<Map<String, Any>>> = callbackFlow {
         val userId = firebaseAuth.currentUser?.uid.orEmpty()
         firebaseFirestore.collection(STORI_COLLECTION)
                 .document(userId)
                 .get()
                 .addOnSuccessListener {
-                    trySend(Result.success(it.data.orEmpty()))
+                    trySend(if (it.exists()) Result.success(it.data.orEmpty()) else Result.failure(GetUserDataException()))
                 }
                 .addOnFailureListener {
                     it.printStackTrace()
-                    trySend(Result.failure(AuthException.SignInException()))
+                    trySend(Result.failure(GetUserDataException()))
                 }
     }
 

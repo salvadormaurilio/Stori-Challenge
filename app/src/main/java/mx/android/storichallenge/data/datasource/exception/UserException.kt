@@ -1,7 +1,7 @@
 package mx.android.storichallenge.data.datasource.exception
 
 sealed class UserException(message: String) : Exception(message) {
-    data class StoreUserException(override val message: String = "Invalid Credentials at Sing Up") : Exception(message)
-    data class GetUserException(override val message: String = "Some error happened when get fat") : Exception(message)
+    data class StoreUserDataException(override val message: String = "Some error happened when store Use Data") : Exception(message)
+    data class GetUserDataException(override val message: String = "Some error happened when get Use Data") : Exception(message)
 }
 
