@@ -4,8 +4,7 @@ import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.firestore.FirebaseFirestore
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.callbackFlow
-import mx.android.storichallenge.data.datasource.exception.UserException.GetUserDataException
-import mx.android.storichallenge.data.datasource.exception.UserException.StoreUserDataException
+import mx.android.storichallenge.data.datasource.exception.UserException
 import javax.inject.Inject
 
 class UserRemoteDataSource @Inject constructor(private val firebaseAuth: FirebaseAuth,
@@ -21,7 +20,7 @@ class UserRemoteDataSource @Inject constructor(private val firebaseAuth: Firebas
                 }
                 .addOnFailureListener {
                     it.printStackTrace()
-                    trySend(Result.failure(StoreUserDataException()))
+                    trySend(Result.failure(UserException.StoreUserDataException()))
                 }
     }
 
@@ -31,11 +30,11 @@ class UserRemoteDataSource @Inject constructor(private val firebaseAuth: Firebas
                 .document(userId)
                 .get()
                 .addOnSuccessListener {
-                    trySend(if (it.exists()) Result.success(it.data.orEmpty()) else Result.failure(GetUserDataException()))
+                    trySend(if (it.exists()) Result.success(it.data.orEmpty()) else Result.failure(UserException.GetUserDataException()))
                 }
                 .addOnFailureListener {
                     it.printStackTrace()
-                    trySend(Result.failure(GetUserDataException()))
+                    trySend(Result.failure(UserException.GetUserDataException()))
                 }
     }
 

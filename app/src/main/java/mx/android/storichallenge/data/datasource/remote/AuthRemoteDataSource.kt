@@ -3,8 +3,7 @@ package mx.android.storichallenge.data.datasource.remote
 import com.google.firebase.auth.FirebaseAuth
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.callbackFlow
-import mx.android.storichallenge.data.datasource.exception.AuthException.SignInException
-import mx.android.storichallenge.data.datasource.exception.AuthException.SignUpException
+import mx.android.storichallenge.data.datasource.exception.AuthException
 import javax.inject.Inject
 
 class AuthRemoteDataSource @Inject constructor(private val firebaseAuth: FirebaseAuth) {
@@ -16,7 +15,7 @@ class AuthRemoteDataSource @Inject constructor(private val firebaseAuth: Firebas
                 }
                 .addOnFailureListener {
                     it.printStackTrace()
-                    trySend(Result.failure(SignInException()))
+                    trySend(Result.failure(AuthException.SignInException()))
                 }
     }
 
@@ -27,7 +26,7 @@ class AuthRemoteDataSource @Inject constructor(private val firebaseAuth: Firebas
                 }
                 .addOnFailureListener {
                     it.printStackTrace()
-                    trySend(Result.failure(SignUpException()))
+                    trySend(Result.failure(AuthException.SignUpException()))
                 }
     }
 }
