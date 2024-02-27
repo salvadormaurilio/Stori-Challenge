@@ -16,7 +16,9 @@ fun UserDataSubmit.toUserDataMap() = mapOf(
         LAST_NAME to lastName,
         EMAIL_NAME to email)
 
-fun Map<String, Any>.toUserResponseData() = UserDataResponse(
+fun Result<Map<String, Any>>.toResultUserResponseData() = map { it.toUserResponseData() }
+
+private fun Map<String, Any>.toUserResponseData() = UserDataResponse(
         fistName = this[FIRST_NAME].toString(),
         lastName = this[LAST_NAME].toString(),
         email =  this[EMAIL_NAME].toString())
