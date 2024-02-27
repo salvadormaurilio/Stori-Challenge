@@ -1,5 +1,7 @@
 package mx.android.storichallenge.domain.model
 
+import mx.android.storichallenge.data.datasource.model.MovementDetailResponse
+
 data class Movement(
     val id: String,
     val name: String,
@@ -21,6 +23,17 @@ fun Map<String, String>.toMovement() = Movement(
     name = this[NAME].orEmpty(),
     date = this[DATE].orEmpty(),
     amount = this[AMOUNT].orEmpty()
+)
+
+fun Result<MovementDetailResponse?>.toMovementDetail() = map { it.toMovementDetail() }
+
+fun MovementDetailResponse?.toMovementDetail() = MovementDetail(
+    name = this?.name.orEmpty(),
+    date = this?.date.orEmpty(),
+    amount = this?.amount.orEmpty(),
+    card = this?.card.orEmpty(),
+    reference = this?.reference.orEmpty(),
+    category = this?.category.orEmpty()
 )
 
 private const val ID = "id"

@@ -41,12 +41,12 @@ class UserRemoteDataSource @Inject constructor(private val firebaseAuth: Firebas
                 }
     }
 
-    fun getMovementDetail(id: String) : Flow<Result<MovementDetailResponse?>> = callbackFlow {
+    fun getMovementDetail(movementId: String) : Flow<Result<MovementDetailResponse?>> = callbackFlow {
         val userId = firebaseAuth.currentUser?.uid.orEmpty()
         firebaseFirestore.collection(USERS_COLLECTION)
             .document(userId)
             .collection(MOVEMENTS_COLLECTION)
-            .document(id)
+            .document(movementId)
             .get()
             .addOnSuccessListener {
                 trySend(if (it.exists()) Result.success(it.toObject<MovementDetailResponse>()) else Result.failure(UserException.GetUserDataException()))
@@ -58,9 +58,7 @@ class UserRemoteDataSource @Inject constructor(private val firebaseAuth: Firebas
     }
 
     companion object {
-
         private const val USERS_COLLECTION = "users"
         private const val MOVEMENTS_COLLECTION = "movements"
-
     }
 }
