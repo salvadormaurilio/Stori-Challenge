@@ -3,6 +3,7 @@ package mx.android.storichallenge.data.datasource.remote
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.firestore.FirebaseFirestore
 import com.google.firebase.firestore.toObject
+import kotlinx.coroutines.channels.awaitClose
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.callbackFlow
 import mx.android.storichallenge.data.datasource.exception.UserException
@@ -27,6 +28,7 @@ class UserRemoteDataSource @Inject constructor(
                 it.printStackTrace()
                 trySend(Result.failure(UserException.StoreUserDataException()))
             }
+        awaitClose { close() }
     }
 
     fun getUserData(): Flow<Result<UserDataResponse?>> = callbackFlow {
@@ -41,6 +43,7 @@ class UserRemoteDataSource @Inject constructor(
                 it.printStackTrace()
                 trySend(Result.failure(UserException.GetUserDataException()))
             }
+        awaitClose { close() }
     }
 
     fun getMovementDetail(movementId: String): Flow<Result<MovementDetailResponse?>> = callbackFlow {
@@ -57,6 +60,7 @@ class UserRemoteDataSource @Inject constructor(
                 it.printStackTrace()
                 trySend(Result.failure(UserException.GetUserDataException()))
             }
+        awaitClose { close() }
     }
 
     companion object {
