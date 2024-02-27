@@ -12,7 +12,7 @@ class UserRemoteDataSource @Inject constructor(private val firebaseAuth: Firebas
 
     fun storeUserData(userDataMap: Map<String, String>): Flow<Result<String>> = callbackFlow {
         val userId = firebaseAuth.currentUser?.uid.orEmpty()
-        firebaseFirestore.collection(STORI_COLLECTION)
+        firebaseFirestore.collection(USERS_COLLECTION)
                 .document(userId)
                 .set(userDataMap)
                 .addOnSuccessListener {
@@ -26,7 +26,7 @@ class UserRemoteDataSource @Inject constructor(private val firebaseAuth: Firebas
 
     fun getUserData(): Flow<Result<Map<String, Any>>> = callbackFlow {
         val userId = firebaseAuth.currentUser?.uid.orEmpty()
-        firebaseFirestore.collection(STORI_COLLECTION)
+        firebaseFirestore.collection(USERS_COLLECTION)
                 .document(userId)
                 .get()
                 .addOnSuccessListener {
@@ -40,7 +40,8 @@ class UserRemoteDataSource @Inject constructor(private val firebaseAuth: Firebas
 
     companion object {
 
-        private const val STORI_COLLECTION = "stori"
+        private const val USERS_COLLECTION = "users"
+        private const val MOVEMENTS_COLLECTION = "movements"
 
     }
 }
