@@ -11,7 +11,7 @@ data class MovementDetailUi(
     val category: String
 )
 
-fun MovementDetail.toUserDataUi() = MovementDetailUi(
+fun MovementDetail.toMovementDetailUi() = MovementDetailUi(
     name = name,
     date = date,
     amount = amount,
