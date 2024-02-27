@@ -2,6 +2,7 @@ package mx.android.storichallenge.ui.singup
 
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
+import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.StateFlow
 import kotlinx.coroutines.launch
@@ -12,6 +13,7 @@ import mx.android.storichallenge.ui.singin.UserDataSubmitUi
 import mx.android.storichallenge.ui.singin.toUserDataSubmit
 import javax.inject.Inject
 
+@HiltViewModel
 class SingUpViewModel @Inject constructor(
     private val authExceptionHandler: AuthExceptionHandler,
     private val signUpUseCase: SignUpUseCase,

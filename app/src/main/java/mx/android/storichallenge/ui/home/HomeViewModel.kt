@@ -2,6 +2,7 @@ package mx.android.storichallenge.ui.home
 
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
+import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.flow.MutableSharedFlow
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.SharedFlow
@@ -12,6 +13,7 @@ import mx.android.storichallenge.domain.GetUserUseCase
 import mx.android.storichallenge.domain.model.UserData
 import javax.inject.Inject
 
+@HiltViewModel
 class HomeViewModel @Inject constructor(
     private val getUserUseCase: GetUserUseCase,
     private val coroutinesDispatchers: CoroutinesDispatchers

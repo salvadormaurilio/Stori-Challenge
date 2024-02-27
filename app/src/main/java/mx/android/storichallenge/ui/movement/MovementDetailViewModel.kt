@@ -2,6 +2,7 @@ package mx.android.storichallenge.ui.movement
 
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
+import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.StateFlow
 import kotlinx.coroutines.launch
@@ -10,6 +11,7 @@ import mx.android.storichallenge.domain.GetMovementDetailUseCase
 import mx.android.storichallenge.domain.model.MovementDetail
 import javax.inject.Inject
 
+@HiltViewModel
 class MovementDetailViewModel @Inject constructor(
     private val getMovementDetailUseCase: GetMovementDetailUseCase,
     private val coroutinesDispatchers: CoroutinesDispatchers

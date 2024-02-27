@@ -2,6 +2,7 @@ package mx.android.storichallenge.ui.singin
 
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
+import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.flow.MutableSharedFlow
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.SharedFlow
@@ -14,6 +15,7 @@ import mx.android.storichallenge.ui.singin.SignInUiState.Error
 import mx.android.storichallenge.ui.singin.SignInUiState.Loading
 import javax.inject.Inject
 
+@HiltViewModel
 class SingInViewModel @Inject constructor(
     private val authExceptionHandler: AuthExceptionHandler,
     private val signInUseCase: SignInUseCase,
