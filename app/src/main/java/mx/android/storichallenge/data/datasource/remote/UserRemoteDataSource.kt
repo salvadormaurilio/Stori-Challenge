@@ -6,6 +6,7 @@ import com.google.firebase.firestore.toObject
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.callbackFlow
 import mx.android.storichallenge.data.datasource.exception.UserException
+import mx.android.storichallenge.data.datasource.model.MovementDetailResponse
 import mx.android.storichallenge.data.datasource.model.UserDataResponse
 import javax.inject.Inject
 
@@ -38,6 +39,22 @@ class UserRemoteDataSource @Inject constructor(private val firebaseAuth: Firebas
                     it.printStackTrace()
                     trySend(Result.failure(UserException.GetUserDataException()))
                 }
+    }
+
+    fun getMovementDetail(id: String) : Flow<Result<MovementDetailResponse?>> = callbackFlow {
+        val userId = firebaseAuth.currentUser?.uid.orEmpty()
+        firebaseFirestore.collection(USERS_COLLECTION)
+            .document(userId)
+            .collection(MOVEMENTS_COLLECTION)
+            .document(id)
+            .get()
+            .addOnSuccessListener {
+                trySend(if (it.exists()) Result.success(it.toObject<MovementDetailResponse>()) else Result.failure(UserException.GetUserDataException()))
+            }
+            .addOnFailureListener {
+                it.printStackTrace()
+                trySend(Result.failure(UserException.GetUserDataException()))
+            }
     }
 
     companion object {

@@ -1,10 +1,10 @@
 package mx.android.storichallenge.data.datasource.model
 
 data class MovementDetailResponse(
-    val name: String,
-    val date: String,
-    val amount: String,
-    val card: String,
-    val reference: String,
-    val category: String
+    val name: String? = null,
+    val date: String? = null,
+    val amount: String? = null,
+    val card: String? = null,
+    val reference: String? = null,
+    val category: String? = null
 )
