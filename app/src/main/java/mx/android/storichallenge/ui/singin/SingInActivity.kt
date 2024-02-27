@@ -1,9 +1,10 @@
-package mx.android.storichallenge.ui
+package mx.android.storichallenge.ui.singin
 
 import android.os.Bundle
 import android.util.Log
 import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
+import androidx.activity.viewModels
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Surface
@@ -15,11 +16,16 @@ import com.google.firebase.firestore.FirebaseFirestore
 import com.google.firebase.firestore.ktx.firestore
 import com.google.firebase.firestore.toObject
 import com.google.firebase.ktx.Firebase
+import dagger.hilt.android.AndroidEntryPoint
 import mx.android.storichallenge.data.datasource.model.UserDataResponse
 import mx.android.storichallenge.domain.model.toUserData
 import mx.android.storichallenge.ui.theme.StoriChallengeTheme
 
-class MainActivity : ComponentActivity() {
+@AndroidEntryPoint
+class SingInActivity : ComponentActivity() {
+
+    private val singInViewModel by viewModels<SingInViewModel>()
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContent {
