@@ -10,38 +10,40 @@ import mx.android.storichallenge.data.datasource.model.MovementDetailResponse
 import mx.android.storichallenge.data.datasource.model.UserDataResponse
 import javax.inject.Inject
 
-class UserRemoteDataSource @Inject constructor(private val firebaseAuth: FirebaseAuth,
-                                               private val firebaseFirestore: FirebaseFirestore) {
+class UserRemoteDataSource @Inject constructor(
+    private val firebaseAuth: FirebaseAuth,
+    private val firebaseFirestore: FirebaseFirestore
+) {
 
     fun storeUserData(userDataMap: Map<String, String>): Flow<Result<String>> = callbackFlow {
         val userId = firebaseAuth.currentUser?.uid.orEmpty()
         firebaseFirestore.collection(USERS_COLLECTION)
-                .document(userId)
-                .set(userDataMap)
-                .addOnSuccessListener {
-                    trySend(Result.success(userId))
-                }
-                .addOnFailureListener {
-                    it.printStackTrace()
-                    trySend(Result.failure(UserException.StoreUserDataException()))
-                }
+            .document(userId)
+            .set(userDataMap)
+            .addOnSuccessListener {
+                trySend(Result.success(userId))
+            }
+            .addOnFailureListener {
+                it.printStackTrace()
+                trySend(Result.failure(UserException.StoreUserDataException()))
+            }
     }
 
     fun getUserData(): Flow<Result<UserDataResponse?>> = callbackFlow {
         val userId = firebaseAuth.currentUser?.uid.orEmpty()
         firebaseFirestore.collection(USERS_COLLECTION)
-                .document(userId)
-                .get()
-                .addOnSuccessListener {
-                    trySend(if (it.exists()) Result.success(it.toObject<UserDataResponse>()) else Result.failure(UserException.GetUserDataException()))
-                }
-                .addOnFailureListener {
-                    it.printStackTrace()
-                    trySend(Result.failure(UserException.GetUserDataException()))
-                }
+            .document(userId)
+            .get()
+            .addOnSuccessListener {
+                trySend(if (it.exists()) Result.success(it.toObject<UserDataResponse>()) else Result.failure(UserException.GetUserDataException()))
+            }
+            .addOnFailureListener {
+                it.printStackTrace()
+                trySend(Result.failure(UserException.GetUserDataException()))
+            }
     }
 
-    fun getMovementDetail(movementId: String) : Flow<Result<MovementDetailResponse?>> = callbackFlow {
+    fun getMovementDetail(movementId: String): Flow<Result<MovementDetailResponse?>> = callbackFlow {
         val userId = firebaseAuth.currentUser?.uid.orEmpty()
         firebaseFirestore.collection(USERS_COLLECTION)
             .document(userId)

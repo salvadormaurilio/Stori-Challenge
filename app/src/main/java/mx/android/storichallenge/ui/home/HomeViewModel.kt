@@ -10,7 +10,6 @@ import kotlinx.coroutines.launch
 import mx.android.storichallenge.core.coroutines.CoroutinesDispatchers
 import mx.android.storichallenge.domain.GetUserUseCase
 import mx.android.storichallenge.domain.model.UserData
-import mx.android.storichallenge.ui.exception.AuthExceptionHandler
 import javax.inject.Inject
 
 class HomeViewModel @Inject constructor(
@@ -50,7 +49,7 @@ class HomeViewModel @Inject constructor(
         _userDataUiState.value = signUpUiState
     }
 
-    fun navigateToSingUp(movementId: String)  {
+    fun navigateToSingUp(movementId: String) {
         _navigateToMovementDetail.tryEmit(movementId)
     }
 }

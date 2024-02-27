@@ -10,23 +10,23 @@ class AuthRemoteDataSource @Inject constructor(private val firebaseAuth: Firebas
 
     fun signIn(email: String, password: String): Flow<Result<String>> = callbackFlow {
         firebaseAuth.signInWithEmailAndPassword(email, password)
-                .addOnSuccessListener {
-                    trySend(Result.success(it.user?.uid.orEmpty()))
-                }
-                .addOnFailureListener {
-                    it.printStackTrace()
-                    trySend(Result.failure(AuthException.SignInException()))
-                }
+            .addOnSuccessListener {
+                trySend(Result.success(it.user?.uid.orEmpty()))
+            }
+            .addOnFailureListener {
+                it.printStackTrace()
+                trySend(Result.failure(AuthException.SignInException()))
+            }
     }
 
     fun signUp(email: String, password: String): Flow<Result<String>> = callbackFlow {
         firebaseAuth.createUserWithEmailAndPassword(email, password)
-                .addOnSuccessListener {
-                    trySend(Result.success(it.user?.uid.orEmpty()))
-                }
-                .addOnFailureListener {
-                    it.printStackTrace()
-                    trySend(Result.failure(AuthException.SignUpException()))
-                }
+            .addOnSuccessListener {
+                trySend(Result.success(it.user?.uid.orEmpty()))
+            }
+            .addOnFailureListener {
+                it.printStackTrace()
+                trySend(Result.failure(AuthException.SignUpException()))
+            }
     }
 }
