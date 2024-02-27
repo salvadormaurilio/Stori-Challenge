@@ -2,7 +2,9 @@ package mx.android.storichallenge.ui.singin
 
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
+import kotlinx.coroutines.flow.MutableSharedFlow
 import kotlinx.coroutines.flow.MutableStateFlow
+import kotlinx.coroutines.flow.SharedFlow
 import kotlinx.coroutines.flow.StateFlow
 import kotlinx.coroutines.launch
 import mx.android.storichallenge.core.coroutines.CoroutinesDispatchers
@@ -22,6 +24,11 @@ class SingInViewModel @Inject constructor(
 
     val signInUiState: StateFlow<SignInUiState?>
         get() = _signInUiState
+
+    private val _navigateToSingUp = MutableSharedFlow<Unit>()
+
+    val navigateToSingUp: SharedFlow<Unit>
+        get() = _navigateToSingUp
 
     fun signIn(email: String, password: String) = viewModelScope.launch(coroutinesDispatchers.io) {
         emitSignInUiState(Loading)
@@ -46,5 +53,9 @@ class SingInViewModel @Inject constructor(
 
     private fun emitSignInUiState(signInUiState: SignInUiState) {
         _signInUiState.value = signInUiState
+    }
+
+    fun navigateToSingUp()  {
+        _navigateToSingUp.tryEmit(Unit)
     }
 }
