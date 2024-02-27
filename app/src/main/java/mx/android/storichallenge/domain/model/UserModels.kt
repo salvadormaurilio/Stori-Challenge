@@ -1,5 +1,7 @@
 package mx.android.storichallenge.domain.model
 
+import mx.android.storichallenge.data.datasource.model.UserDataResponse
+
 data class UserDataSubmit(
     val fistName: String,
     val lastName: String,
@@ -8,7 +10,7 @@ data class UserDataSubmit(
 )
 
 data class UserData(
-    val fistName: String,
+    val firstName: String,
     val lastName: String,
     val email: String,
     val movements: List<Movement>
@@ -20,24 +22,17 @@ fun UserDataSubmit.toUserDataMap() = mapOf(
     EMAIL_NAME to email
 )
 
-fun Result<Map<String, Any>>.toResultUserData() = map { it.toUserData() }
+fun Result<UserDataResponse?>.toResultUserData() = map { it.toUserData() }
 
-fun Map<String, Any>.toUserData() = UserData(
-    fistName = this[FIRST_NAME].toString(),
-    lastName = this[LAST_NAME].toString(),
-    email = this[EMAIL_NAME].toString(),
-    movements = (this[MOVEMENTS] as? ArrayList<HashMap<String, String>>).toMovements(),
+fun UserDataResponse?.toUserData() = UserData(
+    firstName = this?.firstName.orEmpty(),
+    lastName = this?.lastName.orEmpty(),
+    email = this?.email.orEmpty(),
+    movements = this?.movements.toMovements()
 )
 
-private fun ArrayList<HashMap<String, String>>?.toMovements(): List<Movement> = this?.map { it.toMovement() }.orEmpty()
-
-private fun HashMap<String, String>.toMovement() = Movement(
-    id = this["id"].orEmpty(),
-    name = this["name"].orEmpty(),
-    date = this["name"].orEmpty(),
-    amount = this["name"].orEmpty())
+private fun ArrayList<Map<String, String>>?.toMovements() = this?.map { it.toMovement() }.orEmpty()
 
 private const val FIRST_NAME = "first_name"
 private const val LAST_NAME = "last_name"
 private const val EMAIL_NAME = "email"
-private const val MOVEMENTS = "movements"
