@@ -9,7 +9,7 @@ data class UserDataSubmitUi(
         val password: String,
         val confirmPassword: String)
 
-fun UserDataSubmitUi.toUserCredentials() = UserDataSubmit(
+fun UserDataSubmitUi.toUserDataSubmit() = UserDataSubmit(
         fistName = fistName,
         lastName = lastName,
         email = email,
