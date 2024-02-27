@@ -28,10 +28,10 @@ fun UserDataResponse?.toUserData() = UserData(
     firstName = this?.firstName.orEmpty(),
     lastName = this?.lastName.orEmpty(),
     email = this?.email.orEmpty(),
-    movements = this?.movements.toMovements()
+    movements = this?.movements.toMovementList()
 )
 
-private fun ArrayList<Map<String, String>>?.toMovements() = this?.map { it.toMovement() }.orEmpty()
+private fun ArrayList<Map<String, String>>?.toMovementList() = this?.map { it.toMovement() }.orEmpty()
 
 private const val FIRST_NAME = "first_name"
 private const val LAST_NAME = "last_name"
