@@ -3,6 +3,7 @@ package mx.android.storichallenge.fakedata
 import mx.android.storichallenge.domain.model.EMAIL_NAME
 import mx.android.storichallenge.domain.model.FIRST_NAME
 import mx.android.storichallenge.domain.model.LAST_NAME
+import mx.android.storichallenge.domain.model.UserDataSubmit
 
 const val ANY_USER_ID = "MaKNkzR0ySOFAd9PS4IFxnW5rpX2"
 private const val ANY_FIRST_NAME = "Salvador"
@@ -21,18 +22,12 @@ fun givenUserDataMap() = mapOf(
     EMAIL_NAME to ANY_USER_EMAIL
 )
 
-//fun givenUserEntity() = UserEntity(
-//    id = ANY_ID,
-//    name = ANY_NAME,
-//    email = ANY_USER_EMAIL,
-//    password = ANY_PASSWORD
-//)
-//
-//fun givenUserCredentials() = UserCredentials(
-//    name = ANY_NAME,
-//    email = ANY_USER_EMAIL,
-//    password = ANY_PASSWORD
-//)
+fun givenUserDataSubmit() = UserDataSubmit(
+    fistName = ANY_FIRST_NAME,
+    lastName = ANY_LAST_LAST_NAME,
+    email = ANY_USER_EMAIL,
+    password = ANY_PASSWORD
+)
 //
 //fun givenUserData() = UserData(
 //    name = ANY_NAME,
