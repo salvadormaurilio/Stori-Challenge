@@ -18,16 +18,18 @@ data class MovementDetail(
     val category: String
 )
 
-fun Map<String, String>.toMovement() = Movement(
-    id = this[ID].orEmpty(),
-    name = this[NAME].orEmpty(),
-    date = this[DATE].orEmpty(),
-    amount = this[AMOUNT].orEmpty()
+fun ArrayList<Map<String, String>>?.toMovementList() = this?.map { it.toMovement() }.orEmpty()
+
+private fun Map<String, String>.toMovement() = Movement(
+    id = this[MOVEMENT_ID].orEmpty(),
+    name = this[MOVEMENT_NAME].orEmpty(),
+    date = this[MOVEMENT_DATE].orEmpty(),
+    amount = this[MOVEMENT_AMOUNT].orEmpty()
 )
 
 fun Result<MovementDetailResponse?>.toMovementDetail() = map { it.toMovementDetail() }
 
-fun MovementDetailResponse?.toMovementDetail() = MovementDetail(
+private fun MovementDetailResponse?.toMovementDetail() = MovementDetail(
     name = this?.name.orEmpty(),
     date = this?.date.orEmpty(),
     amount = this?.amount.orEmpty(),
@@ -36,7 +38,7 @@ fun MovementDetailResponse?.toMovementDetail() = MovementDetail(
     category = this?.category.orEmpty()
 )
 
-private const val ID = "id"
-private const val NAME = "name"
-private const val DATE = "date"
-private const val AMOUNT = "amount"
+const val MOVEMENT_ID = "id"
+const val MOVEMENT_NAME = "name"
+const val MOVEMENT_DATE = "date"
+const val MOVEMENT_AMOUNT = "amount"

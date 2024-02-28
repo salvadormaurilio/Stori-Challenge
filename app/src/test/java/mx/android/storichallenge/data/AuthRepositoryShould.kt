@@ -35,7 +35,7 @@ class AuthRepositoryShould {
     }
 
     @Test
-    fun `Return User Id when signUp is called and signUp and storeUserData in datasource are success`() = runTest {
+    fun `Return UserId when signUp is called and signUp and storeUserData in datasource are success`() = runTest {
         val userDataSubmit = givenUserDataSubmit()
         val userDataMap = givenUserDataMap()
         val resultUserId = Result.success(ANY_USER_ID)
@@ -82,7 +82,7 @@ class AuthRepositoryShould {
     }
 
     @Test
-    fun `Return User Id when signIn is called and signIn in datasource are success`() = runTest {
+    fun `Return UserId when signIn is called and signIn in datasource is success`() = runTest {
         val resultUserId = Result.success(ANY_USER_ID)
 
         whenever(authRemoteDataSource.signIn(ANY_USER_EMAIL, ANY_PASSWORD)).thenReturn(flowOf(resultUserId))

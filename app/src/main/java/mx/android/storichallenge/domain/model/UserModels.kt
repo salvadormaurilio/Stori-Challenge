@@ -24,14 +24,13 @@ fun UserDataSubmit.toUserDataMap() = mapOf(
 
 fun Result<UserDataResponse?>.toResultUserData() = map { it.toUserData() }
 
-fun UserDataResponse?.toUserData() = UserData(
+private fun UserDataResponse?.toUserData() = UserData(
     firstName = this?.firstName.orEmpty(),
     lastName = this?.lastName.orEmpty(),
     email = this?.email.orEmpty(),
     movements = this?.movements.toMovementList()
 )
 
-private fun ArrayList<Map<String, String>>?.toMovementList() = this?.map { it.toMovement() }.orEmpty()
 
 const val FIRST_NAME = "first_name"
 const val LAST_NAME = "last_name"
