@@ -8,6 +8,7 @@ import mx.android.storichallenge.domain.model.MOVEMENT_NAME
 import mx.android.storichallenge.domain.model.Movement
 import mx.android.storichallenge.domain.model.MovementDetail
 import mx.android.storichallenge.ui.home.MovementUi
+import mx.android.storichallenge.ui.movement.MovementDetailUi
 
 const val ANY_MOVEMENT_ID = "MaKNASzR0ySOFA99PS4IFASW5rpX2"
 
@@ -91,3 +92,11 @@ private fun givenMovementUi2() = MovementUi(
     amount = ANY_MOVEMENT_AMOUNT_2
 )
 
+fun givenMovementDetailUi() = MovementDetailUi(
+    name = ANY_MOVEMENT_NAME_1,
+    date = ANY_MOVEMENT_DATE_1,
+    amount = ANY_MOVEMENT_AMOUNT_1,
+    card = ANY_MOVEMENT_CARD,
+    reference = ANY_MOVEMENT_REFERENCE,
+    category = ANY_MOVEMENT_CATEGORY
+)

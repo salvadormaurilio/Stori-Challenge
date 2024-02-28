@@ -33,7 +33,7 @@ class HomeViewModelShould {
     }
 
     @Test
-    fun `get UserData from userDataUiState when getUserData is called and getUserUseCase is success`() = runTest {
+    fun `get UserDataUi from userDataUiState when getUserData is called and getUserUseCase is success`() = runTest {
         val userData = givenUserData()
         val userDataUi = givenUserDataUi()
         val resultUserData = Result.success(userData)
