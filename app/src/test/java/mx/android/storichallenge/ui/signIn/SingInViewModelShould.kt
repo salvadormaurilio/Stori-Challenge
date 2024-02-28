@@ -18,6 +18,7 @@ import mx.android.storichallenge.ui.singin.SingInViewModel
 import org.junit.Before
 import org.junit.Rule
 import org.junit.Test
+import org.mockito.kotlin.any
 import org.mockito.kotlin.mock
 import org.mockito.kotlin.never
 import org.mockito.kotlin.verify
@@ -43,12 +44,12 @@ class SingInViewModelShould {
     }
 
     @Test
-    fun `get EmailException from signInUiState when signIn is called and email is invalid`() = runTest {
+    fun `Get EmailException from signInUiState when signIn is called and email is invalid`() = runTest {
         singInViewModel.signIn(ANY_INVALID_USER_EMAIL, ANY_PASSWORD)
 
         val result = singInViewModel.signInUiState.firstOrNull()
 
-        verify(signInUseCase, never()).signIn(ANY_INVALID_USER_EMAIL, ANY_PASSWORD)
+        verify(signInUseCase, never()).signIn(any(), any())
         assertThatIsInstanceOf<SignInUiState.Error>(result)
         assertThatIsInstanceOf<AuthUiException.EmailException>((result as SignInUiState.Error).error)
     }
@@ -68,7 +69,7 @@ class SingInViewModelShould {
     }
 
     @Test
-    fun `get SignInException from signInUiState when signIn is called and signInUseCase is failure`() = runTest {
+    fun `Get SignInException from signInUiState when signIn is called and signInUseCase is failure`() = runTest {
         val resultSignInException: Result<String> = Result.failure(AuthException.SignInException())
 
         whenever(signInUseCase.signIn(ANY_USER_EMAIL, ANY_PASSWORD)).thenReturn(flowOf(resultSignInException))
