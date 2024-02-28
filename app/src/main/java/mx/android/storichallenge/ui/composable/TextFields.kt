@@ -23,6 +23,7 @@ import androidx.compose.ui.text.input.VisualTransformation
 import androidx.compose.ui.tooling.preview.Preview
 import mx.android.storichallenge.R
 import mx.android.storichallenge.core.ui.empty
+import mx.android.storichallenge.ui.theme.StoriChallengeTheme
 
 @Composable
 fun EmailTextField(modifier: Modifier = Modifier) {
@@ -36,12 +37,8 @@ fun EmailTextField(modifier: Modifier = Modifier) {
         keyboardOptions = KeyboardOptions(keyboardType = KeyboardType.Email),
         onValueChange = { email = it },
     )
-}
 
-@Preview(showBackground = true)
-@Composable
-fun EmailTextFieldPreview() {
-    EmailTextField()
+
 }
 
 @Composable
@@ -70,6 +67,16 @@ fun PasswordTextField(modifier: Modifier = Modifier, @StringRes text: Int = R.st
 
 @Preview(showBackground = true)
 @Composable
+fun EmailTextFieldPreview() {
+    StoriChallengeTheme {
+        EmailTextField()
+    }
+}
+
+@Preview(showBackground = true)
+@Composable
 fun PasswordTextFieldPreview() {
-    PasswordTextField()
+    StoriChallengeTheme {
+        PasswordTextField()
+    }
 }
