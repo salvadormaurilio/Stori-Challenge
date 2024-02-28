@@ -4,6 +4,7 @@
 
     <application
         android:allowBackup="true"
+        android:name=".App"
         android:dataExtractionRules="@xml/data_extraction_rules"
         android:fullBackupContent="@xml/backup_rules"
         android:icon="@mipmap/ic_launcher"
@@ -15,7 +16,6 @@
         <activity
             android:name=".ui.singin.SingInActivity"
             android:exported="true"
-            android:label="@string/app_name"
             android:theme="@style/Theme.StoriChallenge">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
@@ -23,6 +23,20 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
+
+        <activity
+            android:name=".ui.singup.SingUpActivity"
+            android:exported="true"
+            android:theme="@style/Theme.StoriChallenge"/>
+        <activity
+            android:name=".ui.home.HomeActivity"
+            android:exported="true"
+            android:theme="@style/Theme.StoriChallenge"/>
+
+        <activity
+            android:name=".ui.movement.MovementDetailActivity"
+            android:exported="true"
+            android:theme="@style/Theme.StoriChallenge"/>
     </application>
 
 </manifest>
