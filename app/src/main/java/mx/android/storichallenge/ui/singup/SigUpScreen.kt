@@ -1,14 +1,11 @@
-package mx.android.storichallenge.ui.singin
+package mx.android.storichallenge.ui.singup
 
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.fillMaxSize
-import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
-import androidx.compose.material3.Button
-import androidx.compose.material3.ButtonDefaults
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
@@ -18,18 +15,16 @@ import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.tooling.preview.Preview
 import mx.android.storichallenge.R
 import mx.android.storichallenge.ui.composable.EmailTextField
+import mx.android.storichallenge.ui.composable.NameTextField
 import mx.android.storichallenge.ui.composable.PasswordTextField
 import mx.android.storichallenge.ui.composable.ProgressButton
-import mx.android.storichallenge.ui.theme.Blue500
-import mx.android.storichallenge.ui.theme.Space16
+import mx.android.storichallenge.ui.theme.Space12
 import mx.android.storichallenge.ui.theme.Space24
 import mx.android.storichallenge.ui.theme.Space32
-import mx.android.storichallenge.ui.theme.Space48
 import mx.android.storichallenge.ui.theme.StoriChallengeTheme
-import mx.android.storichallenge.ui.theme.White800
 
 @Composable
-fun SigInScreen(modifier: Modifier = Modifier) {
+fun SigUpScreen(modifier: Modifier = Modifier) {
     Column(
         modifier = modifier
             .fillMaxSize()
@@ -38,41 +33,29 @@ fun SigInScreen(modifier: Modifier = Modifier) {
         horizontalAlignment = Alignment.CenterHorizontally
     ) {
         Text(
-            text = stringResource(id = R.string.sign_in),
+            text = stringResource(id = R.string.sing_up),
             style = MaterialTheme.typography.headlineLarge
         )
-        Spacer(modifier = Modifier.height(Space32))
-        EmailTextField()
-        Spacer(modifier = Modifier.height(Space16))
-        PasswordTextField()
-        Spacer(modifier = Modifier.height(Space32))
-        ProgressButton(
-            isLoading = false,
-            text = R.string.sign_in
-        )
         Spacer(modifier = Modifier.height(Space24))
-        Button(
-            modifier = Modifier
-                .fillMaxWidth()
-                .height(Space48),
-            colors = ButtonDefaults.buttonColors(
-                containerColor = Blue500
-            ),
-            onClick = {}
-        ) {
-            Text(
-                text = stringResource(id = R.string.sing_up),
-                color = White800
-            )
-        }
+        NameTextField(text = R.string.first_name)
+        Spacer(modifier = Modifier.height(Space12))
+        NameTextField(text = R.string.last_name)
+        Spacer(modifier = Modifier.height(Space12))
+        EmailTextField()
+        Spacer(modifier = Modifier.height(Space12))
+        PasswordTextField()
+        Spacer(modifier = Modifier.height(Space12))
+        PasswordTextField(text = R.string.confirm_password)
+        Spacer(modifier = Modifier.height(Space24))
+        ProgressButton(isLoading = false,
+            text = R.string.sing_up)
     }
 }
 
-
 @Preview(showBackground = true)
 @Composable
-fun SingInScreenPreview() {
+fun SingUpScreenPreview() {
     StoriChallengeTheme {
-        SigInScreen()
+        SigUpScreen()
     }
 }

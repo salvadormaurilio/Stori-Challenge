@@ -1,5 +1,6 @@
 package mx.android.storichallenge.ui.composable
 
+import androidx.annotation.StringRes
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.width
@@ -22,7 +23,7 @@ import mx.android.storichallenge.ui.theme.StoriChallengeTheme
 import mx.android.storichallenge.ui.theme.White800
 
 @Composable
-fun ProgressButton(isLoading: Boolean) {
+fun ProgressButton(isLoading: Boolean, @StringRes text: Int) {
     Button(
         colors = ButtonDefaults.buttonColors(disabledContainerColor = BlueGrey500),
         modifier = Modifier
@@ -40,7 +41,7 @@ fun ProgressButton(isLoading: Boolean) {
             )
         else
             Text(
-                text = stringResource(id = R.string.sign_in),
+                text = stringResource(id = text),
                 color = White800
             )
     }
@@ -54,6 +55,6 @@ class IsLoadingParameterProvider : PreviewParameterProvider<Boolean> {
 @Composable
 fun ProgressButtonPreview(@PreviewParameter(IsLoadingParameterProvider::class) isLoading: Boolean) {
     StoriChallengeTheme {
-        ProgressButton(isLoading = isLoading)
+        ProgressButton(isLoading = isLoading, text = R.string.sign_in)
     }
 }

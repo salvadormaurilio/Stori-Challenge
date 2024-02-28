@@ -17,6 +17,7 @@ import androidx.compose.runtime.saveable.rememberSaveable
 import androidx.compose.runtime.setValue
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.res.stringResource
+import androidx.compose.ui.text.input.KeyboardCapitalization
 import androidx.compose.ui.text.input.KeyboardType
 import androidx.compose.ui.text.input.PasswordVisualTransformation
 import androidx.compose.ui.text.input.VisualTransformation
@@ -24,6 +25,23 @@ import androidx.compose.ui.tooling.preview.Preview
 import mx.android.storichallenge.R
 import mx.android.storichallenge.core.ui.empty
 import mx.android.storichallenge.ui.theme.StoriChallengeTheme
+
+@Composable
+fun NameTextField(modifier: Modifier = Modifier, @StringRes text: Int) {
+    var name by rememberSaveable { mutableStateOf(String.empty()) }
+
+    OutlinedTextField(
+        value = name,
+        label = { Text(text = stringResource(id = text)) },
+        modifier = modifier.fillMaxWidth(),
+        singleLine = true,
+        keyboardOptions = KeyboardOptions(
+            capitalization = KeyboardCapitalization.Words,
+            keyboardType = KeyboardType.Text
+        ),
+        onValueChange = { name = it },
+    )
+}
 
 @Composable
 fun EmailTextField(modifier: Modifier = Modifier) {
@@ -37,8 +55,6 @@ fun EmailTextField(modifier: Modifier = Modifier) {
         keyboardOptions = KeyboardOptions(keyboardType = KeyboardType.Email),
         onValueChange = { email = it },
     )
-
-
 }
 
 @Composable
@@ -63,6 +79,14 @@ fun PasswordTextField(modifier: Modifier = Modifier, @StringRes text: Int = R.st
         },
         onValueChange = { password = it },
     )
+}
+
+@Preview(showBackground = true)
+@Composable
+fun NameTextFieldPreview() {
+    StoriChallengeTheme {
+        NameTextField(text = R.string.first_name)
+    }
 }
 
 @Preview(showBackground = true)

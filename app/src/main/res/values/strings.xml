@@ -4,7 +4,7 @@
     <string name="sign_in">Iniciar Sesión</string>
     <string name="sing_up">Registrar Usuario</string>
     <string name="first_name">Nombre</string>
-    <string name="last_name">Nombre</string>
+    <string name="last_name">Apellido</string>
     <string name="email">Correo Electrónico</string>
     <string name="password">Contraseña</string>
     <string name="confirm_password">Confirmar Contraseña</string>
