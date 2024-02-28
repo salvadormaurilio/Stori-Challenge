@@ -7,6 +7,7 @@ import mx.android.storichallenge.domain.model.MOVEMENT_ID
 import mx.android.storichallenge.domain.model.MOVEMENT_NAME
 import mx.android.storichallenge.domain.model.Movement
 import mx.android.storichallenge.domain.model.MovementDetail
+import mx.android.storichallenge.ui.home.MovementUi
 
 const val ANY_MOVEMENT_ID = "MaKNASzR0ySOFA99PS4IFASW5rpX2"
 
@@ -40,16 +41,16 @@ private fun givenMovementMap2() = mapOf(
     MOVEMENT_AMOUNT to ANY_MOVEMENT_AMOUNT_2
 )
 
-fun givenMovementList() = listOf(givenMovementDetail1(), givenMovementDetail2())
+fun givenMovementList() = listOf(givenMovement1(), givenMovement2())
 
-private fun givenMovementDetail1() = Movement(
+private fun givenMovement1() = Movement(
     id = ANY_MOVEMENT_ID_1,
     name = ANY_MOVEMENT_NAME_1,
     date = ANY_MOVEMENT_DATE_1,
     amount = ANY_MOVEMENT_AMOUNT_1
 )
 
-private fun givenMovementDetail2() = Movement(
+private fun givenMovement2() = Movement(
     id = ANY_MOVEMENT_ID_2,
     name = ANY_MOVEMENT_NAME_2,
     date = ANY_MOVEMENT_DATE_2,
@@ -72,5 +73,21 @@ fun givenMovementDetail() = MovementDetail(
     card = ANY_MOVEMENT_CARD,
     reference = ANY_MOVEMENT_REFERENCE,
     category = ANY_MOVEMENT_CATEGORY
+)
+
+fun givenMovementUiList() = listOf(givenMovementUi1(), givenMovementUi2())
+
+private fun givenMovementUi1() = MovementUi(
+    id = ANY_MOVEMENT_ID_1,
+    name = ANY_MOVEMENT_NAME_1,
+    date = ANY_MOVEMENT_DATE_1,
+    amount = ANY_MOVEMENT_AMOUNT_1
+)
+
+private fun givenMovementUi2() = MovementUi(
+    id = ANY_MOVEMENT_ID_2,
+    name = ANY_MOVEMENT_NAME_2,
+    date = ANY_MOVEMENT_DATE_2,
+    amount = ANY_MOVEMENT_AMOUNT_2
 )
 

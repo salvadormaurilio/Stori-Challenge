@@ -6,6 +6,7 @@ import mx.android.storichallenge.domain.model.FIRST_NAME
 import mx.android.storichallenge.domain.model.LAST_NAME
 import mx.android.storichallenge.domain.model.UserData
 import mx.android.storichallenge.domain.model.UserDataSubmit
+import mx.android.storichallenge.ui.home.UserDataUi
 import mx.android.storichallenge.ui.singin.UserDataSubmitUi
 
 const val ANY_USER_ID = "MaKNkzR0ySOFAd9PS4IFxnW5rpX2"
@@ -100,4 +101,11 @@ fun givenUserDataSubmitUiWithDifferentPasswords() = UserDataSubmitUi(
     email = ANY_USER_EMAIL,
     password = ANY_PASSWORD,
     confirmPassword = ANY_OTHER_PASSWORD
+)
+
+fun givenUserDataUi() = UserDataUi(
+    firstName = ANY_FIRST_NAME,
+    lastName = ANY_LAST_NAME,
+    email = ANY_USER_EMAIL,
+    movements = givenMovementUiList()
 )
