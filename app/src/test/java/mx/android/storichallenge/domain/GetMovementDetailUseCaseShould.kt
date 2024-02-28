@@ -16,7 +16,7 @@ import org.mockito.kotlin.mock
 import org.mockito.kotlin.verify
 import org.mockito.kotlin.whenever
 
-class GetMovementDetailCaseShould {
+class GetMovementDetailUseCaseShould {
 
     private val userRepository = mock<UserRepository>()
 

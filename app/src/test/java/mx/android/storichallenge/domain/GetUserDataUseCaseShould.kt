@@ -15,15 +15,15 @@ import org.mockito.kotlin.mock
 import org.mockito.kotlin.verify
 import org.mockito.kotlin.whenever
 
-class GetUserCaseShould {
+class GetUserDataUseCaseShould {
 
     private val userRepository = mock<UserRepository>()
 
-    private lateinit var getUserUseCase: GetUserUseCase
+    private lateinit var getUserDataUseCase: GetUserDataUseCase
 
     @Before
     fun setup() {
-        getUserUseCase = GetUserUseCase(userRepository)
+        getUserDataUseCase = GetUserDataUseCase(userRepository)
     }
 
     @Test
@@ -33,7 +33,7 @@ class GetUserCaseShould {
 
         whenever(userRepository.getUserData()).thenReturn(flowOf(resultUserData))
 
-        val result = getUserUseCase.getUserData().lastOrNull()
+        val result = getUserDataUseCase.getUserData().lastOrNull()
 
         verify(userRepository).getUserData()
         assertThatEquals(result?.getOrNull(), userData)
@@ -45,7 +45,7 @@ class GetUserCaseShould {
 
         whenever(userRepository.getUserData()).thenReturn(flowOf(resultGetUserDataException))
 
-        val result = getUserUseCase.getUserData().lastOrNull()
+        val result = getUserDataUseCase.getUserData().lastOrNull()
 
         verify(userRepository).getUserData()
         assertThatIsInstanceOf<UserException.GetUserDataException>(result?.exceptionOrNull())

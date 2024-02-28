@@ -7,7 +7,7 @@ import mx.android.storichallenge.core.TestDispatcherRule
 import mx.android.storichallenge.core.assertThatEquals
 import mx.android.storichallenge.core.assertThatIsInstanceOf
 import mx.android.storichallenge.data.datasource.exception.UserException
-import mx.android.storichallenge.domain.GetUserUseCase
+import mx.android.storichallenge.domain.GetUserDataUseCase
 import mx.android.storichallenge.domain.model.UserData
 import mx.android.storichallenge.fakedata.givenUserData
 import mx.android.storichallenge.fakedata.givenUserDataUi
@@ -23,43 +23,43 @@ class HomeViewModelShould {
     @get:Rule
     var testDispatcherRule = TestDispatcherRule()
 
-    private val getUserUseCase = mock<GetUserUseCase>()
+    private val getUserDataUseCase = mock<GetUserDataUseCase>()
 
     private lateinit var singInViewModel: HomeViewModel
 
     @Before
     fun setup() {
-        singInViewModel = HomeViewModel(getUserUseCase, testDispatcherRule.coroutinesDispatchers)
+        singInViewModel = HomeViewModel(getUserDataUseCase, testDispatcherRule.coroutinesDispatchers)
     }
 
     @Test
-    fun `get UserDataUi from userDataUiState when getUserData is called and getUserUseCase is success`() = runTest {
+    fun `get UserDataUi from userDataUiState when getUserData is called and getUserDataUseCase is success`() = runTest {
         val userData = givenUserData()
         val userDataUi = givenUserDataUi()
         val resultUserData = Result.success(userData)
 
-        whenever(getUserUseCase.getUserData()).thenReturn(flowOf(resultUserData))
+        whenever(getUserDataUseCase.getUserData()).thenReturn(flowOf(resultUserData))
 
         singInViewModel.getUserData()
 
         val result = singInViewModel.userDataUiState.firstOrNull()
 
-        verify(getUserUseCase).getUserData()
+        verify(getUserDataUseCase).getUserData()
         assertThatIsInstanceOf<UserDataUiState.Success>(result)
         assertThatEquals((result as UserDataUiState.Success).userData, userDataUi)
     }
 
     @Test
-    fun `Get GetUserDataException from userDataUiState when getUserData is called and getUserUseCase is failure`() = runTest {
+    fun `Get GetUserDataException from userDataUiState when getUserData is called and getUserDataUseCase is failure`() = runTest {
         val resultGetUserDataException: Result<UserData> = Result.failure(UserException.GetUserDataException())
 
-        whenever(getUserUseCase.getUserData()).thenReturn(flowOf(resultGetUserDataException))
+        whenever(getUserDataUseCase.getUserData()).thenReturn(flowOf(resultGetUserDataException))
 
         singInViewModel.getUserData()
 
         val result = singInViewModel.userDataUiState.firstOrNull()
 
-        verify(getUserUseCase).getUserData()
+        verify(getUserDataUseCase).getUserData()
         assertThatIsInstanceOf<UserException.GetUserDataException>((result as UserDataUiState.Error).error)
     }
 }

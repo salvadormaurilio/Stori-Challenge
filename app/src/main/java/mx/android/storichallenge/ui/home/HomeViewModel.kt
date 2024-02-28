@@ -9,13 +9,13 @@ import kotlinx.coroutines.flow.SharedFlow
 import kotlinx.coroutines.flow.StateFlow
 import kotlinx.coroutines.launch
 import mx.android.storichallenge.core.coroutines.CoroutinesDispatchers
-import mx.android.storichallenge.domain.GetUserUseCase
+import mx.android.storichallenge.domain.GetUserDataUseCase
 import mx.android.storichallenge.domain.model.UserData
 import javax.inject.Inject
 
 @HiltViewModel
 class HomeViewModel @Inject constructor(
-    private val getUserUseCase: GetUserUseCase,
+    private val getUserDataUseCase: GetUserDataUseCase,
     private val coroutinesDispatchers: CoroutinesDispatchers
 ) : ViewModel() {
 
@@ -32,7 +32,7 @@ class HomeViewModel @Inject constructor(
     fun getUserData() = viewModelScope.launch(coroutinesDispatchers.io) {
         emitUserDataUiState(UserDataUiState.Loading)
 
-        getUserUseCase.getUserData().collect {
+        getUserDataUseCase.getUserData().collect {
             getUserDataSuccess(it)
             getUserDataError(it)
         }
