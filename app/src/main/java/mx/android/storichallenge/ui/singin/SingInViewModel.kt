@@ -57,7 +57,7 @@ class SingInViewModel @Inject constructor(
         _signInUiState.value = signInUiState
     }
 
-    fun navigateToSingUp() {
-        _navigateToSingUp.tryEmit(Unit)
+    fun navigateToSingUp() = viewModelScope.launch {
+        _navigateToSingUp.emit(Unit)
     }
 }

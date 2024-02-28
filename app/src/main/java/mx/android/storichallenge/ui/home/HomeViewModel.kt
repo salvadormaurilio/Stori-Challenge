@@ -51,7 +51,7 @@ class HomeViewModel @Inject constructor(
         _userDataUiState.value = signUpUiState
     }
 
-    fun navigateToSingUp(movementId: String) {
-        _navigateToMovementDetail.tryEmit(movementId)
+    fun navigateToMovementDetail(movementId: String) = viewModelScope.launch {
+        _navigateToMovementDetail.emit(movementId)
     }
 }

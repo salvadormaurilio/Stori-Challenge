@@ -1,9 +1,12 @@
 package mx.android.storichallenge.ui.signIn
 
+import androidx.lifecycle.viewModelScope
 import kotlinx.coroutines.flow.firstOrNull
 import kotlinx.coroutines.flow.flowOf
+import kotlinx.coroutines.launch
 import kotlinx.coroutines.test.runTest
 import mx.android.storichallenge.core.TestDispatcherRule
+import mx.android.storichallenge.core.assertThatEquals
 import mx.android.storichallenge.core.assertThatIsInstanceOf
 import mx.android.storichallenge.data.datasource.exception.AuthException
 import mx.android.storichallenge.domain.SignInUseCase
@@ -77,5 +80,18 @@ class SingInViewModelShould {
         verify(signInUseCase).signIn(ANY_USER_EMAIL, ANY_PASSWORD)
         assertThatIsInstanceOf<SignInUiState.Error>(result)
         assertThatIsInstanceOf<AuthException.SignInException>((result as SignInUiState.Error).error)
+    }
+
+    @Test
+    fun `navigate to signUp when navigateToSingUp is called`() = runTest {
+        var result: Unit? = null
+
+        singInViewModel.viewModelScope.launch {
+            result = singInViewModel.navigateToSingUp.firstOrNull()
+        }
+
+        singInViewModel.navigateToSingUp()
+
+        assertThatEquals(result, Unit)
     }
 }
