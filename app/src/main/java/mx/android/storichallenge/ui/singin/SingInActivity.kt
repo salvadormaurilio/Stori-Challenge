@@ -20,7 +20,7 @@ class SingInActivity : ComponentActivity() {
     private fun initView() {
         setContent {
             StoriChallengeTheme {
-                LoginScreen("Android")
+                SigInScreen()
             }
         }
     }
