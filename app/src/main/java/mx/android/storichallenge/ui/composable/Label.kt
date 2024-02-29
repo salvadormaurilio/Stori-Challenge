@@ -20,8 +20,8 @@ import mx.android.storichallenge.ui.theme.Space8
 import mx.android.storichallenge.ui.theme.StoriChallengeTheme
 
 @Composable
-fun LabelMovement(@StringRes title: Int, text: String) {
-    Spacer(modifier = Modifier.height(Space8))
+fun LabelMovement(modifier: Modifier = Modifier, @StringRes title: Int, text: String) {
+    Spacer(modifier = modifier.height(Space8))
     Text(
         text = stringResource(id = title),
         style = MaterialTheme.typography.labelMedium

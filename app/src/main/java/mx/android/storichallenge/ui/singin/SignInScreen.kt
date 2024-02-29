@@ -33,22 +33,27 @@ import mx.android.storichallenge.ui.theme.StoriChallengeTheme
 import mx.android.storichallenge.ui.theme.White800
 
 
-@OptIn(ExperimentalMaterial3Api::class)
 @Composable
 fun SigInScreen(modifier: Modifier = Modifier) {
     Scaffold(topBar = {
-        TopAppBar(
-            colors = TopAppBarDefaults.topAppBarColors(containerColor = MaterialTheme.colorScheme.primaryContainer),
-            title = {
-                Text(
-                    text = stringResource(id = R.string.sign_in),
-                    color = White800
-                )
-            }
-        )
+        SigInTopAppBar()
     }) {
         SigInContent(modifier = modifier.padding(paddingValues = it))
     }
+}
+
+@OptIn(ExperimentalMaterial3Api::class)
+@Composable
+fun SigInTopAppBar() {
+    TopAppBar(
+        colors = TopAppBarDefaults.topAppBarColors(containerColor = MaterialTheme.colorScheme.primaryContainer),
+        title = {
+            Text(
+                text = stringResource(id = R.string.sign_in),
+                color = White800
+            )
+        }
+    )
 }
 
 @Composable

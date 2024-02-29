@@ -36,6 +36,7 @@ import mx.android.storichallenge.ui.composable.EmailTextField
 import mx.android.storichallenge.ui.composable.NameTextField
 import mx.android.storichallenge.ui.composable.PasswordTextField
 import mx.android.storichallenge.ui.composable.ProgressButton
+import mx.android.storichallenge.ui.theme.BlueGrey500
 import mx.android.storichallenge.ui.theme.BlueGrey800
 import mx.android.storichallenge.ui.theme.Space12
 import mx.android.storichallenge.ui.theme.Space16
@@ -45,30 +46,34 @@ import mx.android.storichallenge.ui.theme.Space80
 import mx.android.storichallenge.ui.theme.StoriChallengeTheme
 import mx.android.storichallenge.ui.theme.White800
 
-@OptIn(ExperimentalMaterial3Api::class)
 @Composable
 fun SigUpScreen(modifier: Modifier = Modifier) {
-    Scaffold(topBar = {
-        TopAppBar(
-            colors = TopAppBarDefaults.topAppBarColors(containerColor = MaterialTheme.colorScheme.primaryContainer),
-            title = {
-                Text(
-                    text = stringResource(id = R.string.sing_up),
-                    color = White800
-                )
-            },
-            navigationIcon = {
-                IconButton(onClick = { }) {
-                    Icon(
-                        imageVector = Icons.Filled.ArrowBack,
-                        contentDescription = String.empty()
-                    )
-                }
-            }
-        )
-    }) {
+    Scaffold(topBar = { SigUpTopAppBar() }) {
         SigUpContent(modifier = modifier.padding(paddingValues = it))
     }
+}
+
+@Composable
+@OptIn(ExperimentalMaterial3Api::class)
+fun SigUpTopAppBar() {
+    TopAppBar(
+        colors = TopAppBarDefaults.topAppBarColors(containerColor = MaterialTheme.colorScheme.primaryContainer),
+        title = {
+            Text(
+                text = stringResource(id = R.string.sing_up),
+                color = White800
+            )
+        },
+        navigationIcon = {
+            IconButton(onClick = { }) {
+                Icon(
+                    imageVector = Icons.Filled.ArrowBack,
+                    tint = BlueGrey500,
+                    contentDescription = String.empty()
+                )
+            }
+        }
+    )
 }
 
 @Composable

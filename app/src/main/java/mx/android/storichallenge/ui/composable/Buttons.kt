@@ -26,10 +26,10 @@ import mx.android.storichallenge.ui.theme.StoriChallengeTheme
 import mx.android.storichallenge.ui.theme.White800
 
 @Composable
-fun ProgressButton(isLoading: Boolean, @StringRes text: Int) {
+fun ProgressButton(modifier: Modifier = Modifier, isLoading: Boolean, @StringRes text: Int) {
     Button(
         colors = ButtonDefaults.buttonColors(disabledContainerColor = BlueGrey500),
-        modifier = Modifier
+        modifier = modifier
             .fillMaxWidth()
             .height(Space48),
         enabled = !isLoading,
