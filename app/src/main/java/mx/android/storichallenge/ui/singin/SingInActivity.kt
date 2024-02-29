@@ -37,7 +37,7 @@ class SingInActivity : ComponentActivity() {
                     modifier = Modifier.fillMaxSize(),
                     color = MaterialTheme.colorScheme.background
                 ) {
-                    SigInContent(
+                    SigInScreen(
                         onSignInButtonClick = { email, password -> singInViewModel.signIn(email, password) },
                         onSignUpButtonClick = { singInViewModel.navigateToSingUp() }
                     )

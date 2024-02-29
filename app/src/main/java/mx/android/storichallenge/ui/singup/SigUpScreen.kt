@@ -40,6 +40,7 @@ import mx.android.storichallenge.ui.composable.EmailTextField
 import mx.android.storichallenge.ui.composable.NameTextField
 import mx.android.storichallenge.ui.composable.PasswordTextField
 import mx.android.storichallenge.ui.composable.ProgressButton
+import mx.android.storichallenge.ui.singin.UserDataSubmitUi
 import mx.android.storichallenge.ui.theme.BlueGrey500
 import mx.android.storichallenge.ui.theme.BlueGrey800
 import mx.android.storichallenge.ui.theme.Space12
@@ -51,9 +52,12 @@ import mx.android.storichallenge.ui.theme.StoriChallengeTheme
 import mx.android.storichallenge.ui.theme.White800
 
 @Composable
-fun SigUpScreen(modifier: Modifier = Modifier) {
+fun SigUpScreen(modifier: Modifier = Modifier, onSignInButtonClick: (userDataSubmitUi: UserDataSubmitUi) -> Unit) {
     Scaffold(topBar = { SigUpTopAppBar() }) {
-        SigUpContent(modifier = modifier.padding(paddingValues = it))
+        SigUpContent(
+            modifier = modifier.padding(paddingValues = it),
+            onSignInButtonClick = onSignInButtonClick
+        )
     }
 }
 
@@ -81,7 +85,7 @@ fun SigUpTopAppBar() {
 }
 
 @Composable
-fun SigUpContent(modifier: Modifier = Modifier) {
+fun SigUpContent(modifier: Modifier = Modifier, onSignInButtonClick: (userDataSubmitUi: UserDataSubmitUi) -> Unit) {
     Column(
         modifier = modifier
             .fillMaxSize()
@@ -123,7 +127,7 @@ fun SigUpContent(modifier: Modifier = Modifier) {
         NameTextField(
             label = R.string.last_name,
             name = lastName,
-            onValueChange = { firstName = it }
+            onValueChange = { lastName = it }
         )
         Spacer(modifier = Modifier.height(Space12))
         EmailTextField(
@@ -146,15 +150,23 @@ fun SigUpContent(modifier: Modifier = Modifier) {
         ProgressButton(
             isLoading = false,
             text = R.string.sing_up,
-            onClick = {}
+            onClick = { onSignInButtonClick(buildUserDataSubmitUi(firstName, lastName, email, password, confirmPassword)) }
         )
     }
 }
+
+private fun buildUserDataSubmitUi(firstName: String, lastName: String, email: String, password: String, confirmPassword: String) =
+    UserDataSubmitUi(
+        fistName = firstName,
+        lastName = lastName, email,
+        password = password,
+        confirmPassword = confirmPassword
+    )
 
 @Preview(showBackground = true)
 @Composable
 fun SingUpScreenPreview() {
     StoriChallengeTheme {
-        SigUpScreen()
+        SigUpScreen(onSignInButtonClick = {})
     }
 }

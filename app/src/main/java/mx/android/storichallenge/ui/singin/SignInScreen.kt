@@ -39,14 +39,16 @@ import mx.android.storichallenge.ui.theme.White800
 
 
 @Composable
-fun SigInScreen(modifier: Modifier = Modifier) {
+fun SigInScreen(modifier: Modifier = Modifier,   
+                onSignInButtonClick: (email: String, password: String) -> Unit,
+                onSignUpButtonClick: () -> Unit) {
     Scaffold(topBar = {
         SigInTopAppBar()
     }) {
         SigInContent(
             modifier = modifier.padding(paddingValues = it),
-            onSignInButtonClick = { email: String, password: String -> },
-            onSignUpButtonClick = {})
+            onSignInButtonClick = onSignInButtonClick,
+            onSignUpButtonClick = onSignUpButtonClick)
     }
 }
 
@@ -118,6 +120,9 @@ fun SigInContent(
 @Composable
 fun SingInScreenPreview() {
     StoriChallengeTheme {
-        SigInScreen()
+        SigInScreen(
+            onSignInButtonClick = { _, _ ->  },
+            onSignUpButtonClick = {}
+        )
     }
 }
