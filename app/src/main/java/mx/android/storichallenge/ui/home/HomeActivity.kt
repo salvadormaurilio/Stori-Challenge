@@ -51,7 +51,8 @@ class HomeActivity : ComponentActivity() {
         userDataUiState?.run {
             HomeScreen(
                 userDataUiState = this,
-                onMovementClick = { homeViewModel.navigateToMovementDetail(it) })
+                onMovementClick = { homeViewModel.navigateToMovementDetail(it) }
+            )
         }
     }
 

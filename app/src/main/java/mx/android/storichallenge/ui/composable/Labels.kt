@@ -86,7 +86,8 @@ fun LabelMovementPreview() {
         Box(modifier = Modifier.padding(top = Space16, bottom = Space16)) {
             LabelMovement(
                 movementUi = givenMovementUi1(),
-                onMovementClick = {})
+                onMovementClick = {}
+            )
         }
     }
 }

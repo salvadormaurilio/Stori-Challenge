@@ -28,7 +28,10 @@ class SingUpActivity : ComponentActivity() {
                     modifier = Modifier.fillMaxSize(),
                     color = MaterialTheme.colorScheme.background
                 ) {
-                    SigUpScreen(onSignInButtonClick = { singUpViewModel.singUp(it) })
+                    SigUpScreen(
+                        onSignInButtonClick = { singUpViewModel.singUp(it) },
+                        onBackPressedClick = { onBackPressedDispatcher.onBackPressed() }
+                    )
                 }
             }
         }

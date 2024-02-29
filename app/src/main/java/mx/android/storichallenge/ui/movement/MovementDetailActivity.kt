@@ -43,7 +43,12 @@ class MovementDetailActivity : ComponentActivity() {
     @Composable
     private fun InitContentWithUiState() {
         val movementDetailUiState by movementDetailViewModel.movementDetailUiState.collectAsState()
-        movementDetailUiState?.run { MovementDetailScreen(movementDetailUiState = this) }
+        movementDetailUiState?.run {
+            MovementDetailScreen(
+                movementDetailUiState = this,
+                onBackPressedClick = { onBackPressedDispatcher.onBackPressed() }
+            )
+        }
     }
 
     private fun getMovementId() = intent?.getStringExtra(MOVEMENT_ID).orEmpty()

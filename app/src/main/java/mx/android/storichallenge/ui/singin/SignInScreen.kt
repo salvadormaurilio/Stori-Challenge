@@ -42,9 +42,7 @@ import mx.android.storichallenge.ui.theme.White800
 fun SigInScreen(modifier: Modifier = Modifier,   
                 onSignInButtonClick: (email: String, password: String) -> Unit,
                 onSignUpButtonClick: () -> Unit) {
-    Scaffold(topBar = {
-        SigInTopAppBar()
-    }) {
+    Scaffold(topBar = { SigInTopAppBar() }) {
         SigInContent(
             modifier = modifier.padding(paddingValues = it),
             onSignInButtonClick = onSignInButtonClick,

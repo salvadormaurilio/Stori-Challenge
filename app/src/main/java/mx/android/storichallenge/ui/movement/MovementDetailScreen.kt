@@ -42,11 +42,11 @@ import mx.android.storichallenge.ui.theme.StoriChallengeTheme
 import mx.android.storichallenge.ui.theme.White800
 
 @Composable
-fun MovementDetailScreen(movementDetailUiState: MovementDetailUiState) {
+fun MovementDetailScreen(movementDetailUiState: MovementDetailUiState, onBackPressedClick: () -> Unit) {
     val snackbarHostState = remember { SnackbarHostState() }
 
     Scaffold(
-        topBar = { MovementDetailTopAppBar() },
+        topBar = { MovementDetailTopAppBar(onBackPressedClick = onBackPressedClick) },
         snackbarHost = { SnackbarBlue(snackbarHostState) }) {
         MovementDetailUiState(movementDetailUiState, it, snackbarHostState)
     }
@@ -78,7 +78,7 @@ private fun MovementDetailUiState(
 
 @Composable
 @OptIn(ExperimentalMaterial3Api::class)
-fun MovementDetailTopAppBar() {
+fun MovementDetailTopAppBar(onBackPressedClick: () -> Unit) {
     TopAppBar(
         colors = TopAppBarDefaults.topAppBarColors(containerColor = MaterialTheme.colorScheme.primaryContainer),
         title = {
@@ -88,7 +88,7 @@ fun MovementDetailTopAppBar() {
             )
         },
         navigationIcon = {
-            IconButton(onClick = { }) {
+            IconButton(onClick = onBackPressedClick) {
                 Icon(
                     imageVector = Icons.Filled.ArrowBack,
                     contentDescription = String.empty()
@@ -156,7 +156,10 @@ fun MovementDetailContent(modifier: Modifier = Modifier, movementDetailUi: Movem
 @Composable
 fun MovementDetailScreenUiStateLoadingPreview() {
     StoriChallengeTheme {
-        MovementDetailScreen(movementDetailUiState = MovementDetailUiState.Loading)
+        MovementDetailScreen(
+            movementDetailUiState = MovementDetailUiState.Loading,
+            onBackPressedClick = {}
+        )
     }
 }
 
@@ -164,7 +167,10 @@ fun MovementDetailScreenUiStateLoadingPreview() {
 @Composable
 fun MovementDetailScreenUiStateSuccessPreview() {
     StoriChallengeTheme {
-        MovementDetailScreen(movementDetailUiState = MovementDetailUiState.Success(givenMovementDetailUi()))
+        MovementDetailScreen(
+            movementDetailUiState = MovementDetailUiState.Success(givenMovementDetailUi()),
+            onBackPressedClick = {}
+        )
     }
 }
 
@@ -172,6 +178,9 @@ fun MovementDetailScreenUiStateSuccessPreview() {
 @Composable
 fun MovementDetailScreenUiStateErrorPreview() {
     StoriChallengeTheme {
-        MovementDetailScreen(movementDetailUiState = MovementDetailUiState.Error(UserException.GetUserDataException()))
+        MovementDetailScreen(
+            movementDetailUiState = MovementDetailUiState.Error(UserException.GetUserDataException()),
+            onBackPressedClick = {}
+        )
     }
 }

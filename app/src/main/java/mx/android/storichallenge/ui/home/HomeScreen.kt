@@ -133,7 +133,8 @@ fun HomeScreenUiStateLoadingPreview() {
     StoriChallengeTheme {
         HomeScreen(
             userDataUiState = UserDataUiState.Loading,
-            onMovementClick = {})
+            onMovementClick = {}
+        )
     }
 }
 
@@ -143,7 +144,8 @@ fun HomeScreenUiStateSuccessPreview() {
     StoriChallengeTheme {
         HomeScreen(
             userDataUiState = UserDataUiState.Success(givenUserDataUi()),
-            onMovementClick = {})
+            onMovementClick = {}
+        )
     }
 }
 
@@ -153,6 +155,7 @@ fun HomeScreenUiStateErrorPreview() {
     StoriChallengeTheme {
         HomeScreen(
             userDataUiState = UserDataUiState.Error(UserException.GetUserDataException()),
-            onMovementClick = {})
+            onMovementClick = {}
+        )
     }
 }

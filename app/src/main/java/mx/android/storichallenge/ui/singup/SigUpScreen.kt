@@ -52,8 +52,10 @@ import mx.android.storichallenge.ui.theme.StoriChallengeTheme
 import mx.android.storichallenge.ui.theme.White800
 
 @Composable
-fun SigUpScreen(modifier: Modifier = Modifier, onSignInButtonClick: (userDataSubmitUi: UserDataSubmitUi) -> Unit) {
-    Scaffold(topBar = { SigUpTopAppBar() }) {
+fun SigUpScreen(modifier: Modifier = Modifier,
+                onSignInButtonClick: (userDataSubmitUi: UserDataSubmitUi) -> Unit,
+                onBackPressedClick: () -> Unit) {
+    Scaffold(topBar = { SigUpTopAppBar(onBackPressedClick = onBackPressedClick) }) {
         SigUpContent(
             modifier = modifier.padding(paddingValues = it),
             onSignInButtonClick = onSignInButtonClick
@@ -63,7 +65,7 @@ fun SigUpScreen(modifier: Modifier = Modifier, onSignInButtonClick: (userDataSub
 
 @Composable
 @OptIn(ExperimentalMaterial3Api::class)
-fun SigUpTopAppBar() {
+fun SigUpTopAppBar(onBackPressedClick: () -> Unit) {
     TopAppBar(
         colors = TopAppBarDefaults.topAppBarColors(containerColor = MaterialTheme.colorScheme.primaryContainer),
         title = {
@@ -73,7 +75,7 @@ fun SigUpTopAppBar() {
             )
         },
         navigationIcon = {
-            IconButton(onClick = { }) {
+            IconButton(onClick = onBackPressedClick) {
                 Icon(
                     imageVector = Icons.Filled.ArrowBack,
                     tint = BlueGrey500,
@@ -167,6 +169,9 @@ private fun buildUserDataSubmitUi(firstName: String, lastName: String, email: St
 @Composable
 fun SingUpScreenPreview() {
     StoriChallengeTheme {
-        SigUpScreen(onSignInButtonClick = {})
+        SigUpScreen(
+            onSignInButtonClick = {},
+            onBackPressedClick = {}
+        )
     }
 }
