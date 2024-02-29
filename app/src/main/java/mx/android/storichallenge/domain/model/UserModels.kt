@@ -32,6 +32,6 @@ private fun UserDataResponse?.toUserData() = UserData(
 )
 
 
-const val FIRST_NAME = "first_name"
-const val LAST_NAME = "last_name"
+const val FIRST_NAME = "firstName"
+const val LAST_NAME = "lastName"
 const val EMAIL_NAME = "email"
