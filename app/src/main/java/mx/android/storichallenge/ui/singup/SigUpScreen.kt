@@ -238,7 +238,7 @@ private fun AlertDialogSuccess(isSuccess: Boolean, onSingUpSuccess: () -> Unit) 
     if (isSuccess) {
         AlertDialog(
             onDismissRequest = {},
-            title = { Text(stringResource(id = R.string.success_sign_in)) },
+            title = { Text(stringResource(id = R.string.success_sign_up)) },
             confirmButton = {},
             dismissButton = {
                 TextButton(onClick = onSingUpSuccess) {
