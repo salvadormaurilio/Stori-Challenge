@@ -7,6 +7,7 @@ import com.google.firebase.firestore.CollectionReference
 import com.google.firebase.firestore.DocumentReference
 import com.google.firebase.firestore.DocumentSnapshot
 import com.google.firebase.firestore.FirebaseFirestore
+import com.google.firebase.storage.FirebaseStorage
 import kotlinx.coroutines.test.runTest
 import mx.android.storichallenge.core.collectAndCancel
 import mx.android.storichallenge.fakedata.ANY_MOVEMENT_ID
@@ -23,6 +24,7 @@ class UserRemoteDataShould {
 
     private val firebaseAuth = mock<FirebaseAuth>()
     private val firebaseUser = mock<FirebaseUser>()
+    private val firebaseStorage = mock<FirebaseStorage>()
     private val firebaseFirestore = mock<FirebaseFirestore>()
     private val collectionReference = mock<CollectionReference>()
     private val documentReference = mock<DocumentReference>()
@@ -33,7 +35,7 @@ class UserRemoteDataShould {
 
     @Before
     fun setup() {
-        authRemoteDataSource = UserRemoteDataSource(firebaseAuth, firebaseFirestore)
+        authRemoteDataSource = UserRemoteDataSource(firebaseAuth, firebaseStorage, firebaseFirestore)
     }
 
     @Test

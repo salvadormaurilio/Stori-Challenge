@@ -1,8 +1,10 @@
 package mx.android.storichallenge.data.datasource.remote
 
+import android.net.Uri
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.firestore.FirebaseFirestore
 import com.google.firebase.firestore.toObject
+import com.google.firebase.storage.FirebaseStorage
 import kotlinx.coroutines.channels.awaitClose
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.callbackFlow
@@ -13,8 +15,25 @@ import javax.inject.Inject
 
 class UserRemoteDataSource @Inject constructor(
     private val firebaseAuth: FirebaseAuth,
+    private val firebaseStorage: FirebaseStorage,
     private val firebaseFirestore: FirebaseFirestore
 ) {
+
+    fun storagePictureIdentification(pictureIdentification: String): Flow<Result<String>> = callbackFlow {
+        val uri = Uri.parse(pictureIdentification)
+        val mountainImagesRef = firebaseStorage.reference.child("images/${uri.lastPathSegment}")
+        mountainImagesRef.putFile(uri)
+            .addOnSuccessListener {
+                mountainImagesRef.downloadUrl.addOnSuccessListener {
+                    trySend(Result.success(it.toString()))
+                }.addOnFailureListener {
+                    trySend(Result.failure(UserException.StorePictureIdentificationException()))
+                }
+            }.addOnFailureListener {
+                it.printStackTrace()
+                trySend(Result.failure(UserException.StorePictureIdentificationException()))
+            }
+    }
 
     fun storeUserData(userDataMap: Map<String, String>): Flow<Result<String>> = callbackFlow {
         val userId = firebaseAuth.currentUser?.uid.orEmpty()
@@ -66,5 +85,6 @@ class UserRemoteDataSource @Inject constructor(
     companion object {
         const val USERS_COLLECTION = "users"
         const val MOVEMENTS_COLLECTION = "movements"
+        const val PATH_IMAGE = "movements"
     }
 }
