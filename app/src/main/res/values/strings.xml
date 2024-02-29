@@ -24,7 +24,7 @@
     <string name="error_sign_up">Error al registrar el usuario</string>
     <string name="success_sign_up">Usuario registrado con éxito</string>
     <string name="error_sign_in">Usuario Inválido</string>
-    <string name="success_sign_in">Inicio sesión exitoso \n%1$s \n%2$s </string>
+    <string name="success_sign_in">Inicio sesión exitoso</string>
     <string name="accept">Aceptar</string>
 
     <string name="error_first_name_invalid">Nombre Inválido</string>

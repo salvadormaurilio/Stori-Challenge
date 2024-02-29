@@ -16,17 +16,21 @@ import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.AccountCircle
 import androidx.compose.material.icons.filled.ArrowBack
 import androidx.compose.material.ripple.rememberRipple
+import androidx.compose.material3.AlertDialog
 import androidx.compose.material3.ExperimentalMaterial3Api
 import androidx.compose.material3.Icon
 import androidx.compose.material3.IconButton
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Scaffold
+import androidx.compose.material3.SnackbarHostState
 import androidx.compose.material3.Text
+import androidx.compose.material3.TextButton
 import androidx.compose.material3.TopAppBar
 import androidx.compose.material3.TopAppBarDefaults
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
+import androidx.compose.runtime.remember
 import androidx.compose.runtime.saveable.rememberSaveable
 import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
@@ -36,10 +40,14 @@ import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.tooling.preview.Preview
 import mx.android.storichallenge.R
 import mx.android.storichallenge.core.ui.empty
+import mx.android.storichallenge.data.datasource.exception.AuthException
 import mx.android.storichallenge.ui.composable.EmailTextField
+import mx.android.storichallenge.ui.composable.LaunchSnackbar
 import mx.android.storichallenge.ui.composable.NameTextField
 import mx.android.storichallenge.ui.composable.PasswordTextField
 import mx.android.storichallenge.ui.composable.ProgressButton
+import mx.android.storichallenge.ui.composable.SnackbarBlue
+import mx.android.storichallenge.ui.exception.AuthUiException
 import mx.android.storichallenge.ui.singin.UserDataSubmitUi
 import mx.android.storichallenge.ui.theme.BlueGrey500
 import mx.android.storichallenge.ui.theme.BlueGrey800
@@ -52,16 +60,32 @@ import mx.android.storichallenge.ui.theme.StoriChallengeTheme
 import mx.android.storichallenge.ui.theme.White800
 
 @Composable
-fun SigUpScreen(modifier: Modifier = Modifier,
-                onSignInButtonClick: (userDataSubmitUi: UserDataSubmitUi) -> Unit,
-                onBackPressedClick: () -> Unit) {
-    Scaffold(topBar = { SigUpTopAppBar(onBackPressedClick = onBackPressedClick) }) {
+fun SigUpScreen(
+    modifier: Modifier = Modifier,
+    signInUiState: SignUpUiState? = null,
+    onSignInButtonClick: (userDataSubmitUi: UserDataSubmitUi) -> Unit,
+    onSingUpSuccess: () -> Unit,
+    onBackPressedClick: () -> Unit
+) {
+    val isLoading = signInUiState is SignUpUiState.Loading
+    val isSuccess = signInUiState is SignUpUiState.Success
+    val errorException = (signInUiState as? SignUpUiState.Error)?.error
+
+    val snackbarHostState = remember { SnackbarHostState() }
+
+    Scaffold(topBar = { SigUpTopAppBar(onBackPressedClick = onBackPressedClick) },
+        snackbarHost = { SnackbarBlue(snackbarHostState) }) {
         SigUpContent(
             modifier = modifier.padding(paddingValues = it),
+            isLoading = isLoading,
+            errorException = errorException,
             onSignInButtonClick = onSignInButtonClick
         )
+        AlertDialogSuccess(isSuccess, onSingUpSuccess)
+        SnackbarError(errorException, snackbarHostState)
     }
 }
+
 
 @Composable
 @OptIn(ExperimentalMaterial3Api::class)
@@ -87,7 +111,12 @@ fun SigUpTopAppBar(onBackPressedClick: () -> Unit) {
 }
 
 @Composable
-fun SigUpContent(modifier: Modifier = Modifier, onSignInButtonClick: (userDataSubmitUi: UserDataSubmitUi) -> Unit) {
+fun SigUpContent(
+    modifier: Modifier = Modifier,
+    isLoading: Boolean,
+    errorException: Throwable?,
+    onSignInButtonClick: (userDataSubmitUi: UserDataSubmitUi) -> Unit
+) {
     Column(
         modifier = modifier
             .fillMaxSize()
@@ -96,6 +125,14 @@ fun SigUpContent(modifier: Modifier = Modifier, onSignInButtonClick: (userDataSu
         verticalArrangement = Arrangement.Center,
         horizontalAlignment = Alignment.CenterHorizontally
     ) {
+
+        val firstNameError = (errorException as? AuthUiException.FirstNameException)?.error
+        val lastNameError = (errorException as? AuthUiException.LastNameException)?.error
+        val emailError = (errorException as? AuthUiException.EmailException)?.error
+        val passwordError = (errorException as? AuthUiException.PasswordException)?.error
+        val confirmPasswordError = (errorException as? AuthUiException.ConfirmPasswordException)?.error
+        val differentPasswordError = (errorException as? AuthUiException.DifferentPasswordException)?.error
+
         var firstName by rememberSaveable { mutableStateOf(String.empty()) }
         var lastName by rememberSaveable { mutableStateOf(String.empty()) }
         var email by rememberSaveable { mutableStateOf(String.empty()) }
@@ -123,34 +160,39 @@ fun SigUpContent(modifier: Modifier = Modifier, onSignInButtonClick: (userDataSu
         NameTextField(
             label = R.string.first_name,
             name = firstName,
+            error = firstNameError,
             onValueChange = { firstName = it }
         )
         Spacer(modifier = Modifier.height(Space12))
         NameTextField(
             label = R.string.last_name,
             name = lastName,
+            error = lastNameError,
             onValueChange = { lastName = it }
         )
         Spacer(modifier = Modifier.height(Space12))
         EmailTextField(
             email = email,
+            error = emailError,
             onValueChange = { email = it }
         )
         Spacer(modifier = Modifier.height(Space12))
         PasswordTextField(
             label = R.string.password,
             password = password,
+            error = passwordError,
             onValueChange = { password = it }
         )
         Spacer(modifier = Modifier.height(Space12))
         PasswordTextField(
             label = R.string.confirm_password,
             password = confirmPassword,
+            error = confirmPasswordError ?: differentPasswordError,
             onValueChange = { confirmPassword = it }
         )
         Spacer(modifier = Modifier.height(Space24))
         ProgressButton(
-            isLoading = false,
+            isLoading = isLoading,
             text = R.string.sing_up,
             onClick = { onSignInButtonClick(buildUserDataSubmitUi(firstName, lastName, email, password, confirmPassword)) }
         )
@@ -165,12 +207,159 @@ private fun buildUserDataSubmitUi(firstName: String, lastName: String, email: St
         confirmPassword = confirmPassword
     )
 
+@Composable
+private fun AlertDialogSuccess(isSuccess: Boolean, onSingUpSuccess: () -> Unit) {
+    if (isSuccess) {
+        AlertDialog(
+            onDismissRequest = {},
+            title = { Text(stringResource(id = R.string.success_sign_in)) },
+            confirmButton = {},
+            dismissButton = {
+                TextButton(onClick = onSingUpSuccess) {
+                    Text(stringResource(id = R.string.accept))
+                }
+            })
+    }
+}
+
+@Composable
+private fun SnackbarError(errorException: Throwable?, snackbarHostState: SnackbarHostState) {
+    if (errorException != null && errorException !is AuthUiException) {
+        LaunchSnackbar(snackbarHostState = snackbarHostState, message = getMessageError(errorException))
+    }
+}
+
+@Composable
+private fun getMessageError(errorException: Throwable) = when (errorException) {
+    is AuthException.SignUpException -> stringResource(id = R.string.error_sign_in)
+    is AuthException.UserAlreadyExistException -> stringResource(id = R.string.error_user_already_exit)
+    else -> errorException.message.orEmpty()
+}
+
 @Preview(showBackground = true)
 @Composable
 fun SingUpScreenPreview() {
     StoriChallengeTheme {
         SigUpScreen(
             onSignInButtonClick = {},
+            onSingUpSuccess = {},
+            onBackPressedClick = {}
+        )
+    }
+}
+
+@Preview(showBackground = true)
+@Composable
+fun SingUpScreenUiStateLoadingPreview() {
+    StoriChallengeTheme {
+        SigUpScreen(
+            signInUiState = SignUpUiState.Loading,
+            onSignInButtonClick = {},
+            onSingUpSuccess = {},
+            onBackPressedClick = {}
+        )
+    }
+}
+
+@Preview(showBackground = true)
+@Composable
+fun SingUpScreenUiStateSuccessPreview() {
+    StoriChallengeTheme {
+        SigUpScreen(
+            signInUiState = SignUpUiState.Success,
+            onSignInButtonClick = {},
+            onSingUpSuccess = {},
+            onBackPressedClick = {}
+        )
+    }
+}
+
+@Preview(showBackground = true)
+@Composable
+fun SingUpScreenFirstNameUiStateErrorPreview() {
+    StoriChallengeTheme {
+        SigUpScreen(
+            signInUiState = SignUpUiState.Error(AuthUiException.FirstNameException),
+            onSignInButtonClick = {},
+            onSingUpSuccess = {},
+            onBackPressedClick = {}
+        )
+    }
+}
+
+@Preview(showBackground = true)
+@Composable
+fun SingUpScreenLastNameUiStateErrorPreview() {
+    StoriChallengeTheme {
+        SigUpScreen(
+            signInUiState = SignUpUiState.Error(AuthUiException.LastNameException),
+            onSignInButtonClick = {},
+            onSingUpSuccess = {},
+            onBackPressedClick = {}
+        )
+    }
+}
+
+@Preview(showBackground = true)
+@Composable
+fun SingUpScreenEmailUiStateErrorPreview() {
+    StoriChallengeTheme {
+        SigUpScreen(
+            signInUiState = SignUpUiState.Error(AuthUiException.EmailException),
+            onSignInButtonClick = {},
+            onSingUpSuccess = {},
+            onBackPressedClick = {}
+        )
+    }
+}
+
+@Preview(showBackground = true)
+@Composable
+fun SingUpScreenPasswordUiStateErrorPreview() {
+    StoriChallengeTheme {
+        SigUpScreen(
+            signInUiState = SignUpUiState.Error(AuthUiException.PasswordException),
+            onSignInButtonClick = {},
+            onSingUpSuccess = {},
+            onBackPressedClick = {}
+        )
+    }
+}
+
+@Preview(showBackground = true)
+@Composable
+fun SingUpScreenConfirmPasswordUiStateErrorPreview() {
+    StoriChallengeTheme {
+        SigUpScreen(
+            signInUiState = SignUpUiState.Error(AuthUiException.ConfirmPasswordException),
+            onSignInButtonClick = {},
+            onSingUpSuccess = {},
+            onBackPressedClick = {}
+        )
+    }
+}
+
+@Preview(showBackground = true)
+@Composable
+fun SingUpScreenDifferentPasswordUiStateErrorPreview() {
+    StoriChallengeTheme {
+        SigUpScreen(
+            signInUiState = SignUpUiState.Error(AuthUiException.DifferentPasswordException),
+            onSignInButtonClick = {},
+            onSingUpSuccess = {},
+            onBackPressedClick = {}
+        )
+    }
+}
+
+@Preview(showBackground = true)
+@Composable
+fun SingUpScreenUiStateErrorPreview() {
+    StoriChallengeTheme {
+        SigUpScreen(
+            signInUiState = SignUpUiState.Error(AuthException.UserAlreadyExistException()),
+            onSignInButtonClick = {},
+            onSingUpSuccess = {},
             onBackPressedClick = {}
         )
     }

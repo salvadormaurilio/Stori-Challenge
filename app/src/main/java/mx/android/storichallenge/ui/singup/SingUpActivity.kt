@@ -30,6 +30,7 @@ class SingUpActivity : ComponentActivity() {
                 ) {
                     SigUpScreen(
                         onSignInButtonClick = { singUpViewModel.singUp(it) },
+                        onSingUpSuccess = {},
                         onBackPressedClick = { onBackPressedDispatcher.onBackPressed() }
                     )
                 }
