@@ -1,7 +1,9 @@
 package mx.android.storichallenge.ui.composable
 
 import androidx.annotation.StringRes
+import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.fillMaxWidth
+import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.text.KeyboardOptions
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.Visibility
@@ -24,6 +26,7 @@ import androidx.compose.ui.text.input.VisualTransformation
 import androidx.compose.ui.tooling.preview.Preview
 import mx.android.storichallenge.R
 import mx.android.storichallenge.core.ui.empty
+import mx.android.storichallenge.ui.theme.Space16
 import mx.android.storichallenge.ui.theme.StoriChallengeTheme
 
 @Composable
@@ -85,7 +88,9 @@ fun PasswordTextField(modifier: Modifier = Modifier, @StringRes text: Int = R.st
 @Composable
 fun NameTextFieldPreview() {
     StoriChallengeTheme {
-        NameTextField(text = R.string.first_name)
+        Box(modifier = Modifier.padding(Space16)) {
+            NameTextField(text = R.string.first_name)
+        }
     }
 }
 
@@ -93,7 +98,9 @@ fun NameTextFieldPreview() {
 @Composable
 fun EmailTextFieldPreview() {
     StoriChallengeTheme {
-        EmailTextField()
+        Box(modifier = Modifier.padding(Space16)) {
+            EmailTextField()
+        }
     }
 }
 
@@ -101,6 +108,8 @@ fun EmailTextFieldPreview() {
 @Composable
 fun PasswordTextFieldPreview() {
     StoriChallengeTheme {
-        PasswordTextField()
+        Box(modifier = Modifier.padding(Space16)) {
+            PasswordTextField()
+        }
     }
 }

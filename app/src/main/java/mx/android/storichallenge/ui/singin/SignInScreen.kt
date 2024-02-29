@@ -86,7 +86,6 @@ fun SigInContent(modifier: Modifier = Modifier) {
     }
 }
 
-
 @Preview(showBackground = true)
 @Composable
 fun SingInScreenPreview() {
