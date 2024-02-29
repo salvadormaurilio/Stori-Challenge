@@ -7,7 +7,7 @@ data class UserDataSubmit(
     val lastName: String,
     val email: String,
     val password: String,
-    val pictureIdentification: String
+    var pictureIdentification: String
 )
 
 data class UserData(

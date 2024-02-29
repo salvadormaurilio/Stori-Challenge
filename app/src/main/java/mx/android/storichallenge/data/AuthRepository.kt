@@ -4,6 +4,7 @@ import kotlinx.coroutines.ExperimentalCoroutinesApi
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.flatMapConcat
 import kotlinx.coroutines.flow.flowOf
+import kotlinx.coroutines.flow.onEach
 import mx.android.storichallenge.data.datasource.remote.AuthRemoteDataSource
 import mx.android.storichallenge.data.datasource.remote.UserRemoteDataSource
 import mx.android.storichallenge.domain.model.UserDataSubmit
@@ -20,5 +21,11 @@ class AuthRepository @Inject constructor(
 
     fun signUp(userDataSubmit: UserDataSubmit): Flow<Result<String>> =
         authRemoteDataSource.signUp(userDataSubmit.email, userDataSubmit.password)
+            .flatMapConcat {
+                if (it.isSuccess) userRemoteDataSource.storagePictureIdentification(userDataSubmit.pictureIdentification) else flowOf(
+                    it
+                )
+            }
+            .onEach { if (it.isSuccess) userDataSubmit.pictureIdentification = it.getOrNull().orEmpty() }
             .flatMapConcat { if (it.isSuccess) userRemoteDataSource.storeUserData(userDataSubmit.toUserDataMap()) else flowOf(it) }
 }
