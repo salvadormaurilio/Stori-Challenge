@@ -20,6 +20,7 @@ fun givenUserDataUi() = UserDataUi(
     firstName = ANY_FIRST_NAME,
     lastName = ANY_LAST_NAME,
     email = ANY_USER_EMAIL,
+    pictureIdentification = ANY_PICTURE_IDENTIFICATION,
     movements = givenMovementUiList()
 )
 

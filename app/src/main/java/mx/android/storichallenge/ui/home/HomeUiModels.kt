@@ -7,6 +7,7 @@ data class UserDataUi(
     val firstName: String,
     val lastName: String,
     val email: String,
+    var pictureIdentification: String,
     val movements: List<MovementUi>
 )
 
@@ -21,6 +22,7 @@ fun UserData.toUserDataUi() = UserDataUi(
     firstName = firstName,
     lastName = lastName,
     email = email,
+    pictureIdentification = pictureIdentification,
     movements = movements.toMovementUiList()
 )
 

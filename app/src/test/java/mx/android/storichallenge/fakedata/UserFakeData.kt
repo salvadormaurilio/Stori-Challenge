@@ -4,6 +4,7 @@ import mx.android.storichallenge.data.datasource.model.UserDataResponse
 import mx.android.storichallenge.domain.model.EMAIL_NAME
 import mx.android.storichallenge.domain.model.FIRST_NAME
 import mx.android.storichallenge.domain.model.LAST_NAME
+import mx.android.storichallenge.domain.model.PICTURE_IDENTIFICATION
 import mx.android.storichallenge.domain.model.UserData
 import mx.android.storichallenge.domain.model.UserDataSubmit
 import mx.android.storichallenge.ui.home.UserDataUi
@@ -27,7 +28,8 @@ const val ANY_LOCAL_PICTURE_IDENTIFICATION =
 fun givenUserDataMap() = mapOf(
     FIRST_NAME to ANY_FIRST_NAME,
     LAST_NAME to ANY_LAST_NAME,
-    EMAIL_NAME to ANY_USER_EMAIL
+    EMAIL_NAME to ANY_USER_EMAIL,
+    PICTURE_IDENTIFICATION to ANY_PICTURE_IDENTIFICATION
 )
 
 fun givenUserDataSubmit() = UserDataSubmit(
@@ -36,7 +38,7 @@ fun givenUserDataSubmit() = UserDataSubmit(
     email = ANY_USER_EMAIL,
     password = ANY_PASSWORD,
     pictureIdentification = ANY_PICTURE_IDENTIFICATION,
-    )
+)
 
 fun givenUserDataSubmitWithLocalPictureIdentification() = UserDataSubmit(
     fistName = ANY_FIRST_NAME,
@@ -50,6 +52,7 @@ fun givenUserDataResponse() = UserDataResponse(
     firstName = ANY_FIRST_NAME,
     lastName = ANY_LAST_NAME,
     email = ANY_USER_EMAIL,
+    pictureIdentification = ANY_LOCAL_PICTURE_IDENTIFICATION,
     movements = givenMovementsResponseArray()
 )
 
@@ -57,6 +60,7 @@ fun givenUserData() = UserData(
     firstName = ANY_FIRST_NAME,
     lastName = ANY_LAST_NAME,
     email = ANY_USER_EMAIL,
+    pictureIdentification = ANY_LOCAL_PICTURE_IDENTIFICATION,
     movements = givenMovementList()
 )
 
@@ -127,5 +131,6 @@ fun givenUserDataUi() = UserDataUi(
     firstName = ANY_FIRST_NAME,
     lastName = ANY_LAST_NAME,
     email = ANY_USER_EMAIL,
+    pictureIdentification = ANY_LOCAL_PICTURE_IDENTIFICATION,
     movements = givenMovementUiList()
 )

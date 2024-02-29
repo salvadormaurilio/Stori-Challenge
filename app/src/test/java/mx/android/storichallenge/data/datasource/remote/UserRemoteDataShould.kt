@@ -39,7 +39,7 @@ class UserRemoteDataShould {
     }
 
     @Test
-    fun `Call store user data collection when storeUserData is called`() = runTest {
+    fun `Call store UserData collection when storeUserData is called`() = runTest {
         val userDataMap = givenUserDataMap()
 
         whenever(firebaseAuth.currentUser).thenReturn(firebaseUser)
@@ -56,7 +56,7 @@ class UserRemoteDataShould {
     }
 
     @Test
-    fun `Call get user data collection when getUserData is called`() = runTest {
+    fun `Call get UserData collection when getUserData is called`() = runTest {
         whenever(firebaseAuth.currentUser).thenReturn(firebaseUser)
         whenever(firebaseUser.uid).thenReturn(ANY_USER_ID)
 
@@ -71,7 +71,7 @@ class UserRemoteDataShould {
     }
 
     @Test
-    fun `Call get movement detail data collection when getMovementDetail is called`() = runTest {
+    fun `Call get MovementDetail data collection when getMovementDetail is called`() = runTest {
         whenever(firebaseAuth.currentUser).thenReturn(firebaseUser)
         whenever(firebaseUser.uid).thenReturn(ANY_USER_ID)
 
