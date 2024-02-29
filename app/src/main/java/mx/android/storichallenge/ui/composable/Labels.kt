@@ -83,7 +83,7 @@ fun LabelMovementDetail(modifier: Modifier = Modifier, @StringRes title: Int, te
 @Composable
 fun LabelMovementPreview() {
     StoriChallengeTheme {
-        Box(modifier = Modifier.padding(top = Space16, bottom = Space16)){
+        Box(modifier = Modifier.padding(top = Space16, bottom = Space16)) {
             LabelMovement(movementUi = givenMovementUi1())
         }
     }
@@ -94,7 +94,10 @@ fun LabelMovementPreview() {
 fun LabelMovementDetailPreview() {
     StoriChallengeTheme {
         Column(modifier = Modifier.padding(all = Space16)) {
-            LabelMovementDetail(title = R.string.category, text = ANY_MOVEMENT_CATEGORY)
+            LabelMovementDetail(
+                title = R.string.category,
+                text = ANY_MOVEMENT_CATEGORY
+            )
         }
     }
 }

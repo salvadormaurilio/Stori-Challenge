@@ -25,6 +25,10 @@ import androidx.compose.material3.Text
 import androidx.compose.material3.TopAppBar
 import androidx.compose.material3.TopAppBarDefaults
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.getValue
+import androidx.compose.runtime.mutableStateOf
+import androidx.compose.runtime.saveable.rememberSaveable
+import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
@@ -86,6 +90,12 @@ fun SigUpContent(modifier: Modifier = Modifier) {
         verticalArrangement = Arrangement.Center,
         horizontalAlignment = Alignment.CenterHorizontally
     ) {
+        var firstName by rememberSaveable { mutableStateOf(String.empty()) }
+        var lastName by rememberSaveable { mutableStateOf(String.empty()) }
+        var email by rememberSaveable { mutableStateOf(String.empty()) }
+        var password by rememberSaveable { mutableStateOf(String.empty()) }
+        var confirmPassword by rememberSaveable { mutableStateOf(String.empty()) }
+
         Icon(
             modifier = Modifier
                 .size(size = Space80)
@@ -104,15 +114,34 @@ fun SigUpContent(modifier: Modifier = Modifier) {
             style = MaterialTheme.typography.bodyMedium
         )
         Spacer(modifier = Modifier.height(Space16))
-        NameTextField(text = R.string.first_name)
+        NameTextField(
+            label = R.string.first_name,
+            name = firstName,
+            onValueChange = { firstName = it }
+        )
         Spacer(modifier = Modifier.height(Space12))
-        NameTextField(text = R.string.last_name)
+        NameTextField(
+            label = R.string.last_name,
+            name = lastName,
+            onValueChange = { firstName = it }
+        )
         Spacer(modifier = Modifier.height(Space12))
-        EmailTextField()
+        EmailTextField(
+            email = email,
+            onValueChange = { email = it }
+        )
         Spacer(modifier = Modifier.height(Space12))
-        PasswordTextField()
+        PasswordTextField(
+            label = R.string.password,
+            password = password,
+            onValueChange = { password = it }
+        )
         Spacer(modifier = Modifier.height(Space12))
-        PasswordTextField(text = R.string.confirm_password)
+        PasswordTextField(
+            label = R.string.confirm_password,
+            password = confirmPassword,
+            onValueChange = { confirmPassword = it }
+        )
         Spacer(modifier = Modifier.height(Space24))
         ProgressButton(
             isLoading = false,

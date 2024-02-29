@@ -16,11 +16,16 @@ import androidx.compose.material3.Text
 import androidx.compose.material3.TopAppBar
 import androidx.compose.material3.TopAppBarDefaults
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.getValue
+import androidx.compose.runtime.mutableStateOf
+import androidx.compose.runtime.saveable.rememberSaveable
+import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.tooling.preview.Preview
 import mx.android.storichallenge.R
+import mx.android.storichallenge.core.ui.empty
 import mx.android.storichallenge.ui.composable.EmailTextField
 import mx.android.storichallenge.ui.composable.PasswordTextField
 import mx.android.storichallenge.ui.composable.ProgressButton
@@ -38,7 +43,10 @@ fun SigInScreen(modifier: Modifier = Modifier) {
     Scaffold(topBar = {
         SigInTopAppBar()
     }) {
-        SigInContent(modifier = modifier.padding(paddingValues = it))
+        SigInContent(
+            modifier = modifier.padding(paddingValues = it),
+            onSignInButtonClick = { email: String, password: String -> },
+            onSignUpButtonClick = {})
     }
 }
 
@@ -57,7 +65,14 @@ fun SigInTopAppBar() {
 }
 
 @Composable
-fun SigInContent(modifier: Modifier = Modifier) {
+fun SigInContent(
+    modifier: Modifier = Modifier,
+    onSignInButtonClick: (email: String, password: String) -> Unit,
+    onSignUpButtonClick: () -> Unit
+) {
+    var email by rememberSaveable { mutableStateOf(String.empty()) }
+    var password by rememberSaveable { mutableStateOf(String.empty()) }
+
     Column(
         modifier = modifier
             .fillMaxSize()
@@ -65,9 +80,16 @@ fun SigInContent(modifier: Modifier = Modifier) {
         verticalArrangement = Arrangement.Center,
         horizontalAlignment = Alignment.CenterHorizontally
     ) {
-        EmailTextField()
+        EmailTextField(
+            email = email,
+            onValueChange = { email = it }
+        )
         Spacer(modifier = Modifier.height(Space16))
-        PasswordTextField()
+        PasswordTextField(
+            label = R.string.password,
+            password = password,
+            onValueChange = { password = it }
+        )
         Spacer(modifier = Modifier.height(Space32))
         ProgressButton(
             isLoading = false,
@@ -81,7 +103,7 @@ fun SigInContent(modifier: Modifier = Modifier) {
             colors = ButtonDefaults.buttonColors(
                 containerColor = Blue500
             ),
-            onClick = {}
+            onClick = { onSignUpButtonClick() }
         ) {
             Text(
                 text = stringResource(id = R.string.sing_up),

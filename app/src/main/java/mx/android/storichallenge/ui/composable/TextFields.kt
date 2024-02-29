@@ -30,44 +30,38 @@ import mx.android.storichallenge.ui.theme.Space16
 import mx.android.storichallenge.ui.theme.StoriChallengeTheme
 
 @Composable
-fun NameTextField(modifier: Modifier = Modifier, @StringRes text: Int) {
-    var name by rememberSaveable { mutableStateOf(String.empty()) }
-
+fun NameTextField(modifier: Modifier = Modifier, @StringRes label: Int, name: String, onValueChange: (String) -> Unit) {
     OutlinedTextField(
         value = name,
-        label = { Text(text = stringResource(id = text)) },
+        label = { Text(text = stringResource(id = label)) },
         modifier = modifier.fillMaxWidth(),
         singleLine = true,
         keyboardOptions = KeyboardOptions(
-            capitalization = KeyboardCapitalization.Words,
-            keyboardType = KeyboardType.Text
+            capitalization = KeyboardCapitalization.Words, keyboardType = KeyboardType.Text
         ),
-        onValueChange = { name = it },
+        onValueChange = { onValueChange(it) },
     )
 }
 
 @Composable
-fun EmailTextField(modifier: Modifier = Modifier) {
-    var email by rememberSaveable { mutableStateOf(String.empty()) }
-
+fun EmailTextField(modifier: Modifier = Modifier, email: String, onValueChange: (String) -> Unit) {
     OutlinedTextField(
         value = email,
         label = { Text(text = stringResource(id = R.string.email)) },
         modifier = modifier.fillMaxWidth(),
         singleLine = true,
         keyboardOptions = KeyboardOptions(keyboardType = KeyboardType.Email),
-        onValueChange = { email = it },
+        onValueChange = { onValueChange(it) },
     )
 }
 
 @Composable
-fun PasswordTextField(modifier: Modifier = Modifier, @StringRes text: Int = R.string.password) {
-    var password by rememberSaveable { mutableStateOf(String.empty()) }
+fun PasswordTextField(modifier: Modifier = Modifier, @StringRes label: Int, password: String, onValueChange: (String) -> Unit) {
     var passwordVisible by rememberSaveable { mutableStateOf(false) }
 
     OutlinedTextField(
         value = password,
-        label = { Text(text = stringResource(id = text)) },
+        label = { Text(text = stringResource(id = label)) },
         modifier = modifier.fillMaxWidth(),
         singleLine = true,
         keyboardOptions = KeyboardOptions(keyboardType = KeyboardType.Password),
@@ -80,7 +74,7 @@ fun PasswordTextField(modifier: Modifier = Modifier, @StringRes text: Int = R.st
                 )
             }
         },
-        onValueChange = { password = it },
+        onValueChange = { onValueChange(it) },
     )
 }
 
@@ -88,8 +82,12 @@ fun PasswordTextField(modifier: Modifier = Modifier, @StringRes text: Int = R.st
 @Composable
 fun NameTextFieldPreview() {
     StoriChallengeTheme {
+        var name by rememberSaveable { mutableStateOf(String.empty()) }
+
         Box(modifier = Modifier.padding(Space16)) {
-            NameTextField(text = R.string.first_name)
+            NameTextField(label = R.string.first_name, name = name,
+                onValueChange = { name = it }
+            )
         }
     }
 }
@@ -98,8 +96,13 @@ fun NameTextFieldPreview() {
 @Composable
 fun EmailTextFieldPreview() {
     StoriChallengeTheme {
+        var email by rememberSaveable { mutableStateOf(String.empty()) }
+
         Box(modifier = Modifier.padding(Space16)) {
-            EmailTextField()
+            EmailTextField(
+                email = email,
+                onValueChange = { email = it }
+            )
         }
     }
 }
@@ -108,8 +111,14 @@ fun EmailTextFieldPreview() {
 @Composable
 fun PasswordTextFieldPreview() {
     StoriChallengeTheme {
+        var password by rememberSaveable { mutableStateOf(String.empty()) }
+
         Box(modifier = Modifier.padding(Space16)) {
-            PasswordTextField()
+            PasswordTextField(
+                label = R.string.password,
+                password = password,
+                onValueChange = { password = it }
+            )
         }
     }
 }

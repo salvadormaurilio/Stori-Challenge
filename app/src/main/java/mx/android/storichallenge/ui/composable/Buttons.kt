@@ -59,7 +59,10 @@ class IsLoadingParameterProvider : PreviewParameterProvider<Boolean> {
 fun ProgressButtonPreview(@PreviewParameter(IsLoadingParameterProvider::class) isLoading: Boolean) {
     StoriChallengeTheme {
         Box(modifier = Modifier.padding(Space16)) {
-            ProgressButton(isLoading = isLoading, text = R.string.sign_in)
+            ProgressButton(
+                isLoading = isLoading,
+                text = R.string.sign_in
+            )
         }
     }
 }
