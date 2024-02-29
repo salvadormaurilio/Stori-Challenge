@@ -55,7 +55,15 @@ Sign In Success | Some Fiel is Wrong | User Invalid
 
 ## :green_heart: How did you test it?
 
-Install the application or run the Unit Tests recommended command:
+To test you can use the following credentials
+
+
+```
+email: 
+passwor: 
+```
+
+**Also run the Unit Tests, recommended command:**
 
 
 ### Unit Tests:

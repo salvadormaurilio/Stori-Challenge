@@ -10,10 +10,9 @@ import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.rememberScrollState
-import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.foundation.verticalScroll
 import androidx.compose.material.icons.Icons
-import androidx.compose.material.icons.filled.AccountCircle
+import androidx.compose.material.icons.filled.AccountBox
 import androidx.compose.material.icons.filled.ArrowBack
 import androidx.compose.material.ripple.rememberRipple
 import androidx.compose.material3.AlertDialog
@@ -35,7 +34,6 @@ import androidx.compose.runtime.saveable.rememberSaveable
 import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.draw.clip
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.tooling.preview.Preview
 import mx.android.storichallenge.R
@@ -63,6 +61,7 @@ import mx.android.storichallenge.ui.theme.White800
 fun SigUpScreen(
     modifier: Modifier = Modifier,
     signInUiState: SignUpUiState? = null,
+    onProfileIdentification: () -> Unit,
     onSignUpButtonClick: (userDataSubmitUi: UserDataSubmitUi) -> Unit,
     onSingUpSuccess: () -> Unit,
     onBackPressedClick: () -> Unit
@@ -79,6 +78,7 @@ fun SigUpScreen(
             modifier = modifier.padding(paddingValues = it),
             isLoading = isLoading,
             errorException = errorException,
+            onProfileIdentification = onProfileIdentification,
             onSignUpButtonClick = onSignUpButtonClick
         )
         AlertDialogSuccess(isSuccess, onSingUpSuccess)
@@ -115,6 +115,7 @@ fun SigUpContent(
     modifier: Modifier = Modifier,
     isLoading: Boolean,
     errorException: Throwable?,
+    onProfileIdentification: () -> Unit,
     onSignUpButtonClick: (userDataSubmitUi: UserDataSubmitUi) -> Unit
 ) {
     Column(
@@ -142,18 +143,17 @@ fun SigUpContent(
         Icon(
             modifier = Modifier
                 .size(size = Space80)
-                .clip(shape = RoundedCornerShape(Space80))
                 .clickable(
                     interactionSource = MutableInteractionSource(),
                     indication = rememberRipple(bounded = true),
-                    onClick = {}
+                    onClick = onProfileIdentification
                 ),
-            imageVector = Icons.Filled.AccountCircle,
+            imageVector = Icons.Filled.AccountBox,
             tint = BlueGrey800,
             contentDescription = String.empty()
         )
         Text(
-            text = stringResource(id = R.string.profile_picture),
+            text = stringResource(id = R.string.profile_identification),
             style = MaterialTheme.typography.bodyMedium
         )
         Spacer(modifier = Modifier.height(Space16))
@@ -241,6 +241,7 @@ private fun getMessageError(errorException: Throwable) = when (errorException) {
 fun SingUpScreenPreview() {
     StoriChallengeTheme {
         SigUpScreen(
+            onProfileIdentification = {},
             onSignUpButtonClick = {},
             onSingUpSuccess = {},
             onBackPressedClick = {}
@@ -254,6 +255,7 @@ fun SingUpScreenUiStateLoadingPreview() {
     StoriChallengeTheme {
         SigUpScreen(
             signInUiState = SignUpUiState.Loading,
+            onProfileIdentification = {},
             onSignUpButtonClick = {},
             onSingUpSuccess = {},
             onBackPressedClick = {}
@@ -267,6 +269,7 @@ fun SingUpScreenUiStateSuccessPreview() {
     StoriChallengeTheme {
         SigUpScreen(
             signInUiState = SignUpUiState.Success,
+            onProfileIdentification = {},
             onSignUpButtonClick = {},
             onSingUpSuccess = {},
             onBackPressedClick = {}
@@ -280,6 +283,7 @@ fun SingUpScreenFirstNameUiStateErrorPreview() {
     StoriChallengeTheme {
         SigUpScreen(
             signInUiState = SignUpUiState.Error(AuthUiException.FirstNameException),
+            onProfileIdentification = {},
             onSignUpButtonClick = {},
             onSingUpSuccess = {},
             onBackPressedClick = {}
@@ -293,6 +297,7 @@ fun SingUpScreenLastNameUiStateErrorPreview() {
     StoriChallengeTheme {
         SigUpScreen(
             signInUiState = SignUpUiState.Error(AuthUiException.LastNameException),
+            onProfileIdentification = {},
             onSignUpButtonClick = {},
             onSingUpSuccess = {},
             onBackPressedClick = {}
@@ -306,6 +311,7 @@ fun SingUpScreenEmailUiStateErrorPreview() {
     StoriChallengeTheme {
         SigUpScreen(
             signInUiState = SignUpUiState.Error(AuthUiException.EmailException),
+            onProfileIdentification = {},
             onSignUpButtonClick = {},
             onSingUpSuccess = {},
             onBackPressedClick = {}
@@ -319,6 +325,7 @@ fun SingUpScreenPasswordUiStateErrorPreview() {
     StoriChallengeTheme {
         SigUpScreen(
             signInUiState = SignUpUiState.Error(AuthUiException.PasswordException),
+            onProfileIdentification = {},
             onSignUpButtonClick = {},
             onSingUpSuccess = {},
             onBackPressedClick = {}
@@ -332,6 +339,7 @@ fun SingUpScreenConfirmPasswordUiStateErrorPreview() {
     StoriChallengeTheme {
         SigUpScreen(
             signInUiState = SignUpUiState.Error(AuthUiException.ConfirmPasswordException),
+            onProfileIdentification = {},
             onSignUpButtonClick = {},
             onSingUpSuccess = {},
             onBackPressedClick = {}
@@ -345,6 +353,7 @@ fun SingUpScreenDifferentPasswordUiStateErrorPreview() {
     StoriChallengeTheme {
         SigUpScreen(
             signInUiState = SignUpUiState.Error(AuthUiException.DifferentPasswordException),
+            onProfileIdentification = {},
             onSignUpButtonClick = {},
             onSingUpSuccess = {},
             onBackPressedClick = {}
@@ -358,6 +367,7 @@ fun SingUpScreenUiStateErrorPreview() {
     StoriChallengeTheme {
         SigUpScreen(
             signInUiState = SignUpUiState.Error(AuthException.UserAlreadyExistException()),
+            onProfileIdentification = {},
             onSignUpButtonClick = {},
             onSingUpSuccess = {},
             onBackPressedClick = {}

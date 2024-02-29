@@ -50,6 +50,7 @@ class SingUpActivity : ComponentActivity() {
 
         SigUpScreen(
             signInUiState = signInUiState,
+            onProfileIdentification = {},
             onSignUpButtonClick = { singUpViewModel.singUp(it) },
             onSingUpSuccess = { singUpViewModel.navigateToHome() },
             onBackPressedClick = { onBackPressedDispatcher.onBackPressed() }
