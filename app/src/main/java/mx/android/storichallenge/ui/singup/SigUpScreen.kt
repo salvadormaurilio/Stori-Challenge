@@ -145,7 +145,8 @@ fun SigUpContent(modifier: Modifier = Modifier) {
         Spacer(modifier = Modifier.height(Space24))
         ProgressButton(
             isLoading = false,
-            text = R.string.sing_up
+            text = R.string.sing_up,
+            onClick = {}
         )
     }
 }

@@ -93,7 +93,8 @@ fun SigInContent(
         Spacer(modifier = Modifier.height(Space32))
         ProgressButton(
             isLoading = false,
-            text = R.string.sign_in
+            text = R.string.sign_in,
+            onClick = { onSignInButtonClick(email, password) }
         )
         Spacer(modifier = Modifier.height(Space24))
         Button(

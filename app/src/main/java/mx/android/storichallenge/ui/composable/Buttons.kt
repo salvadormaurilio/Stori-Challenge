@@ -26,14 +26,14 @@ import mx.android.storichallenge.ui.theme.StoriChallengeTheme
 import mx.android.storichallenge.ui.theme.White800
 
 @Composable
-fun ProgressButton(modifier: Modifier = Modifier, isLoading: Boolean, @StringRes text: Int) {
+fun ProgressButton(modifier: Modifier = Modifier, isLoading: Boolean, @StringRes text: Int, onClick: () -> Unit) {
     Button(
         colors = ButtonDefaults.buttonColors(disabledContainerColor = BlueGrey500),
         modifier = modifier
             .fillMaxWidth()
             .height(Space48),
         enabled = !isLoading,
-        onClick = {}
+        onClick = onClick
     ) {
         if (isLoading)
             CircularProgressIndicator(
@@ -61,7 +61,8 @@ fun ProgressButtonPreview(@PreviewParameter(IsLoadingParameterProvider::class) i
         Box(modifier = Modifier.padding(Space16)) {
             ProgressButton(
                 isLoading = isLoading,
-                text = R.string.sign_in
+                text = R.string.sign_in,
+                onClick = {}
             )
         }
     }
