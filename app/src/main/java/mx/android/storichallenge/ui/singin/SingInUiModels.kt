@@ -7,12 +7,14 @@ data class UserDataSubmitUi(
     val lastName: String,
     val email: String,
     val password: String,
-    val confirmPassword: String
+    val confirmPassword: String,
+    val pictureIdentification: String
 )
 
 fun UserDataSubmitUi.toUserDataSubmit() = UserDataSubmit(
     fistName = fistName,
     lastName = lastName,
     email = email,
-    password = password
+    password = password,
+    pictureIdentification = pictureIdentification
 )

@@ -194,7 +194,18 @@ fun SigUpContent(
         ProgressButton(
             isLoading = isLoading,
             text = R.string.sing_up,
-            onClick = { onSignUpButtonClick(buildUserDataSubmitUi(firstName, lastName, email, password, confirmPassword)) }
+            onClick = {
+                onSignUpButtonClick(
+                    buildUserDataSubmitUi(
+                        firstName,
+                        lastName,
+                        email,
+                        password,
+                        confirmPassword,
+                        pictureIdentification
+                    )
+                )
+            }
         )
     }
 }
@@ -225,12 +236,20 @@ private fun PictureIdentification(modifier: Modifier = Modifier, pictureIdentifi
     }
 }
 
-private fun buildUserDataSubmitUi(firstName: String, lastName: String, email: String, password: String, confirmPassword: String) =
+private fun buildUserDataSubmitUi(
+    firstName: String,
+    lastName: String,
+    email: String,
+    password: String,
+    confirmPassword: String,
+    pictureIdentification: String
+) =
     UserDataSubmitUi(
         fistName = firstName,
         lastName = lastName, email,
         password = password,
-        confirmPassword = confirmPassword
+        confirmPassword = confirmPassword,
+        pictureIdentification = pictureIdentification,
     )
 
 @Composable

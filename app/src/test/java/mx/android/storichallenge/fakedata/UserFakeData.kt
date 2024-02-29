@@ -19,7 +19,8 @@ const val ANY_INVALID_USER_EMAIL = "salvadorbuapap.mx"
 const val ANY_PASSWORD = "Admin1234_1"
 const val ANY_INVALID_PASSWORD = "Admi"
 private const val ANY_OTHER_PASSWORD = "Admin1234_12"
-const val ANY_PICTURE_IDENTIFICATION = "https://previews.123rf.com/images/alexutemov/alexutemov1605/alexutemov160500480/56958565-id-identidad-corporativa-medicina-identificador-identificaci%C3%B3n-del-m%C3%A9dico-y-la-tarjeta-de.jpg"
+const val ANY_PICTURE_IDENTIFICATION =
+    "https://previews.123rf.com/images/alexutemov/alexutemov1605/alexutemov160500480/56958565-id-identidad-corporativa-medicina-identificador-identificaci%C3%B3n-del-m%C3%A9dico-y-la-tarjeta-de.jpg"
 
 fun givenUserDataMap() = mapOf(
     FIRST_NAME to ANY_FIRST_NAME,
@@ -31,8 +32,9 @@ fun givenUserDataSubmit() = UserDataSubmit(
     fistName = ANY_FIRST_NAME,
     lastName = ANY_LAST_NAME,
     email = ANY_USER_EMAIL,
-    password = ANY_PASSWORD
-)
+    password = ANY_PASSWORD,
+    pictureIdentification = ANY_PICTURE_IDENTIFICATION,
+    )
 
 fun givenUserDataResponse() = UserDataResponse(
     firstName = ANY_FIRST_NAME,
@@ -53,7 +55,8 @@ fun givenUserDataSubmitUi() = UserDataSubmitUi(
     lastName = ANY_LAST_NAME,
     email = ANY_USER_EMAIL,
     password = ANY_PASSWORD,
-    confirmPassword = ANY_PASSWORD
+    confirmPassword = ANY_PASSWORD,
+    pictureIdentification = ANY_PICTURE_IDENTIFICATION,
 )
 
 fun givenUserDataSubmitUiWithInvalidFirstName() = UserDataSubmitUi(
@@ -61,7 +64,8 @@ fun givenUserDataSubmitUiWithInvalidFirstName() = UserDataSubmitUi(
     lastName = ANY_LAST_NAME,
     email = ANY_USER_EMAIL,
     password = ANY_PASSWORD,
-    confirmPassword = ANY_PASSWORD
+    confirmPassword = ANY_PASSWORD,
+    pictureIdentification = ANY_PICTURE_IDENTIFICATION,
 )
 
 fun givenUserDataSubmitUiWithInvalidLastName() = UserDataSubmitUi(
@@ -69,7 +73,8 @@ fun givenUserDataSubmitUiWithInvalidLastName() = UserDataSubmitUi(
     lastName = ANY_INVALID_LAST_NAME,
     email = ANY_USER_EMAIL,
     password = ANY_PASSWORD,
-    confirmPassword = ANY_PASSWORD
+    confirmPassword = ANY_PASSWORD,
+    pictureIdentification = ANY_PICTURE_IDENTIFICATION,
 )
 
 fun givenUserDataSubmitUiWithInvalidEmail() = UserDataSubmitUi(
@@ -77,7 +82,8 @@ fun givenUserDataSubmitUiWithInvalidEmail() = UserDataSubmitUi(
     lastName = ANY_LAST_NAME,
     email = ANY_INVALID_USER_EMAIL,
     password = ANY_PASSWORD,
-    confirmPassword = ANY_PASSWORD
+    confirmPassword = ANY_PASSWORD,
+    pictureIdentification = ANY_PICTURE_IDENTIFICATION,
 )
 
 fun givenUserDataSubmitUiWithInvalidPassword() = UserDataSubmitUi(
@@ -85,7 +91,8 @@ fun givenUserDataSubmitUiWithInvalidPassword() = UserDataSubmitUi(
     lastName = ANY_LAST_NAME,
     email = ANY_USER_EMAIL,
     password = ANY_INVALID_PASSWORD,
-    confirmPassword = ANY_PASSWORD
+    confirmPassword = ANY_PASSWORD,
+    pictureIdentification = ANY_PICTURE_IDENTIFICATION,
 )
 
 fun givenUserDataSubmitUiWithInvalidConfirmPassword() = UserDataSubmitUi(
@@ -93,7 +100,8 @@ fun givenUserDataSubmitUiWithInvalidConfirmPassword() = UserDataSubmitUi(
     lastName = ANY_LAST_NAME,
     email = ANY_USER_EMAIL,
     password = ANY_PASSWORD,
-    confirmPassword = ANY_INVALID_PASSWORD
+    confirmPassword = ANY_INVALID_PASSWORD,
+    pictureIdentification = ANY_PICTURE_IDENTIFICATION,
 )
 
 fun givenUserDataSubmitUiWithDifferentPasswords() = UserDataSubmitUi(
@@ -101,7 +109,8 @@ fun givenUserDataSubmitUiWithDifferentPasswords() = UserDataSubmitUi(
     lastName = ANY_LAST_NAME,
     email = ANY_USER_EMAIL,
     password = ANY_PASSWORD,
-    confirmPassword = ANY_OTHER_PASSWORD
+    confirmPassword = ANY_OTHER_PASSWORD,
+    pictureIdentification = ANY_PICTURE_IDENTIFICATION,
 )
 
 fun givenUserDataUi() = UserDataUi(
