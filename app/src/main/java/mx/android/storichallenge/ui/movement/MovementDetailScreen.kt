@@ -34,33 +34,38 @@ import mx.android.storichallenge.ui.theme.Space80
 import mx.android.storichallenge.ui.theme.StoriChallengeTheme
 import mx.android.storichallenge.ui.theme.White800
 
-@OptIn(ExperimentalMaterial3Api::class)
 @Composable
 fun MovementDetailScreen(modifier: Modifier = Modifier, movementDetailUi: MovementDetailUi) {
     Scaffold(topBar = {
-        TopAppBar(
-            colors = TopAppBarDefaults.topAppBarColors(containerColor = MaterialTheme.colorScheme.primaryContainer),
-            title = {
-                Text(
-                    text = stringResource(id = R.string.movement_detail),
-                    color = White800
-                )
-            },
-            navigationIcon = {
-                IconButton(onClick = { }) {
-                    Icon(
-                        imageVector = Icons.Filled.ArrowBack,
-                        contentDescription = String.empty()
-                    )
-                }
-            }
-        )
+        MovementDetailTopAppBar()
     }) {
         MovementDetailContent(
             modifier = modifier.padding(paddingValues = it),
             movementDetailUi = movementDetailUi
         )
     }
+}
+
+@Composable
+@OptIn(ExperimentalMaterial3Api::class)
+fun MovementDetailTopAppBar() {
+    TopAppBar(
+        colors = TopAppBarDefaults.topAppBarColors(containerColor = MaterialTheme.colorScheme.primaryContainer),
+        title = {
+            Text(
+                text = stringResource(id = R.string.movement_detail),
+                color = White800
+            )
+        },
+        navigationIcon = {
+            IconButton(onClick = { }) {
+                Icon(
+                    imageVector = Icons.Filled.ArrowBack,
+                    contentDescription = String.empty()
+                )
+            }
+        }
+    )
 }
 
 @Composable

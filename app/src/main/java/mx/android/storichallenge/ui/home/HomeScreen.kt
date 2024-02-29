@@ -8,11 +8,7 @@ import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.lazy.items
-import androidx.compose.material.icons.Icons
-import androidx.compose.material.icons.filled.ArrowBack
 import androidx.compose.material3.ExperimentalMaterial3Api
-import androidx.compose.material3.Icon
-import androidx.compose.material3.IconButton
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Scaffold
 import androidx.compose.material3.Text
@@ -24,9 +20,7 @@ import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.tooling.preview.Preview
 import mx.android.storichallenge.R
-import mx.android.storichallenge.core.ui.empty
 import mx.android.storichallenge.ui.composable.LabelMovement
-import mx.android.storichallenge.ui.theme.BlueGrey500
 import mx.android.storichallenge.ui.theme.Space16
 import mx.android.storichallenge.ui.theme.Space2
 import mx.android.storichallenge.ui.theme.Space24
@@ -67,15 +61,6 @@ fun HomeTopAppBar(firstName: String, lastName: String, email: String) {
                     text = stringResource(id = R.string.user_email, email),
                     color = White800,
                     style = MaterialTheme.typography.labelMedium
-                )
-            }
-        },
-        navigationIcon = {
-            IconButton(onClick = { }) {
-                Icon(
-                    imageVector = Icons.Filled.ArrowBack,
-                    tint = BlueGrey500,
-                    contentDescription = String.empty()
                 )
             }
         }
