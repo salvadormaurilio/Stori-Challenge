@@ -1,12 +1,15 @@
 package mx.android.storichallenge.ui.home
 
+import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.PaddingValues
+import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
+import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.lazy.items
 import androidx.compose.material3.ExperimentalMaterial3Api
@@ -22,7 +25,9 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.tooling.preview.Preview
+import coil.compose.AsyncImage
 import mx.android.storichallenge.R
+import mx.android.storichallenge.core.ui.empty
 import mx.android.storichallenge.data.datasource.exception.UserException
 import mx.android.storichallenge.ui.composable.CircularProgressIndicatorFixMax
 import mx.android.storichallenge.ui.composable.LabelMovement
@@ -31,6 +36,7 @@ import mx.android.storichallenge.ui.composable.SnackbarBlue
 import mx.android.storichallenge.ui.theme.Space16
 import mx.android.storichallenge.ui.theme.Space2
 import mx.android.storichallenge.ui.theme.Space24
+import mx.android.storichallenge.ui.theme.Space48
 import mx.android.storichallenge.ui.theme.StoriChallengeTheme
 import mx.android.storichallenge.ui.theme.White800
 
@@ -57,19 +63,33 @@ fun HomeTopAppBar(userDataUiState: UserDataUiState) {
         colors = TopAppBarDefaults.topAppBarColors(containerColor = MaterialTheme.colorScheme.primaryContainer),
         title = {
             userDataUi?.run {
-                Column {
-                    Text(
-                        text = stringResource(id = R.string.user_name, firstName, lastName),
-                        color = White800,
-                        style = MaterialTheme.typography.titleMedium
+                Row {
+                    Column(modifier = Modifier.weight(1f)) {
+                        Text(
+                            text = stringResource(id = R.string.user_name, firstName, lastName),
+                            color = White800,
+                            style = MaterialTheme.typography.titleMedium
 
-                    )
-                    Spacer(modifier = Modifier.height(Space2))
-                    Text(
-                        text = stringResource(id = R.string.user_email, email),
-                        color = White800,
-                        style = MaterialTheme.typography.labelMedium
-                    )
+                        )
+                        Spacer(modifier = Modifier.height(Space2))
+                        Text(
+                            text = stringResource(id = R.string.user_email, email),
+                            color = White800,
+                            style = MaterialTheme.typography.labelMedium
+                        )
+                    }
+                    Box(
+                        Modifier.padding(
+                            start = Space16,
+                            end = Space16
+                        )
+                    ) {
+                        AsyncImage(
+                            modifier = Modifier.size(size = Space48),
+                            model = pictureIdentification,
+                            contentDescription = String.empty()
+                        )
+                    }
                 }
             }
         }

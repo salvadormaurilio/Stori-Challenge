@@ -1,5 +1,6 @@
 package mx.android.storichallenge.ui.composable
 
+import android.annotation.SuppressLint
 import androidx.annotation.StringRes
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.interaction.MutableInteractionSource
@@ -27,6 +28,7 @@ import mx.android.storichallenge.ui.theme.Space2
 import mx.android.storichallenge.ui.theme.Space8
 import mx.android.storichallenge.ui.theme.StoriChallengeTheme
 
+@SuppressLint("UnrememberedMutableInteractionSource")
 @Composable
 fun LabelMovement(modifier: Modifier = Modifier, movementUi: MovementUi, onMovementClick: (id: String) -> Unit) {
     Column(
