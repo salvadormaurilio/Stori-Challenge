@@ -47,8 +47,11 @@ fun MovementDetailScreen(movementDetailUiState: MovementDetailUiState, onBackPre
 
     Scaffold(
         topBar = { MovementDetailTopAppBar(onBackPressedClick = onBackPressedClick) },
-        snackbarHost = { SnackbarBlue(snackbarHostState) }) {
-        MovementDetailUiState(movementDetailUiState, it, snackbarHostState)
+        snackbarHost = { SnackbarBlue(snackbarHostState = snackbarHostState) }) {
+        MovementDetailUiState(
+            movementDetailUiState = movementDetailUiState,
+            paddingValues = it, snackbarHostState = snackbarHostState
+        )
     }
 }
 
@@ -71,7 +74,7 @@ private fun MovementDetailUiState(
         }
 
         is MovementDetailUiState.Error -> {
-            LaunchSnackbar(snackbarHostState)
+            LaunchSnackbar(snackbarHostState = snackbarHostState)
         }
     }
 }

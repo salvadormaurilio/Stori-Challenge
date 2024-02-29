@@ -32,7 +32,6 @@
             android:name=".ui.home.HomeActivity"
             android:exported="true"
             android:theme="@style/Theme.StoriChallenge"/>
-
         <activity
             android:name=".ui.movement.MovementDetailActivity"
             android:exported="true"

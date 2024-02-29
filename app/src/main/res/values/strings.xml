@@ -27,9 +27,10 @@
     <string name="success_sign_in">Inicio sesión exitoso \n%1$s \n%2$s </string>
     <string name="accept">Aceptar</string>
 
-    <string name="error_name_invalid">Nombre Inválido</string>
+    <string name="error_first_name_invalid">Nombre Inválido</string>
+    <string name="error_last_name_invalid">Apellido Inválido</string>
     <string name="error_email_invalid">Correo Inválido</string>
-    <string name="error_password_invalid">Contraseña Inválida</string>
+    <string name="error_password_invalid">Contraseña Inválida, debe contener una minúscula, una mayúscula, un número y un caracter especial</string>
     <string name="error_password_different">La contraseña es diferente</string>
     <string name="error_get_data">Error al obtener la información</string>
 </resources>

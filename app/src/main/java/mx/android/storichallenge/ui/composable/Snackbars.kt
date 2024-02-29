@@ -1,7 +1,6 @@
 package mx.android.storichallenge.ui.composable
 
 import android.annotation.SuppressLint
-import androidx.annotation.StringRes
 import androidx.compose.material3.Snackbar
 import androidx.compose.material3.SnackbarHost
 import androidx.compose.material3.SnackbarHostState
@@ -24,9 +23,8 @@ fun SnackbarBlue(snackbarHostState: SnackbarHostState) {
 
 @SuppressLint("CoroutineCreationDuringComposition")
 @Composable
-fun LaunchSnackbar(snackbarHostState: SnackbarHostState, @StringRes error: Int = R.string.error_get_data) {
+fun LaunchSnackbar(snackbarHostState: SnackbarHostState, message: String = stringResource(id = R.string.error_get_data)) {
     val scope = rememberCoroutineScope()
-    val message = stringResource(id = error)
     scope.launch {
         snackbarHostState.showSnackbar(message = message)
     }

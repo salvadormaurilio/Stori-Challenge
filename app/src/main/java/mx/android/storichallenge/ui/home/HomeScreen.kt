@@ -39,8 +39,13 @@ fun HomeScreen(userDataUiState: UserDataUiState, onMovementClick: (id: String) -
     val snackbarHostState = remember { SnackbarHostState() }
 
     Scaffold(topBar = { HomeTopAppBar(userDataUiState) },
-        snackbarHost = { SnackbarBlue(snackbarHostState) }) {
-        HomeUiState(userDataUiState, it, snackbarHostState, onMovementClick)
+        snackbarHost = { SnackbarBlue(snackbarHostState = snackbarHostState) }) {
+        HomeUiState(
+            userDataUiState = userDataUiState,
+            paddingValues = it,
+            snackbarHostState = snackbarHostState,
+            onMovementClick = onMovementClick
+        )
     }
 }
 
@@ -91,7 +96,7 @@ private fun HomeUiState(
         }
 
         is UserDataUiState.Error -> {
-            LaunchSnackbar(snackbarHostState)
+            LaunchSnackbar(snackbarHostState = snackbarHostState)
         }
     }
 }

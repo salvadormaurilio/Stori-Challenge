@@ -7,6 +7,9 @@ import androidx.activity.viewModels
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Surface
+import androidx.compose.runtime.Composable
+import androidx.compose.runtime.collectAsState
+import androidx.compose.runtime.getValue
 import androidx.compose.ui.Modifier
 import androidx.lifecycle.Lifecycle
 import androidx.lifecycle.flowWithLifecycle
@@ -35,13 +38,23 @@ class SingInActivity : ComponentActivity() {
                     modifier = Modifier.fillMaxSize(),
                     color = MaterialTheme.colorScheme.background
                 ) {
-                    SigInScreen(
-                        onSignInButtonClick = { email, password -> singInViewModel.signIn(email, password) },
-                        onSignUpButtonClick = { singInViewModel.navigateToSingUp() }
-                    )
+                    InitContentWithUiState()
                 }
             }
         }
+    }
+
+    @Composable
+    private fun InitContentWithUiState() {
+        val signInUiState by singInViewModel.signInUiState.collectAsState()
+
+        SigInScreen(
+            signInUiState = signInUiState,
+            onSignInButtonClick = { email, password -> singInViewModel.signIn(email, password) },
+            onSingInSuccess = {  },
+            onSignUpButtonClick = { singInViewModel.navigateToSingUp() }
+        )
+
     }
 
     private fun collectSingUpAction() {
