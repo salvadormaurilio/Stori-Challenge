@@ -5,7 +5,7 @@ Example of Sing Up and Sign In with Firebase
 
 This project simulates the Sign Up and Sign in of a user, things to consider:
 - For Sing In and Sign Auth, was used Firebase Authentication
-- All Userdata is saved in Firestore
+- All Userdata is saved in Firebase Storage and Firestore
 - For Sign Up and Sing in, there is validation of the fields, like email, passord, etc.
 
 
@@ -39,6 +39,11 @@ This project simulates the Sign Up and Sign in of a user, things to consider:
 To manage user login, Firebase Authentication was used with email and password.
 
 ![image](https://github.com/salvadormaurilio/Stori-Challenge/assets/4513422/f51ed1bc-1d09-4df9-a9da-b5280bf5597e)
+
+### Firebase Storage
+All user picture identification are stored in Firebase Storage, and the picture url is saved in Firestorage like user data
+![image](https://github.com/salvadormaurilio/Stori-Challenge/assets/4513422/5cda0d09-2b7e-4030-aae6-06fab270ca18)
+
 
 ### Firestore
 Now to store the user data Firestore is used, having a collection `users` to save the user data and another collection intended `movements` to save the movements
