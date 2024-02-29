@@ -92,8 +92,9 @@ fun SigUpContent(modifier: Modifier = Modifier) {
                 .clip(shape = RoundedCornerShape(Space80))
                 .clickable(
                     interactionSource = MutableInteractionSource(),
-                    indication = rememberRipple(bounded = true)
-                ) {},
+                    indication = rememberRipple(bounded = true),
+                    onClick = {}
+                ),
             imageVector = Icons.Filled.AccountCircle,
             tint = BlueGrey800,
             contentDescription = String.empty()

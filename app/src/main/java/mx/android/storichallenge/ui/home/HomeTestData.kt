@@ -23,14 +23,14 @@ fun givenUserDataUi() = UserDataUi(
 
 fun givenMovementUiList() = listOf(givenMovementUi1(), givenMovementUi2())
 
-private fun givenMovementUi1() = MovementUi(
+fun givenMovementUi1() = MovementUi(
     id = ANY_MOVEMENT_ID_1,
     name = ANY_MOVEMENT_NAME_1,
     date = ANY_MOVEMENT_DATE_1,
     amount = ANY_MOVEMENT_AMOUNT_1
 )
 
-private fun givenMovementUi2() = MovementUi(
+fun givenMovementUi2() = MovementUi(
     id = ANY_MOVEMENT_ID_2,
     name = ANY_MOVEMENT_NAME_2,
     date = ANY_MOVEMENT_DATE_2,

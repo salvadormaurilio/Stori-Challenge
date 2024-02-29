@@ -9,6 +9,11 @@
     <string name="email">Correo Electrónico</string>
     <string name="password">Contraseña</string>
     <string name="confirm_password">Confirmar Contraseña</string>
+    <string name="user_name">Nombre: %1$s %2$s</string>
+    <string name="user_email">Correo: %1$s</string>
+    <string name="movements">Movimientos</string>
+
+
     <string name="movement_detail">Detalles del Movimiento</string>
     <string name="card">Tarjeta</string>
     <string name="category">Categoría</string>
