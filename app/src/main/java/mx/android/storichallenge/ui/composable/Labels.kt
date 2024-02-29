@@ -49,12 +49,12 @@ fun LabelMovement(modifier: Modifier = Modifier, movementUi: MovementUi) {
                 Spacer(modifier = Modifier.height(Space2))
                 Text(
                     text = movementUi.date,
-                    style = MaterialTheme.typography.labelLarge
+                    style = MaterialTheme.typography.labelMedium
                 )
             }
             Text(
                 text = movementUi.amount,
-                style = MaterialTheme.typography.labelLarge
+                style = MaterialTheme.typography.titleMedium
             )
         }
         Spacer(modifier = Modifier.height(Space12))
@@ -85,7 +85,6 @@ fun LabelMovementPreview() {
     StoriChallengeTheme {
         Box(modifier = Modifier.padding(top = Space16, bottom = Space16)){
             LabelMovement(movementUi = givenMovementUi1())
-
         }
     }
 }
