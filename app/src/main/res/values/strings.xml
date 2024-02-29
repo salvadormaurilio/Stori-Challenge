@@ -31,4 +31,5 @@
     <string name="error_email_invalid">Correo Inválido</string>
     <string name="error_password_invalid">Contraseña Inválida</string>
     <string name="error_password_different">La contraseña es diferente</string>
+    <string name="error_get_data">Error al obtener la información</string>
 </resources>

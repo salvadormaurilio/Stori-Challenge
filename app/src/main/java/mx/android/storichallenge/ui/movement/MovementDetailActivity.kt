@@ -8,6 +8,8 @@ import androidx.activity.viewModels
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Surface
+import androidx.compose.runtime.collectAsState
+import androidx.compose.runtime.getValue
 import androidx.compose.ui.Modifier
 import dagger.hilt.android.AndroidEntryPoint
 import mx.android.storichallenge.core.ui.intentTo
@@ -21,7 +23,7 @@ class MovementDetailActivity : ComponentActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         initContent()
-        movementDetailViewModel.getMovementDetail(getMovementId())
+        movementDetailViewModel.getMovementDetail("movement_1")
     }
 
     private fun initContent() {
@@ -31,7 +33,8 @@ class MovementDetailActivity : ComponentActivity() {
                     modifier = Modifier.fillMaxSize(),
                     color = MaterialTheme.colorScheme.background
                 ) {
-                    MovementDetailScreen(movementDetailUi = givenMovementDetailUi())
+                    val movementDetailUiState by movementDetailViewModel.movementDetailUiState.collectAsState()
+                    movementDetailUiState?.run { MovementDetailScreen(movementDetailUiState = this) }
                 }
             }
         }

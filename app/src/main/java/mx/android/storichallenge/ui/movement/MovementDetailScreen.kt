@@ -1,6 +1,7 @@
 package mx.android.storichallenge.ui.movement
 
 import androidx.compose.foundation.layout.Column
+import androidx.compose.foundation.layout.PaddingValues
 import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.height
@@ -14,17 +15,25 @@ import androidx.compose.material3.Icon
 import androidx.compose.material3.IconButton
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Scaffold
+import androidx.compose.material3.Snackbar
+import androidx.compose.material3.SnackbarHost
+import androidx.compose.material3.SnackbarHostState
 import androidx.compose.material3.Text
 import androidx.compose.material3.TopAppBar
 import androidx.compose.material3.TopAppBarDefaults
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.remember
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.tooling.preview.Preview
 import mx.android.storichallenge.R
 import mx.android.storichallenge.core.ui.empty
+import mx.android.storichallenge.data.datasource.exception.UserException
+import mx.android.storichallenge.ui.composable.CircularProgressIndicatorFixMax
 import mx.android.storichallenge.ui.composable.LabelMovementDetail
+import mx.android.storichallenge.ui.composable.SnackbarBlue
+import mx.android.storichallenge.ui.theme.BlueGrey500
 import mx.android.storichallenge.ui.theme.BlueGrey800
 import mx.android.storichallenge.ui.theme.Space12
 import mx.android.storichallenge.ui.theme.Space16
@@ -35,16 +44,43 @@ import mx.android.storichallenge.ui.theme.StoriChallengeTheme
 import mx.android.storichallenge.ui.theme.White800
 
 @Composable
-fun MovementDetailScreen(modifier: Modifier = Modifier, movementDetailUi: MovementDetailUi) {
-    Scaffold(topBar = {
-        MovementDetailTopAppBar()
-    }) {
-        MovementDetailContent(
-            modifier = modifier.padding(paddingValues = it),
-            movementDetailUi = movementDetailUi
-        )
+fun MovementDetailScreen(movementDetailUiState: MovementDetailUiState) {
+    val snackbarHostState = remember { SnackbarHostState() }
+    
+    Scaffold(
+        topBar = { MovementDetailTopAppBar() },
+        snackbarHost = {
+            SnackbarHost(hostState = snackbarHostState) {
+                Snackbar(
+                    snackbarData = it,
+                    containerColor = BlueGrey500,
+                )
+            }
+        }) {
+        MovementDetailUiState(movementDetailUiState, it, snackbarHostState)
     }
 }
+
+@Composable
+private fun MovementDetailUiState(movementDetailUiState: MovementDetailUiState, paddingValues: PaddingValues, snackbarHostState: SnackbarHostState) {
+    when (movementDetailUiState) {
+        is MovementDetailUiState.Loading -> {
+            CircularProgressIndicatorFixMax()
+        }
+
+        is MovementDetailUiState.Success -> {
+            MovementDetailContent(
+                modifier = Modifier.padding(paddingValues = paddingValues),
+                movementDetailUi = movementDetailUiState.movementDetailUi
+            )
+        }
+
+        is MovementDetailUiState.Error -> {
+            SnackbarBlue(snackbarHostState)
+        }
+    }
+}
+
 
 @Composable
 @OptIn(ExperimentalMaterial3Api::class)
@@ -124,8 +160,24 @@ fun MovementDetailContent(modifier: Modifier = Modifier, movementDetailUi: Movem
 
 @Preview(showBackground = true)
 @Composable
-fun MovementDetailScreenPreview() {
+fun MovementDetailScreenUiStateLoadingPreview() {
     StoriChallengeTheme {
-        MovementDetailScreen(movementDetailUi = givenMovementDetailUi())
+        MovementDetailScreen(movementDetailUiState = MovementDetailUiState.Loading)
+    }
+}
+
+@Preview(showBackground = true)
+@Composable
+fun MovementDetailScreenUiStateSuccessPreview() {
+    StoriChallengeTheme {
+        MovementDetailScreen(movementDetailUiState = MovementDetailUiState.Success(givenMovementDetailUi()))
+    }
+}
+
+@Preview(showBackground = true)
+@Composable
+fun MovementDetailScreenUiStateErrorPreview() {
+    StoriChallengeTheme {
+        MovementDetailScreen(movementDetailUiState = MovementDetailUiState.Error(UserException.GetUserDataException()))
     }
 }
