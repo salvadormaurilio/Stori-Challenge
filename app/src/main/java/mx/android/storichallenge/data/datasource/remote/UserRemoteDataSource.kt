@@ -21,7 +21,7 @@ class UserRemoteDataSource @Inject constructor(
 
     fun storagePictureIdentification(pictureIdentification: String): Flow<Result<String>> = callbackFlow {
         val uri = Uri.parse(pictureIdentification)
-        val mountainImagesRef = firebaseStorage.reference.child("images/${uri.lastPathSegment}")
+        val mountainImagesRef = firebaseStorage.reference.child("$PATH_IMAGE/${uri.lastPathSegment}")
         mountainImagesRef.putFile(uri)
             .addOnSuccessListener {
                 mountainImagesRef.downloadUrl.addOnSuccessListener {
@@ -86,6 +86,6 @@ class UserRemoteDataSource @Inject constructor(
     companion object {
         const val USERS_COLLECTION = "users"
         const val MOVEMENTS_COLLECTION = "movements"
-        const val PATH_IMAGE = "movements"
+        const val PATH_IMAGE = "images"
     }
 }

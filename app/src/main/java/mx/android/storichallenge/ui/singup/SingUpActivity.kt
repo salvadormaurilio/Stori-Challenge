@@ -98,7 +98,7 @@ class SingUpActivity : ComponentActivity() {
     }
 
     companion object{
-        private const val DEFAULT_IMAGE_PREFIX = "tmp_image_file"
+        private const val DEFAULT_IMAGE_PREFIX = "image_picture_identification"
         private const val DEFAULT_IMAGE_SUFFIX = ".png"
         private const val DEFAULT_IMAGE_AUTHORITY = "${BuildConfig.APPLICATION_ID}.provider"
     }
