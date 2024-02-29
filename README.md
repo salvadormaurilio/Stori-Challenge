@@ -1,10 +1,10 @@
-# Stori Login Challenge 
-Example of Sing Up and Sign In with Firebase 
+# Stori Login Challenge
+Example of Sing Up and Sign In with Firebase
 
 ## :scroll: Motivation and Context
 
 This project simulates the Sign Up and Sign in of a user, things to consider:
-- For Sing In and Sign Auth, was used Firebase Authentication 
+- For Sing In and Sign Auth, was used Firebase Authentication
 - All Userdata is saved in Firestore
 - For Sign Up and Sing in, there is validation of the fields, like email, passord, etc.
 
@@ -24,9 +24,7 @@ This project simulates the Sign Up and Sign in of a user, things to consider:
 - Hamcrest
 - Corrutines test
 
-
 ### Topics
-
 - Clean Architecture
 - Clean Code
 - SOLID
@@ -55,24 +53,19 @@ Sign In Success | Some Fiel is Wrong | User Invalid
 
 ## :green_heart: How did you test it?
 
-To test you can use the following credentials
-
+To test and see movements you can use the following credentials
 
 ```
-email: 
-passwor: 
+email: salvador@stori.mx
+password: Admin_123
 ```
+You can also create a user from scratch to test Sign Up
 
-**Also run the Unit Tests, recommended command:**
 
-
-### Unit Tests:
+**Also you can run the Unit Tests, recommended command:**
 
 ```
 /gradlew test
 ```
-
-
-
 
 
