@@ -1,6 +1,5 @@
 package mx.android.storichallenge.ui.singin
 
-import android.util.Log
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import dagger.hilt.android.lifecycle.HiltViewModel
@@ -52,7 +51,6 @@ class SingInViewModel @Inject constructor(
     }
 
     private fun signInSuccess(result: Result<String>) = result.onSuccess {
-        Log.d("SingInActivity", "success 1")
         emitSignInUiState(SignInUiState.Success)
     }
 
@@ -70,7 +68,6 @@ class SingInViewModel @Inject constructor(
     }
 
     fun navigateToHome() = viewModelScope.launch {
-        Log.d("SingInActivity", "success 4")
         _navigateToHome.emit(Unit)
     }
 }

@@ -30,7 +30,7 @@ class SingInActivity : ComponentActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         initContent()
-        collectSingUpAction()
+        collectSingInActions()
     }
 
     private fun initContent() {
@@ -58,7 +58,7 @@ class SingInActivity : ComponentActivity() {
         )
     }
 
-    private fun collectSingUpAction() {
+    private fun collectSingInActions() {
         lifecycleScope.launch {
             singInViewModel.navigateToSingUp
                 .flowWithLifecycle(lifecycle, Lifecycle.State.CREATED)

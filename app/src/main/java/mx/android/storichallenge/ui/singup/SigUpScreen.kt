@@ -63,7 +63,7 @@ import mx.android.storichallenge.ui.theme.White800
 fun SigUpScreen(
     modifier: Modifier = Modifier,
     signInUiState: SignUpUiState? = null,
-    onSignInButtonClick: (userDataSubmitUi: UserDataSubmitUi) -> Unit,
+    onSignUpButtonClick: (userDataSubmitUi: UserDataSubmitUi) -> Unit,
     onSingUpSuccess: () -> Unit,
     onBackPressedClick: () -> Unit
 ) {
@@ -79,7 +79,7 @@ fun SigUpScreen(
             modifier = modifier.padding(paddingValues = it),
             isLoading = isLoading,
             errorException = errorException,
-            onSignInButtonClick = onSignInButtonClick
+            onSignUpButtonClick = onSignUpButtonClick
         )
         AlertDialogSuccess(isSuccess, onSingUpSuccess)
         SnackbarError(errorException, snackbarHostState)
@@ -115,7 +115,7 @@ fun SigUpContent(
     modifier: Modifier = Modifier,
     isLoading: Boolean,
     errorException: Throwable?,
-    onSignInButtonClick: (userDataSubmitUi: UserDataSubmitUi) -> Unit
+    onSignUpButtonClick: (userDataSubmitUi: UserDataSubmitUi) -> Unit
 ) {
     Column(
         modifier = modifier
@@ -194,7 +194,7 @@ fun SigUpContent(
         ProgressButton(
             isLoading = isLoading,
             text = R.string.sing_up,
-            onClick = { onSignInButtonClick(buildUserDataSubmitUi(firstName, lastName, email, password, confirmPassword)) }
+            onClick = { onSignUpButtonClick(buildUserDataSubmitUi(firstName, lastName, email, password, confirmPassword)) }
         )
     }
 }
@@ -241,7 +241,7 @@ private fun getMessageError(errorException: Throwable) = when (errorException) {
 fun SingUpScreenPreview() {
     StoriChallengeTheme {
         SigUpScreen(
-            onSignInButtonClick = {},
+            onSignUpButtonClick = {},
             onSingUpSuccess = {},
             onBackPressedClick = {}
         )
@@ -254,7 +254,7 @@ fun SingUpScreenUiStateLoadingPreview() {
     StoriChallengeTheme {
         SigUpScreen(
             signInUiState = SignUpUiState.Loading,
-            onSignInButtonClick = {},
+            onSignUpButtonClick = {},
             onSingUpSuccess = {},
             onBackPressedClick = {}
         )
@@ -267,7 +267,7 @@ fun SingUpScreenUiStateSuccessPreview() {
     StoriChallengeTheme {
         SigUpScreen(
             signInUiState = SignUpUiState.Success,
-            onSignInButtonClick = {},
+            onSignUpButtonClick = {},
             onSingUpSuccess = {},
             onBackPressedClick = {}
         )
@@ -280,7 +280,7 @@ fun SingUpScreenFirstNameUiStateErrorPreview() {
     StoriChallengeTheme {
         SigUpScreen(
             signInUiState = SignUpUiState.Error(AuthUiException.FirstNameException),
-            onSignInButtonClick = {},
+            onSignUpButtonClick = {},
             onSingUpSuccess = {},
             onBackPressedClick = {}
         )
@@ -293,7 +293,7 @@ fun SingUpScreenLastNameUiStateErrorPreview() {
     StoriChallengeTheme {
         SigUpScreen(
             signInUiState = SignUpUiState.Error(AuthUiException.LastNameException),
-            onSignInButtonClick = {},
+            onSignUpButtonClick = {},
             onSingUpSuccess = {},
             onBackPressedClick = {}
         )
@@ -306,7 +306,7 @@ fun SingUpScreenEmailUiStateErrorPreview() {
     StoriChallengeTheme {
         SigUpScreen(
             signInUiState = SignUpUiState.Error(AuthUiException.EmailException),
-            onSignInButtonClick = {},
+            onSignUpButtonClick = {},
             onSingUpSuccess = {},
             onBackPressedClick = {}
         )
@@ -319,7 +319,7 @@ fun SingUpScreenPasswordUiStateErrorPreview() {
     StoriChallengeTheme {
         SigUpScreen(
             signInUiState = SignUpUiState.Error(AuthUiException.PasswordException),
-            onSignInButtonClick = {},
+            onSignUpButtonClick = {},
             onSingUpSuccess = {},
             onBackPressedClick = {}
         )
@@ -332,7 +332,7 @@ fun SingUpScreenConfirmPasswordUiStateErrorPreview() {
     StoriChallengeTheme {
         SigUpScreen(
             signInUiState = SignUpUiState.Error(AuthUiException.ConfirmPasswordException),
-            onSignInButtonClick = {},
+            onSignUpButtonClick = {},
             onSingUpSuccess = {},
             onBackPressedClick = {}
         )
@@ -345,7 +345,7 @@ fun SingUpScreenDifferentPasswordUiStateErrorPreview() {
     StoriChallengeTheme {
         SigUpScreen(
             signInUiState = SignUpUiState.Error(AuthUiException.DifferentPasswordException),
-            onSignInButtonClick = {},
+            onSignUpButtonClick = {},
             onSingUpSuccess = {},
             onBackPressedClick = {}
         )
@@ -358,7 +358,7 @@ fun SingUpScreenUiStateErrorPreview() {
     StoriChallengeTheme {
         SigUpScreen(
             signInUiState = SignUpUiState.Error(AuthException.UserAlreadyExistException()),
-            onSignInButtonClick = {},
+            onSignUpButtonClick = {},
             onSingUpSuccess = {},
             onBackPressedClick = {}
         )

@@ -1,9 +1,12 @@
 package mx.android.storichallenge.ui.signUp
 
+import androidx.lifecycle.viewModelScope
 import kotlinx.coroutines.flow.firstOrNull
 import kotlinx.coroutines.flow.flowOf
+import kotlinx.coroutines.launch
 import kotlinx.coroutines.test.runTest
 import mx.android.storichallenge.core.TestDispatcherRule
+import mx.android.storichallenge.core.assertThatEquals
 import mx.android.storichallenge.core.assertThatIsInstanceOf
 import mx.android.storichallenge.data.datasource.exception.AuthException
 import mx.android.storichallenge.domain.SignUpUseCase
@@ -83,5 +86,18 @@ class SingUpViewModelShould {
         verify(signUpUseCase).signUp(userDataSubmit)
         assertThatIsInstanceOf<SignUpUiState.Error>(result)
         assertThatIsInstanceOf<AuthException.SignUpException>((result as SignUpUiState.Error).error)
+    }
+
+    @Test
+    fun `navigate to home when navigateToHome is called`() = runTest {
+        var result: Unit? = null
+
+        singUpViewModel.viewModelScope.launch {
+            result = singUpViewModel.navigateToHome.firstOrNull()
+        }
+
+        singUpViewModel.navigateToHome()
+
+        assertThatEquals(result, Unit)
     }
 }
