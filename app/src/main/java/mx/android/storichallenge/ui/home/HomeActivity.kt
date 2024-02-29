@@ -2,17 +2,14 @@ package mx.android.storichallenge.ui.home
 
 import android.os.Bundle
 import androidx.activity.ComponentActivity
-import androidx.activity.compose.setContent
 import androidx.activity.viewModels
-import androidx.compose.foundation.layout.fillMaxSize
-import androidx.compose.material3.MaterialTheme
-import androidx.compose.material3.Surface
-import androidx.compose.material3.Text
-import androidx.compose.runtime.Composable
-import androidx.compose.ui.Modifier
-import androidx.compose.ui.tooling.preview.Preview
+import androidx.lifecycle.Lifecycle
+import androidx.lifecycle.flowWithLifecycle
+import androidx.lifecycle.lifecycleScope
 import dagger.hilt.android.AndroidEntryPoint
-import mx.android.storichallenge.ui.theme.StoriChallengeTheme
+import kotlinx.coroutines.launch
+import mx.android.storichallenge.core.ui.intentTo
+import mx.android.storichallenge.ui.movement.MovementDetailActivity
 
 @AndroidEntryPoint
 class HomeActivity : ComponentActivity() {
@@ -21,29 +18,18 @@ class HomeActivity : ComponentActivity() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setContent {
-            StoriChallengeTheme {
-                // A surface container using the 'background' color from the theme
-                Surface(modifier = Modifier.fillMaxSize(), color = MaterialTheme.colorScheme.background) {
-                    Greeting("Android")
-                }
-            }
+        lifecycleScope.launch {
+            collectMovementDetailAction()
         }
     }
-}
 
-@Composable
-fun Greeting(name: String, modifier: Modifier = Modifier) {
-    Text(
-        text = "Hello $name!",
-        modifier = modifier
-    )
-}
+    private suspend fun collectMovementDetailAction() {
+        homeViewModel.navigateToMovementDetail
+            .flowWithLifecycle(lifecycle, Lifecycle.State.CREATED)
+            .collect { openSignUpActivity() }
+    }
 
-@Preview(showBackground = true)
-@Composable
-fun GreetingPreview() {
-    StoriChallengeTheme {
-        Greeting("Android")
+    private fun openSignUpActivity() {
+        startActivity(intentTo<MovementDetailActivity>())
     }
 }
