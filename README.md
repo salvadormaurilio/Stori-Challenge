@@ -44,8 +44,7 @@ To manage user login, Firebase Authentication was used with email and password.
 Now to store the user data Firestore is used, having a collection `users` to save the user data and another collection intended `movements` to save the movements
 
 **Users table**
-
-![image](https://github.com/salvadormaurilio/Stori-Challenge/assets/4513422/b8cc71a7-524b-4cad-a216-7f75534d2184)
+![image](https://github.com/salvadormaurilio/Stori-Challenge/assets/4513422/b38f65ef-a3c8-4790-aea0-8be372a37f7e)
 
 
 **Movements table**
