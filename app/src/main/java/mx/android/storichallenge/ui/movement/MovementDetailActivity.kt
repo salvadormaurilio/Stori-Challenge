@@ -8,6 +8,7 @@ import androidx.activity.viewModels
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Surface
+import androidx.compose.runtime.Composable
 import androidx.compose.runtime.collectAsState
 import androidx.compose.runtime.getValue
 import androidx.compose.ui.Modifier
@@ -23,7 +24,7 @@ class MovementDetailActivity : ComponentActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         initContent()
-        movementDetailViewModel.getMovementDetail("movement_1")
+        movementDetailViewModel.getMovementDetail(getMovementId())
     }
 
     private fun initContent() {
@@ -33,11 +34,16 @@ class MovementDetailActivity : ComponentActivity() {
                     modifier = Modifier.fillMaxSize(),
                     color = MaterialTheme.colorScheme.background
                 ) {
-                    val movementDetailUiState by movementDetailViewModel.movementDetailUiState.collectAsState()
-                    movementDetailUiState?.run { MovementDetailScreen(movementDetailUiState = this) }
+                    InitContentWithUiState()
                 }
             }
         }
+    }
+
+    @Composable
+    private fun InitContentWithUiState() {
+        val movementDetailUiState by movementDetailViewModel.movementDetailUiState.collectAsState()
+        movementDetailUiState?.run { MovementDetailScreen(movementDetailUiState = this) }
     }
 
     private fun getMovementId() = intent?.getStringExtra(MOVEMENT_ID).orEmpty()

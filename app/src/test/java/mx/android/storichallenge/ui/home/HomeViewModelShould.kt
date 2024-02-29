@@ -49,7 +49,7 @@ class HomeViewModelShould {
 
         verify(getUserDataUseCase).getUserData()
         assertThatIsInstanceOf<UserDataUiState.Success>(result)
-        assertThatEquals((result as UserDataUiState.Success).userData, userDataUi)
+        assertThatEquals((result as UserDataUiState.Success).userDataUi, userDataUi)
     }
 
     @Test

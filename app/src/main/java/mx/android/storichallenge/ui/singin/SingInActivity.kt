@@ -25,9 +25,7 @@ class SingInActivity : ComponentActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         initContent()
-        lifecycleScope.launch {
-            collectSingUpAction()
-        }
+        collectSingUpAction()
     }
 
     private fun initContent() {
@@ -46,10 +44,12 @@ class SingInActivity : ComponentActivity() {
         }
     }
 
-    private suspend fun collectSingUpAction() {
-        singInViewModel.navigateToSingUp
-            .flowWithLifecycle(lifecycle, Lifecycle.State.CREATED)
-            .collect { openSignUpActivity() }
+    private fun collectSingUpAction() {
+        lifecycleScope.launch {
+            singInViewModel.navigateToSingUp
+                .flowWithLifecycle(lifecycle, Lifecycle.State.CREATED)
+                .collect { openSignUpActivity() }
+        }
     }
 
     private fun openSignUpActivity() {
