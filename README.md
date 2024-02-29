@@ -41,6 +41,7 @@ To manage user login, Firebase Authentication was used with email and password.
 
 ### Firebase Storage
 All user picture identification are stored in Firebase Storage, and the picture url is saved in Firestorage like user data
+
 ![image](https://github.com/salvadormaurilio/Stori-Challenge/assets/4513422/5cda0d09-2b7e-4030-aae6-06fab270ca18)
 
 
@@ -48,6 +49,7 @@ All user picture identification are stored in Firebase Storage, and the picture 
 Now to store the user data Firestore is used, having a collection `users` to save the user data and another collection intended `movements` to save the movements
 
 **Users table**
+
 ![image](https://github.com/salvadormaurilio/Stori-Challenge/assets/4513422/b38f65ef-a3c8-4790-aea0-8be372a37f7e)
 
 
@@ -56,8 +58,6 @@ Now to store the user data Firestore is used, having a collection `users` to sav
 ![image](https://github.com/salvadormaurilio/Stori-Challenge/assets/4513422/0ff22771-829c-424d-a031-52188ed60b93)
 
 ## :art: UI Test
-
-![QkSHjy5iY3 (1)]()
 
 ### Sign In
 
@@ -69,7 +69,7 @@ Sign In Success | Some Fiel is Wrong | User Invalid
 
 Sign Up Success | Some Fiel is Wrong | User al readey Exist
 --- | ---  | --- 
-<img src="" width="320"> | <img src="https://github.com/salvadormaurilio/Stori-Challenge/assets/4513422/586f4874-2ae9-4314-a90b-e429c617cb05" width="320"> | <img src="" width="320">
+<img src="https://github.com/salvadormaurilio/Stori-Challenge/assets/4513422/3a096102-9b5b-4de5-b41c-22290f9ad87a" width="320"> | <img src="https://github.com/salvadormaurilio/Stori-Challenge/assets/4513422/586f4874-2ae9-4314-a90b-e429c617cb05" width="320"> | <img src="https://github.com/salvadormaurilio/Stori-Challenge/assets/4513422/615c0f8f-c8c1-4ed2-b34d-c7f0e10f557c" width="320">
 
 
 ### Home
