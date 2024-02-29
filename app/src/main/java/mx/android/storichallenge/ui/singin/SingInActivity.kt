@@ -24,13 +24,13 @@ class SingInActivity : ComponentActivity() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        initView()
+        initContent()
         lifecycleScope.launch {
             collectSingUpAction()
         }
     }
 
-    private fun initView() {
+    private fun initContent() {
         setContent {
             StoriChallengeTheme {
                 Surface(

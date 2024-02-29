@@ -28,7 +28,7 @@ import mx.android.storichallenge.ui.theme.StoriChallengeTheme
 import mx.android.storichallenge.ui.theme.White800
 
 @Composable
-fun HomeScreen(modifier: Modifier = Modifier, userDataUi: UserDataUi) {
+fun HomeScreen(modifier: Modifier = Modifier, userDataUi: UserDataUi, onMovementClick: (id: String) -> Unit) {
     Scaffold(topBar = {
         HomeTopAppBar(
             firstName = userDataUi.firstName,
@@ -38,7 +38,8 @@ fun HomeScreen(modifier: Modifier = Modifier, userDataUi: UserDataUi) {
     }) {
         HomeContent(
             modifier = modifier.padding(paddingValues = it),
-            userDataUi = userDataUi
+            userDataUi = userDataUi,
+            onMovementClick = onMovementClick
         )
     }
 }
@@ -68,7 +69,7 @@ fun HomeTopAppBar(firstName: String, lastName: String, email: String) {
 }
 
 @Composable
-fun HomeContent(modifier: Modifier = Modifier, userDataUi: UserDataUi) {
+fun HomeContent(modifier: Modifier = Modifier, userDataUi: UserDataUi, onMovementClick: (id: String) -> Unit) {
     LazyColumn(
         modifier = modifier
             .fillMaxSize()
@@ -90,7 +91,10 @@ fun HomeContent(modifier: Modifier = Modifier, userDataUi: UserDataUi) {
             items = userDataUi.movements,
             key = { it.id }
         ) {
-            LabelMovement(movementUi = it)
+            LabelMovement(
+                movementUi = it,
+                onMovementClick = onMovementClick
+            )
         }
     }
 }
@@ -99,6 +103,8 @@ fun HomeContent(modifier: Modifier = Modifier, userDataUi: UserDataUi) {
 @Composable
 fun HomeScreenPreview() {
     StoriChallengeTheme {
-        HomeScreen(userDataUi = givenUserDataUi())
+        HomeScreen(
+            userDataUi = givenUserDataUi(),
+            onMovementClick = {})
     }
 }

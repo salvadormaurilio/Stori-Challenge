@@ -28,13 +28,13 @@ import mx.android.storichallenge.ui.theme.Space8
 import mx.android.storichallenge.ui.theme.StoriChallengeTheme
 
 @Composable
-fun LabelMovement(modifier: Modifier = Modifier, movementUi: MovementUi) {
+fun LabelMovement(modifier: Modifier = Modifier, movementUi: MovementUi, onMovementClick: (id: String) -> Unit) {
     Column(
         modifier = modifier
             .clickable(
                 interactionSource = MutableInteractionSource(),
                 indication = rememberRipple(bounded = true),
-                onClick = {}
+                onClick = { onMovementClick(movementUi.id) }
             )
             .padding(start = Space16, end = Space16)
     ) {
@@ -84,7 +84,9 @@ fun LabelMovementDetail(modifier: Modifier = Modifier, @StringRes title: Int, te
 fun LabelMovementPreview() {
     StoriChallengeTheme {
         Box(modifier = Modifier.padding(top = Space16, bottom = Space16)) {
-            LabelMovement(movementUi = givenMovementUi1())
+            LabelMovement(
+                movementUi = givenMovementUi1(),
+                onMovementClick = {})
         }
     }
 }
