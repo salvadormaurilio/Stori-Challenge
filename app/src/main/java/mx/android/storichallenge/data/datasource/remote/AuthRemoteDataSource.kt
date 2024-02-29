@@ -1,6 +1,7 @@
 package mx.android.storichallenge.data.datasource.remote
 
 import com.google.firebase.auth.FirebaseAuth
+import com.google.firebase.auth.FirebaseAuthUserCollisionException
 import kotlinx.coroutines.channels.awaitClose
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.callbackFlow
@@ -28,8 +29,11 @@ class AuthRemoteDataSource @Inject constructor(private val firebaseAuth: Firebas
             }
             .addOnFailureListener {
                 it.printStackTrace()
-                trySend(Result.failure(AuthException.SignUpException()))
+                trySend(Result.failure(getAuthException(it)))
             }
         awaitClose { close() }
     }
+
+    private fun getAuthException(it: Exception) =
+        if (it is FirebaseAuthUserCollisionException) AuthException.UserAlreadyExistException() else AuthException.SignUpException()
 }
