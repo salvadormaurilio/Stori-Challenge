@@ -1,5 +1,6 @@
 package mx.android.storichallenge.ui.singin
 
+import android.util.Log
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import dagger.hilt.android.lifecycle.HiltViewModel
@@ -32,6 +33,12 @@ class SingInViewModel @Inject constructor(
     val navigateToSingUp: SharedFlow<Unit>
         get() = _navigateToSingUp
 
+    private val _navigateToHome = MutableSharedFlow<Unit>()
+
+    val navigateToHome: SharedFlow<Unit>
+        get() = _navigateToHome
+
+
     fun signIn(email: String, password: String) = viewModelScope.launch(coroutinesDispatchers.io) {
         emitSignInUiState(Loading)
 
@@ -45,6 +52,7 @@ class SingInViewModel @Inject constructor(
     }
 
     private fun signInSuccess(result: Result<String>) = result.onSuccess {
+        Log.d("SingInActivity", "success 1")
         emitSignInUiState(SignInUiState.Success)
     }
 
@@ -59,5 +67,10 @@ class SingInViewModel @Inject constructor(
 
     fun navigateToSingUp() = viewModelScope.launch {
         _navigateToSingUp.emit(Unit)
+    }
+
+    fun navigateToHome() = viewModelScope.launch {
+        Log.d("SingInActivity", "success 4")
+        _navigateToHome.emit(Unit)
     }
 }

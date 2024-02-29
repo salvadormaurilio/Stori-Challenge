@@ -94,4 +94,17 @@ class SingInViewModelShould {
 
         assertThatEquals(result, Unit)
     }
+
+    @Test
+    fun `navigate to home when navigateToHome is called`() = runTest {
+        var result: Unit? = null
+
+        singInViewModel.viewModelScope.launch {
+            result = singInViewModel.navigateToHome.firstOrNull()
+        }
+
+        singInViewModel.navigateToHome()
+
+        assertThatEquals(result, Unit)
+    }
 }

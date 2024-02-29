@@ -17,6 +17,8 @@ import androidx.lifecycle.lifecycleScope
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.launch
 import mx.android.storichallenge.core.ui.intentTo
+import mx.android.storichallenge.core.ui.intentToAndClearStack
+import mx.android.storichallenge.ui.home.HomeActivity
 import mx.android.storichallenge.ui.singup.SingUpActivity
 import mx.android.storichallenge.ui.theme.StoriChallengeTheme
 
@@ -51,10 +53,9 @@ class SingInActivity : ComponentActivity() {
         SigInScreen(
             signInUiState = signInUiState,
             onSignInButtonClick = { email, password -> singInViewModel.signIn(email, password) },
-            onSingInSuccess = {  },
+            onSingInSuccess = { singInViewModel.navigateToHome() },
             onSignUpButtonClick = { singInViewModel.navigateToSingUp() }
         )
-
     }
 
     private fun collectSingUpAction() {
@@ -63,10 +64,19 @@ class SingInActivity : ComponentActivity() {
                 .flowWithLifecycle(lifecycle, Lifecycle.State.CREATED)
                 .collect { openSignUpActivity() }
         }
+        lifecycleScope.launch {
+            singInViewModel.navigateToHome
+                .flowWithLifecycle(lifecycle, Lifecycle.State.CREATED)
+                .collect { openHomeActivity() }
+        }
     }
 
     private fun openSignUpActivity() {
         startActivity(intentTo<SingUpActivity>())
+    }
+
+    private fun openHomeActivity() {
+        startActivity(intentToAndClearStack<HomeActivity>())
     }
 }
 
