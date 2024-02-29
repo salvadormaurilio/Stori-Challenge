@@ -32,6 +32,26 @@ This project simulates the Sign Up and Sign in of a user, things to consider:
 - Repository pattern
 - Dependency injection
 
+
+## :floppy_disk: Firebase
+
+### Firebase Authentication
+To manage user login, Firebase Authentication was used with email and password.
+
+![image](https://github.com/salvadormaurilio/Stori-Challenge/assets/4513422/f51ed1bc-1d09-4df9-a9da-b5280bf5597e)
+
+### Firestore
+Now to store the user data Firestore is used, having a collection `users` to save the user data and another collection intended `movements` to save the movements
+
+**Users table**
+
+![image](https://github.com/salvadormaurilio/Stori-Challenge/assets/4513422/b8cc71a7-524b-4cad-a216-7f75534d2184)
+
+
+**Movements table**
+
+![image](https://github.com/salvadormaurilio/Stori-Challenge/assets/4513422/0ff22771-829c-424d-a031-52188ed60b93)
+
 ## :art: UI Test
 
 ### Auth
