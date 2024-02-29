@@ -29,3 +29,5 @@ val Space20 = 20.dp
 val Space24 = 24.dp
 val Space32 = 32.dp
 val Space48 = 48.dp
+val Space64 = 64.dp
+val Space80 = 80.dp

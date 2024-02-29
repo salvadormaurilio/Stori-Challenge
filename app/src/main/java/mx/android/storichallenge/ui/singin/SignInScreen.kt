@@ -9,8 +9,12 @@ import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
 import androidx.compose.material3.Button
 import androidx.compose.material3.ButtonDefaults
+import androidx.compose.material3.ExperimentalMaterial3Api
 import androidx.compose.material3.MaterialTheme
+import androidx.compose.material3.Scaffold
 import androidx.compose.material3.Text
+import androidx.compose.material3.TopAppBar
+import androidx.compose.material3.TopAppBarDefaults
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
@@ -28,8 +32,27 @@ import mx.android.storichallenge.ui.theme.Space48
 import mx.android.storichallenge.ui.theme.StoriChallengeTheme
 import mx.android.storichallenge.ui.theme.White800
 
+
+@OptIn(ExperimentalMaterial3Api::class)
 @Composable
 fun SigInScreen(modifier: Modifier = Modifier) {
+    Scaffold(topBar = {
+        TopAppBar(
+            colors = TopAppBarDefaults.topAppBarColors(containerColor = MaterialTheme.colorScheme.primaryContainer),
+            title = {
+                Text(
+                    text = stringResource(id = R.string.sign_in),
+                    color = White800
+                )
+            }
+        )
+    }) {
+        SigInContent(modifier = modifier.padding(paddingValues = it))
+    }
+}
+
+@Composable
+fun SigInContent(modifier: Modifier = Modifier) {
     Column(
         modifier = modifier
             .fillMaxSize()
@@ -37,11 +60,6 @@ fun SigInScreen(modifier: Modifier = Modifier) {
         verticalArrangement = Arrangement.Center,
         horizontalAlignment = Alignment.CenterHorizontally
     ) {
-        Text(
-            text = stringResource(id = R.string.sign_in),
-            style = MaterialTheme.typography.headlineLarge
-        )
-        Spacer(modifier = Modifier.height(Space32))
         EmailTextField()
         Spacer(modifier = Modifier.height(Space16))
         PasswordTextField()
