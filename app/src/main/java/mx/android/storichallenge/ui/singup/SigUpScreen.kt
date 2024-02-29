@@ -276,7 +276,7 @@ private fun SnackbarError(errorException: Throwable?, snackbarHostState: Snackba
 
 @Composable
 private fun getMessageError(errorException: Throwable) = when (errorException) {
-    is AuthException.SignUpException -> stringResource(id = R.string.error_sign_in)
+    is AuthException.SignUpException -> stringResource(id = R.string.error_sign_up)
     is AuthException.UserAlreadyExistException -> stringResource(id = R.string.error_user_already_exit)
     else -> errorException.message.orEmpty()
 }
