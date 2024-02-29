@@ -2,7 +2,6 @@ package mx.android.storichallenge.ui.singup
 
 import android.net.Uri
 import android.os.Bundle
-import android.util.Log
 import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
 import androidx.activity.result.contract.ActivityResultContracts
@@ -22,7 +21,6 @@ import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.launch
 import mx.android.storichallenge.BuildConfig
 import mx.android.storichallenge.core.ui.intentToAndClearStack
-import mx.android.storichallenge.ui.home.ANY_PICTURE_IDENTIFICATION
 import mx.android.storichallenge.ui.home.HomeActivity
 import mx.android.storichallenge.ui.theme.StoriChallengeTheme
 import java.io.File
@@ -34,12 +32,9 @@ class SingUpActivity : ComponentActivity() {
 
     private var latestTmpUri: Uri? = null
 
-
     private val takeImageResult = registerForActivityResult(ActivityResultContracts.TakePicture()) { isSuccess ->
         if (isSuccess) {
-            latestTmpUri?.let { uri ->
-                Log.d("SingUpActivity", "Takye picture success ${uri.path}")
-            }
+            latestTmpUri?.run { singUpViewModel.loadPictureIdentification(this.toString()) }
         }
     }
 
@@ -65,9 +60,9 @@ class SingUpActivity : ComponentActivity() {
     @Composable
     private fun InitContentWithUiState() {
         val signInUiState by singUpViewModel.signUpUiState.collectAsState()
-
+        val pictureIdentificationUiState by singUpViewModel.pictureIdentificationUiState.collectAsState()
         SigUpScreen(
-            pictureIdentification = ANY_PICTURE_IDENTIFICATION,
+            pictureIdentification = pictureIdentificationUiState,
             signInUiState = signInUiState,
             onProfileIdentification = { takeImage() },
             onSignUpButtonClick = { singUpViewModel.singUp(it) },
@@ -77,19 +72,17 @@ class SingUpActivity : ComponentActivity() {
     }
 
     private fun takeImage() {
-        getTmpFileUri().let { uri ->
-            latestTmpUri = uri
-            takeImageResult.launch(uri)
-        }
+        latestTmpUri = getTmpFileUri()
+        takeImageResult.launch(latestTmpUri)
+
     }
 
     private fun getTmpFileUri(): Uri {
-        val tmpFile = File.createTempFile("tmp_image_file", ".png", cacheDir).apply {
+        val tmpFile = File.createTempFile(DEFAULT_IMAGE_PREFIX, DEFAULT_IMAGE_SUFFIX, cacheDir).apply {
             createNewFile()
             deleteOnExit()
         }
-
-        return FileProvider.getUriForFile(applicationContext, "${BuildConfig.APPLICATION_ID}.provider", tmpFile)
+        return FileProvider.getUriForFile(applicationContext, DEFAULT_IMAGE_AUTHORITY, tmpFile)
     }
 
     private fun collectSingUpAction() {
@@ -102,5 +95,11 @@ class SingUpActivity : ComponentActivity() {
 
     private fun openHomeActivity() {
         startActivity(intentToAndClearStack<HomeActivity>())
+    }
+
+    companion object{
+        private const val DEFAULT_IMAGE_PREFIX = "tmp_image_file"
+        private const val DEFAULT_IMAGE_SUFFIX = ".png"
+        private const val DEFAULT_IMAGE_AUTHORITY = "${BuildConfig.APPLICATION_ID}.provider"
     }
 }

@@ -56,6 +56,7 @@ import mx.android.storichallenge.ui.theme.Space12
 import mx.android.storichallenge.ui.theme.Space16
 import mx.android.storichallenge.ui.theme.Space24
 import mx.android.storichallenge.ui.theme.Space32
+import mx.android.storichallenge.ui.theme.Space8
 import mx.android.storichallenge.ui.theme.Space80
 import mx.android.storichallenge.ui.theme.StoriChallengeTheme
 import mx.android.storichallenge.ui.theme.White800
@@ -150,6 +151,7 @@ fun SigUpContent(
             pictureIdentification = pictureIdentification,
             onProfileIdentification = onProfileIdentification
         )
+        Spacer(modifier = Modifier.height(Space8))
         Text(
             text = stringResource(id = R.string.picture_identification),
             style = MaterialTheme.typography.bodyMedium
@@ -265,7 +267,7 @@ private fun getMessageError(errorException: Throwable) = when (errorException) {
 fun SingUpScreenPreview() {
     StoriChallengeTheme {
         SigUpScreen(
-            pictureIdentification =  String.empty(),
+            pictureIdentification = String.empty(),
             onProfileIdentification = {},
             onSignUpButtonClick = {},
             onSingUpSuccess = {},
@@ -279,7 +281,7 @@ fun SingUpScreenPreview() {
 fun SingUpScreenPictureIdentificationPreview() {
     StoriChallengeTheme {
         SigUpScreen(
-            pictureIdentification =  ANY_PICTURE_IDENTIFICATION,
+            pictureIdentification = ANY_PICTURE_IDENTIFICATION,
             onProfileIdentification = {},
             onSignUpButtonClick = {},
             onSingUpSuccess = {},
@@ -293,7 +295,7 @@ fun SingUpScreenPictureIdentificationPreview() {
 fun SingUpScreenUiStateLoadingPreview() {
     StoriChallengeTheme {
         SigUpScreen(
-            pictureIdentification =  String.empty(),
+            pictureIdentification = String.empty(),
             signInUiState = SignUpUiState.Loading,
             onProfileIdentification = {},
             onSignUpButtonClick = {},
@@ -308,7 +310,7 @@ fun SingUpScreenUiStateLoadingPreview() {
 fun SingUpScreenUiStateSuccessPreview() {
     StoriChallengeTheme {
         SigUpScreen(
-            pictureIdentification =  String.empty(),
+            pictureIdentification = String.empty(),
             signInUiState = SignUpUiState.Success,
             onProfileIdentification = {},
             onSignUpButtonClick = {},
@@ -323,7 +325,7 @@ fun SingUpScreenUiStateSuccessPreview() {
 fun SingUpScreenFirstNameUiStateErrorPreview() {
     StoriChallengeTheme {
         SigUpScreen(
-            pictureIdentification =  String.empty(),
+            pictureIdentification = String.empty(),
             signInUiState = SignUpUiState.Error(AuthUiException.FirstNameException),
             onProfileIdentification = {},
             onSignUpButtonClick = {},
@@ -338,7 +340,7 @@ fun SingUpScreenFirstNameUiStateErrorPreview() {
 fun SingUpScreenLastNameUiStateErrorPreview() {
     StoriChallengeTheme {
         SigUpScreen(
-            pictureIdentification =  String.empty(),
+            pictureIdentification = String.empty(),
             signInUiState = SignUpUiState.Error(AuthUiException.LastNameException),
             onProfileIdentification = {},
             onSignUpButtonClick = {},
@@ -353,7 +355,7 @@ fun SingUpScreenLastNameUiStateErrorPreview() {
 fun SingUpScreenEmailUiStateErrorPreview() {
     StoriChallengeTheme {
         SigUpScreen(
-            pictureIdentification =  String.empty(),
+            pictureIdentification = String.empty(),
             signInUiState = SignUpUiState.Error(AuthUiException.EmailException),
             onProfileIdentification = {},
             onSignUpButtonClick = {},
@@ -368,7 +370,7 @@ fun SingUpScreenEmailUiStateErrorPreview() {
 fun SingUpScreenPasswordUiStateErrorPreview() {
     StoriChallengeTheme {
         SigUpScreen(
-            pictureIdentification =  String.empty(),
+            pictureIdentification = String.empty(),
             signInUiState = SignUpUiState.Error(AuthUiException.PasswordException),
             onProfileIdentification = {},
             onSignUpButtonClick = {},
@@ -383,7 +385,7 @@ fun SingUpScreenPasswordUiStateErrorPreview() {
 fun SingUpScreenConfirmPasswordUiStateErrorPreview() {
     StoriChallengeTheme {
         SigUpScreen(
-            pictureIdentification =  String.empty(),
+            pictureIdentification = String.empty(),
             signInUiState = SignUpUiState.Error(AuthUiException.ConfirmPasswordException),
             onProfileIdentification = {},
             onSignUpButtonClick = {},
@@ -398,7 +400,7 @@ fun SingUpScreenConfirmPasswordUiStateErrorPreview() {
 fun SingUpScreenDifferentPasswordUiStateErrorPreview() {
     StoriChallengeTheme {
         SigUpScreen(
-            pictureIdentification =  String.empty(),
+            pictureIdentification = String.empty(),
             signInUiState = SignUpUiState.Error(AuthUiException.DifferentPasswordException),
             onProfileIdentification = {},
             onSignUpButtonClick = {},
@@ -413,7 +415,7 @@ fun SingUpScreenDifferentPasswordUiStateErrorPreview() {
 fun SingUpScreenUiStateErrorPreview() {
     StoriChallengeTheme {
         SigUpScreen(
-            pictureIdentification =  String.empty(),
+            pictureIdentification = String.empty(),
             signInUiState = SignUpUiState.Error(AuthException.UserAlreadyExistException()),
             onProfileIdentification = {},
             onSignUpButtonClick = {},

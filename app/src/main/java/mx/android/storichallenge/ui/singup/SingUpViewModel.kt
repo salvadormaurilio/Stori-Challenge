@@ -9,6 +9,7 @@ import kotlinx.coroutines.flow.SharedFlow
 import kotlinx.coroutines.flow.StateFlow
 import kotlinx.coroutines.launch
 import mx.android.storichallenge.core.coroutines.CoroutinesDispatchers
+import mx.android.storichallenge.core.ui.empty
 import mx.android.storichallenge.domain.SignUpUseCase
 import mx.android.storichallenge.ui.exception.AuthExceptionHandler
 import mx.android.storichallenge.ui.singin.UserDataSubmitUi
@@ -26,6 +27,11 @@ class SingUpViewModel @Inject constructor(
 
     val signUpUiState: StateFlow<SignUpUiState?>
         get() = _signUpUiState
+
+    private val _pictureIdentificationUiState = MutableStateFlow(String.empty())
+
+    val pictureIdentificationUiState: StateFlow<String>
+        get() = _pictureIdentificationUiState
 
     private val _navigateToHome = MutableSharedFlow<Unit>()
 
@@ -55,6 +61,10 @@ class SingUpViewModel @Inject constructor(
 
     private fun emitSignInUiState(signUpUiState: SignUpUiState) {
         _signUpUiState.value = signUpUiState
+    }
+
+    fun loadPictureIdentification(path: String) {
+        _pictureIdentificationUiState.value = path
     }
 
     fun navigateToHome() = viewModelScope.launch {

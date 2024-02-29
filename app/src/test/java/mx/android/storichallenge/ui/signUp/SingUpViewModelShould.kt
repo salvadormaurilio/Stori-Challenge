@@ -10,6 +10,7 @@ import mx.android.storichallenge.core.assertThatEquals
 import mx.android.storichallenge.core.assertThatIsInstanceOf
 import mx.android.storichallenge.data.datasource.exception.AuthException
 import mx.android.storichallenge.domain.SignUpUseCase
+import mx.android.storichallenge.fakedata.ANY_PICTURE_IDENTIFICATION
 import mx.android.storichallenge.fakedata.ANY_USER_ID
 import mx.android.storichallenge.fakedata.givenUserDataSubmit
 import mx.android.storichallenge.fakedata.givenUserDataSubmitUi
@@ -86,6 +87,15 @@ class SingUpViewModelShould {
         verify(signUpUseCase).signUp(userDataSubmit)
         assertThatIsInstanceOf<SignUpUiState.Error>(result)
         assertThatIsInstanceOf<AuthException.SignUpException>((result as SignUpUiState.Error).error)
+    }
+
+    @Test
+    fun `pass pictureIdentification when loadPictureIdentification is called`() = runTest {
+        singUpViewModel.loadPictureIdentification(ANY_PICTURE_IDENTIFICATION)
+
+        val result = singUpViewModel.pictureIdentificationUiState.firstOrNull()
+
+        assertThatEquals(result, ANY_PICTURE_IDENTIFICATION)
     }
 
     @Test

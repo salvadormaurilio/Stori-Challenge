@@ -19,6 +19,7 @@ const val ANY_INVALID_USER_EMAIL = "salvadorbuapap.mx"
 const val ANY_PASSWORD = "Admin1234_1"
 const val ANY_INVALID_PASSWORD = "Admi"
 private const val ANY_OTHER_PASSWORD = "Admin1234_12"
+const val ANY_PICTURE_IDENTIFICATION = "https://previews.123rf.com/images/alexutemov/alexutemov1605/alexutemov160500480/56958565-id-identidad-corporativa-medicina-identificador-identificaci%C3%B3n-del-m%C3%A9dico-y-la-tarjeta-de.jpg"
 
 fun givenUserDataMap() = mapOf(
     FIRST_NAME to ANY_FIRST_NAME,
