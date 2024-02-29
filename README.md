@@ -32,7 +32,6 @@ This project simulates the Sign Up and Sign in of a user, things to consider:
 - Repository pattern
 - Dependency injection
 
-
 ## :floppy_disk: Firebase
 
 ### Firebase Authentication
@@ -70,6 +69,8 @@ Sign In Success | Some Fiel is Wrong | User Invalid
 
 Sign Up Success | Some Fiel is Wrong | User al readey Exist
 --- | ---  | --- 
+<img src="" width="320"> | <img src="https://github.com/salvadormaurilio/Stori-Challenge/assets/4513422/586f4874-2ae9-4314-a90b-e429c617cb05" width="320"> | <img src="" width="320">
+
 
 ### Home
 
@@ -82,7 +83,7 @@ Home Success | Home Fails
 
 Movement Detail Success | Movement Detail Fails 
 --- | --- 
-<img src="https://github.com/salvadormaurilio/Stori-Challenge/assets/4513422/19cd9c4d-4cff-4edf-87c5-b8b034f325ef" width="320"> | <img src="https://github.com/salvadormaurilio/Stori-Challenge/assets/4513422/f72ea491-22c5-44c5-83aa-e6d0e59dc901" width="320"> 
+<img src="https://github.com/salvadormaurilio/Stori-Challenge/assets/4513422/0717d23f-f8f0-43bc-9b63-affb2ca1766d" width="320"> | <img src="https://github.com/salvadormaurilio/Stori-Challenge/assets/4513422/86fc8f57-7302-477a-a738-8de7a40ca8b8" width="320"> 
 
 
 ## :green_heart: How did you test it?
