@@ -33,6 +33,7 @@ class UserRemoteDataSource @Inject constructor(
                 it.printStackTrace()
                 trySend(Result.failure(UserException.StorePictureIdentificationException()))
             }
+        awaitClose { close() }
     }
 
     fun storeUserData(userDataMap: Map<String, String>): Flow<Result<String>> = callbackFlow {
