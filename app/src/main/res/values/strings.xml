@@ -23,7 +23,6 @@
     <string name="error_user_already_exit">El usuario ya se encuentra registrado</string>
     <string name="error_sign_up">Error al registrar el usuario</string>
     <string name="success_sign_up">Usuario registrado con éxito</string>
-    <string name="error_sign_up">Usuario Inválido</string>
     <string name="error_sign_in">Usuario Inválido</string>
     <string name="accept">Aceptar</string>
 
