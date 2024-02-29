@@ -3,7 +3,7 @@
 
     <string name="sign_in">Iniciar Sesión</string>
     <string name="sing_up">Registrar Usuario</string>
-    <string name="profile_identification">Foto de Identificación</string>
+    <string name="picture_identification">Foto de Identificación</string>
     <string name="first_name">Nombre</string>
     <string name="last_name">Apellido</string>
     <string name="email">Correo Electrónico</string>
