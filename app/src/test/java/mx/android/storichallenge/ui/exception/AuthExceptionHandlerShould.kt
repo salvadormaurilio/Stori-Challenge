@@ -12,6 +12,7 @@ import mx.android.storichallenge.fakedata.givenUserDataSubmitUiWithInvalidEmail
 import mx.android.storichallenge.fakedata.givenUserDataSubmitUiWithInvalidFirstName
 import mx.android.storichallenge.fakedata.givenUserDataSubmitUiWithInvalidLastName
 import mx.android.storichallenge.fakedata.givenUserDataSubmitUiWithInvalidPassword
+import mx.android.storichallenge.fakedata.givenUserDataSubmitUiWithInvalidPictureIdentification
 import org.junit.Before
 import org.junit.Test
 
@@ -32,6 +33,16 @@ class AuthExceptionHandlerShould {
 
         assertThatEquals(result.second, AuthUiException.NoValidationNeededException)
         assertThatEquals(result.first, false)
+    }
+
+    @Test
+    fun `return PictureIdentificationException when areInvalidSingUpCredentials is called and userDataSubmitUi has picture Identification invalid`() {
+        val userDataSubmitUi = givenUserDataSubmitUiWithInvalidPictureIdentification()
+
+        val result = authExceptionHandler.areInvalidSingUpCredentials(userDataSubmitUi)
+
+        assertThatEquals(result.first, true)
+        assertThatEquals(result.second, AuthUiException.PictureIdentificationException)
     }
 
     @Test

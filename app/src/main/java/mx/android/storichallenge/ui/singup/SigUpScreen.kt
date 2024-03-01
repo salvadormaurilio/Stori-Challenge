@@ -48,6 +48,7 @@ import mx.android.storichallenge.ui.composable.PasswordTextField
 import mx.android.storichallenge.ui.composable.ProgressButton
 import mx.android.storichallenge.ui.composable.SnackbarBlue
 import mx.android.storichallenge.ui.exception.AuthUiException
+import mx.android.storichallenge.ui.exception.AuthUiException.PictureIdentificationException.error
 import mx.android.storichallenge.ui.home.ANY_PICTURE_IDENTIFICATION
 import mx.android.storichallenge.ui.singin.UserDataSubmitUi
 import mx.android.storichallenge.ui.theme.BlueGrey500
@@ -268,9 +269,20 @@ private fun AlertDialogSuccess(isSuccess: Boolean, onSingUpSuccess: () -> Unit) 
 }
 
 @Composable
-private fun SnackbarError(errorException: Throwable?, snackbarHostState: SnackbarHostState) {
-    if (errorException != null && errorException !is AuthUiException) {
-        LaunchSnackbar(snackbarHostState = snackbarHostState, message = getMessageError(errorException))
+private fun SnackbarError(errorException: Throwable?, snackbarHostState: SnackbarHostState) = errorException?.run {
+    when (this) {
+        is AuthUiException.PictureIdentificationException -> {
+            LaunchSnackbar(
+                snackbarHostState = snackbarHostState,
+                message = error?.run { stringResource(id = this) }.orEmpty()
+            )
+        }
+        !is AuthUiException -> {
+            LaunchSnackbar(
+                snackbarHostState = snackbarHostState,
+                message = getMessageError(this)
+            )
+        }
     }
 }
 
@@ -346,6 +358,21 @@ fun SingUpScreenFirstNameUiStateErrorPreview() {
         SigUpScreen(
             pictureIdentification = String.empty(),
             signInUiState = SignUpUiState.Error(AuthUiException.FirstNameException),
+            onProfileIdentification = {},
+            onSignUpButtonClick = {},
+            onSingUpSuccess = {},
+            onBackPressedClick = {}
+        )
+    }
+}
+
+@Preview(showBackground = true)
+@Composable
+fun SingUpScreenPictureIdentificationUiStateErrorPreview() {
+    StoriChallengeTheme {
+        SigUpScreen(
+            pictureIdentification = String.empty(),
+            signInUiState = SignUpUiState.Error(AuthUiException.PictureIdentificationException),
             onProfileIdentification = {},
             onSignUpButtonClick = {},
             onSingUpSuccess = {},

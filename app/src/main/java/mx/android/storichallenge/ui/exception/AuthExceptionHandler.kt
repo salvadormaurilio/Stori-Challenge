@@ -9,6 +9,7 @@ class AuthExceptionHandler @Inject constructor() {
 
     fun areInvalidSingUpCredentials(userDataSubmitUi: UserDataSubmitUi) = userDataSubmitUi.run {
         when {
+            pictureIdentification.isBlank() -> Pair(true, AuthUiException.PictureIdentificationException)
             fistName.isBlank() || fistName.length < MIN_CHARACTERS_NAMES -> Pair(true, AuthUiException.FirstNameException)
             lastName.isBlank() || lastName.length < MIN_CHARACTERS_NAMES -> Pair(true, AuthUiException.LastNameException)
             !email.isValidEmail() -> Pair(true, AuthUiException.EmailException)

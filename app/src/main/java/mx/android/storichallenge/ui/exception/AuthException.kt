@@ -4,6 +4,7 @@ import androidx.annotation.StringRes
 import mx.android.storichallenge.R
 
 sealed class AuthUiException(@StringRes val error: Int? = null) : Exception() {
+    data object PictureIdentificationException : AuthUiException(R.string.error_picture_identification_invalid)
     data object FirstNameException : AuthUiException(R.string.error_first_name_invalid)
     data object LastNameException : AuthUiException(R.string.error_last_name_invalid)
     data object EmailException : AuthUiException(R.string.error_email_invalid)

@@ -1,5 +1,6 @@
 package mx.android.storichallenge.fakedata
 
+import mx.android.storichallenge.core.ui.empty
 import mx.android.storichallenge.data.datasource.model.UserDataResponse
 import mx.android.storichallenge.domain.model.EMAIL_NAME
 import mx.android.storichallenge.domain.model.FIRST_NAME
@@ -71,6 +72,15 @@ fun givenUserDataSubmitUi() = UserDataSubmitUi(
     password = ANY_PASSWORD,
     confirmPassword = ANY_PASSWORD,
     pictureIdentification = ANY_PICTURE_IDENTIFICATION,
+)
+
+fun givenUserDataSubmitUiWithInvalidPictureIdentification() = UserDataSubmitUi(
+    fistName = ANY_INVALID_FIRST_NAME,
+    lastName = ANY_LAST_NAME,
+    email = ANY_USER_EMAIL,
+    password = ANY_PASSWORD,
+    confirmPassword = ANY_PASSWORD,
+    pictureIdentification = String.empty(),
 )
 
 fun givenUserDataSubmitUiWithInvalidFirstName() = UserDataSubmitUi(
